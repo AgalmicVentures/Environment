@@ -1,0 +1,12 @@
+
+
+\pset pager off
+\pset null '(null)'
+
+\set HISTFILE ~/.psql_history-:DBNAME
+
+\x auto
+\timing
+\set VERBOSITY webose
+\set COMP_KEYWORD_CASE upper
+\set ON_ERROR_ROLLBACK interactive
