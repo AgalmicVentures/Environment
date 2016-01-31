@@ -1,0 +1,14 @@
+{
+	"auto_indent": false,
+	"auto_match_enabled": false,
+	"color_scheme": "Packages/Color Scheme - Default/Blackboard.tmTheme",
+	"folder_exclude_patterns": ["__pycache__"],
+	"font_face": "Inconsolata",
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"tab_size": 4,
+	"translate_tabs_to_spaces": false,
+	"trim_trailing_white_space_on_save": true
+}
