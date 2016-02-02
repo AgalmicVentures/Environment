@@ -7,8 +7,10 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 
 #Check for generated SSH keys
-if [ ! -e ~/.ssh/id_rsa.pub ]
+if [ -e ~/.ssh/id_rsa.pub ]
 then
+	echo -e "${GREEN}SSH key detected${NC}"
+else
 	echo -e "${RED}No SSH key detected (run setup.sh or ssh-keygen)!${NC}"
 fi
 
