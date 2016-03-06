@@ -52,26 +52,50 @@ else
 	echo -e "${RED}Detected very low memory: ${MEMORY_KB}K${NC}"
 fi
 
-#Check if sysctl limits are reasonable (esp. network buffers)
+#Check if sysctl limits are reasonable
+
+#Max network buffer sizes
 RMEM_MAX=`sysctl -n net.core.rmem_max`
 if [[ $RMEM_MAX -gt 4000000 ]]
 then
-	echo -e "${GREEN}Detected ${RMEM_MAX} network read buffer${NC}"
+	echo -e "${GREEN}Detected ${RMEM_MAX} max network read buffer size${NC}"
 elif [[ $RMEM_MAX -gt 1000000 ]]
 then
-	echo -e "${YELLOW}Detected low network read buffer (net.core.rmem_max): ${RMEM_MAX}${NC}"
+	echo -e "${YELLOW}Detected low max network read buffer size (net.core.rmem_max): ${RMEM_MAX}${NC}"
 else
-	echo -e "${RED}Detected very low network read buffer (net.core.rmem_max): ${RMEM_MAX}${NC}"
+	echo -e "${RED}Detected very low max network read buffer size (net.core.rmem_max): ${RMEM_MAX}${NC}"
 fi
 
 WMEM_MAX=`sysctl -n net.core.wmem_max`
 if [[ $WMEM_MAX -gt 4000000 ]]
 then
-	echo -e "${GREEN}Detected ${WMEM_MAX} network write buffer${NC}"
+	echo -e "${GREEN}Detected ${WMEM_MAX} max network write buffer size${NC}"
 elif [[ $WMEM_MAX -gt 1000000 ]]
 then
-	echo -e "${YELLOW}Detected low network write buffer (net.core.wmem_max): ${WMEM_MAX}${NC}"
+	echo -e "${YELLOW}Detected low max network write buffer size (net.core.wmem_max): ${WMEM_MAX}${NC}"
 else
-	echo -e "${RED}Detected very low network write buffer (net.core.wmem_max): ${WMEM_MAX}${NC}"
+	echo -e "${RED}Detected very low max network write buffer size (net.core.wmem_max): ${WMEM_MAX}${NC}"
 fi
 
+#Default network buffer sizes
+RMEM_DEFAULT=`sysctl -n net.core.rmem_default`
+if [[ $RMEM_DEFAULT -gt 4000000 ]]
+then
+	echo -e "${GREEN}Detected ${RMEM_DEFAULT} default network read buffer size${NC}"
+elif [[ $RMEM_DEFAULT -gt 1000000 ]]
+then
+	echo -e "${YELLOW}Detected low default network read buffer size (net.core.rmem_default): ${RMEM_DEFAULT}${NC}"
+else
+	echo -e "${RED}Detected very low default network read buffer size (net.core.rmem_default): ${RMEM_DEFAULT}${NC}"
+fi
+
+WMEM_DEFAULT=`sysctl -n net.core.wmem_default`
+if [[ $WMEM_DEFAULT -gt 4000000 ]]
+then
+	echo -e "${GREEN}Detected ${WMEM_DEFAULT} default network write buffer size${NC}"
+elif [[ $WMEM_DEFAULT -gt 1000000 ]]
+then
+	echo -e "${YELLOW}Detected low default network write buffer size (net.core.wmem_default): ${WMEM_DEFAULT}${NC}"
+else
+	echo -e "${RED}Detected very low default network write buffer size (net.core.wmem_default): ${WMEM_DEFAULT}${NC}"
+fi
