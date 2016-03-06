@@ -18,10 +18,10 @@ fi
 UNAME=`uname`
 if [[ $UNAME == "Linux" ]]
 then
-	echo -e "${GREEN}Detected Linux{NC}"
+	echo -e "${GREEN}Detected Linux${NC}"
 elif [[ $UNAME == "FreeBSD" ]]
 then
-	echo -e "${GREEN}Detected FreeBSD{NC}"
+	echo -e "${GREEN}Detected FreeBSD${NC}"
 elif [[ $UNAME == "Darwin" ]]
 then
 	echo -e "${RED}Detected OS X -- script only works on Linux currently${NC}"
