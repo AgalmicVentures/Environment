@@ -16,10 +16,19 @@ fi
 
 #Check OS before hardware
 UNAME=`uname`
-if [[ $UNAME == "Darwin" ]]
+if [[ $UNAME == "Linux" ]]
 then
-	echo -e "${RED}Detected OS X -- script only works on Ubuntu currently${NC}"
+	echo -e "${GREEN}Detected Linux{NC}"
+elif [[ $UNAME == "FreeBSD" ]]
+then
+	echo -e "${GREEN}Detected FreeBSD{NC}"
+elif [[ $UNAME == "Darwin" ]]
+then
+	echo -e "${RED}Detected OS X -- script only works on Linux currently${NC}"
 	exit
+else
+	echo -e "${RED}Detected unknown OS '$UNAME' -- script only works on Linux currently${NC}"
+	exit 1
 fi
 
 #Check for single core (bad VM?)
