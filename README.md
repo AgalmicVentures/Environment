@@ -24,6 +24,9 @@ Lots of ease-of-use improvements for `vim`: backspace works as expected, left ar
 ### `check_config.sh`
 Checks the configuration of the system, including network buffer sizes and other commonly problematic values.
 
+### `create_ramdisk.sh`
+Creates a named RAM disk (tmpfs) under `/mnt` with the specified size.
+
 ### `colors.sh`
 Defines a variety of formatting specifications with [ANSI codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
