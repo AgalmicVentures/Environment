@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -u
+
 if [[ $# -lt 2 ]]
 then
 	echo "Usage:   ./git_find_author.sh <AUTHOR> <PATTERN>"

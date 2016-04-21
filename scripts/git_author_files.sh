@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -u
+
 if [[ $# -lt 1 ]]
 then
 	echo "Usage:   ./git_author_files.sh <AUTHOR>"
