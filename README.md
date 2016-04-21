@@ -21,6 +21,9 @@ Lots of ease-of-use improvements for `vim`: backspace works as expected, left ar
 
 ## Scripts
 
+### `augment_lines.py`
+Augments lines of text (e.g. with a time stamp).
+
 ### `check_config.sh`
 Checks the configuration of the system, including network buffer sizes and other commonly problematic values.
 
@@ -30,5 +33,14 @@ Creates a named RAM disk (tmpfs) under `/mnt` with the specified size.
 ### `colors.sh`
 Defines a variety of formatting specifications with [ANSI codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
-### `git`
-Applies the same operation to all of the repositories in the current working directory. Especially usefu when you have a large number of projects.
+### `git_author_files.sh`
+Returns a list of the files touched by the given author in the Git repository in the current working directory.
+
+### `git_file_authors.sh`
+Returns a summary of authors of a file in the Git repository in the current working directory.
+
+### `git_find_author.sh`
+Returns a list of currently existing files touched by the given author in the Git repository in the current working directory. Output sorted by the number of lines contributed in each file.a
+
+### `hg`
+Applies the same operation to all of the Mercurial repositories in the current working directory. Especially useful when you have a large number of projects.
