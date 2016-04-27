@@ -1,0 +1,16 @@
+
+before_script:
+
+stages:
+  - test
+
+smoke_test_job:
+  stage: test
+  script:
+    - scripts/augment_lines.py -h
+    - scripts/check_config.sh
+    - scripts/git
+    - scripts/hg
+  only:
+    - master
+
