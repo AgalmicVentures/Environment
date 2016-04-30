@@ -7,10 +7,11 @@ stages:
 smoke_test_job:
   stage: test
   script:
-    - scripts/augment_lines.py -h
+    - scripts/AugmentLines.py -h
     - scripts/check_config.sh
+    - scripts/CsvToJson.py -h
     - scripts/git
     - scripts/hg
+    - scripts/JsonToXml.py -h
   only:
     - master
-
