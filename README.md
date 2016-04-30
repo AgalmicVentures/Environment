@@ -21,7 +21,7 @@ Lots of ease-of-use improvements for `vim`: backspace works as expected, left ar
 
 ## Scripts
 
-### `augment_lines.py`
+### `AugmentLines.py`
 Augments lines of text (e.g. with a time stamp).
 
 ### `check_config.sh`
@@ -32,6 +32,9 @@ Creates a named RAM disk (tmpfs) under `/mnt` with the specified size.
 
 ### `colors.sh`
 Defines a variety of formatting specifications with [ANSI codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
+
+### `CsvToJson.py`
+Converts CSV documents to JSON with a variety of transformation options.
 
 ### `git_author_files.sh`
 Returns a list of the files touched by the given author in the Git repository in the current working directory.
@@ -44,3 +47,6 @@ Returns a list of currently existing files touched by the given author in the Gi
 
 ### `hg`
 Applies the same operation to all of the Mercurial repositories in the current working directory. Especially useful when you have a large number of projects.
+
+### `JsonToXml.py`
+Converts JSON documents to XML with a variety of transformation options.
