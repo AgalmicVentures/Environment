@@ -10,7 +10,7 @@ BLUE='\033[0;34m'
 
 OLD_PWD=`pwd`
 
-for DIR in `find . -name .git -type d -d 3`
+for DIR in `find . -name .git -type d -maxdepth 3`
 do
 	BASE=`dirname ${DIR}`
 	echo -e "${BLUE}****************************** ${BASE} ******************************${NC}"
