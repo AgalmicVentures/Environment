@@ -39,7 +39,7 @@ then
 
 	alias ls="ls -G"
 else
-	alias ls="ls --color=always"
+	alias ls="ls --color=auto"
 fi
 
 alias ll="ls -lAh"
