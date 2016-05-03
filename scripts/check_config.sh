@@ -42,6 +42,9 @@ else
 	echo -e "${YELLOW}Detected only 1 CPU!${NC}"
 fi
 
+#Display more information about the NUMA topology
+numactl -H
+
 #Check for too little RAM (bad VM?)
 MEMORY_KB=`cat /proc/meminfo | grep MemTotal | awk '{print $2}'`
 if [[ $MEMORY_KB -gt 4000000 ]]
