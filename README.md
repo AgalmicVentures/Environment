@@ -36,6 +36,9 @@ Defines a variety of formatting specifications with [ANSI codes](https://en.wiki
 ### `CsvToJson.py`
 Converts CSV documents to JSON with a variety of transformation options.
 
+### `drop_caches.sh`
+Frees the page cache and all reclaimable slab objects (e.g. inodes).
+
 ### `git_author_files.sh`
 Returns a list of the files touched by the given author in the Git repository in the current working directory.
 
