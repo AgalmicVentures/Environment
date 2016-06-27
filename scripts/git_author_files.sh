@@ -4,6 +4,7 @@ set -u
 
 if [[ $# -lt 1 ]]
 then
+	echo "Returns a list of files edited by the given author"
 	echo "Usage:   ./git_author_files.sh <AUTHOR>"
 	echo "Example: ./git_author_files.sh \"Ian Hutchinson\""
 	exit 1
