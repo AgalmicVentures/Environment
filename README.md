@@ -42,14 +42,18 @@ Frees the page cache and all reclaimable slab objects (e.g. inodes).
 ### `git_author_files.sh`
 Returns a list of the files touched by the given author in the Git repository in the current working directory.
 
+### `git_author_line_counts.sh`
+Returns a list of currently existing files touched by the given author in the Git repository in the current working directory. Output sorted by the number of lines contributed in each file.a
+
 ### `git_file_authors.sh`
 Returns a summary of authors of a file in the Git repository in the current working directory.
-
-### `git_find_author.sh`
-Returns a list of currently existing files touched by the given author in the Git repository in the current working directory. Output sorted by the number of lines contributed in each file.a
 
 ### `hg`
 Applies the same operation to all of the Mercurial repositories in the current working directory. Especially useful when you have a large number of projects.
 
 ### `JsonToXml.py`
 Converts JSON documents to XML with a variety of transformation options.
+
+### `setup_firewall.sh`
+Installs and configures a basic firewall (may need to run as root).
+
