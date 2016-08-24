@@ -1,0 +1,7 @@
+[alias]
+	st = status
+[user]
+	name = Ian Hutchinson
+	email = ihutchinson@agalmicventures.com
+[push]
+	default = simple

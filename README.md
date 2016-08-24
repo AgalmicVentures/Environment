@@ -10,6 +10,9 @@ Many features including:
 * Warnings on non-zero return values
 * Aliases for common commands, e.g. `ll` for `ls -lAh`
 
+### `.gitconfig`
+Git default settings.
+
 ### `.hgrc`
 Mercurial default settings.
 
