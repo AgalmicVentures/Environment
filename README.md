@@ -54,8 +54,16 @@ Returns a summary of authors of a file in the Git repository in the current work
 ### `hg`
 Applies the same operation to all of the Mercurial repositories in the current working directory. Especially useful when you have a large number of projects.
 
+### `GenerateConfigs.py`
+Generates the a set of JSON configurations given a base configuration and a second JSON object with lists of values for parameters (`{"a": [1, 2], "b": [3, 4, 5]}`). Useful with `Parallelize.py`.
+
 ### `JsonToXml.py`
 Converts JSON documents to XML with a variety of transformation options.
+
+### `Parallelize.py`
+Given a process name, run ID, and set of configurations, runs the process in parallel over all of the configurations. For example,
+`./Parallelize.py ./xyz run134 config1 config2 config3 config4 config5` will run `./xyz1 run134 config1`, ..., `./xyz1 run134 config5`.
+It will use as many CPU's as are available. Useful with `GenerateConfigs.py`.
 
 ### `setup_firewall.sh`
 Installs and configures a basic firewall (may need to run as root).
