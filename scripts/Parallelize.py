@@ -3,7 +3,6 @@
 import argparse
 import datetime
 import multiprocessing
-import os
 import subprocess
 import sys
 import time
