@@ -65,6 +65,9 @@ Given a process name, run ID, and set of configurations, runs the process in par
 `./Parallelize.py ./xyz run134 config1 config2 config3 config4 config5` will run `./xyz1 run134 config1`, ..., `./xyz1 run134 config5`.
 It will use as many CPU's as are available. Useful with `GenerateConfigs.py`.
 
+### `RandomSleep.py`
+Sleeps for a random amount of time given a minimum and maximum bound. Useful for randomizing the start time of processes.
+
 ### `setup_firewall.sh`
 Installs and configures a basic firewall (may need to run as root).
 
