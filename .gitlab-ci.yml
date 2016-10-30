@@ -6,10 +6,14 @@ smoke_test_job:
   stage: test
   script:
     - scripts/AugmentLines.py -h
-    - scripts/check_config.sh
     - scripts/CsvToJson.py -h
+    - scripts/GenerateConfigs.py -h
+    - scripts/JsonToXml.py -h
+    - scripts/Parallelize.py -h
+    - scripts/RandomSleep.py 0 2
+
+    - scripts/check_config.sh
     - scripts/git
     - scripts/hg
-    - scripts/JsonToXml.py -h
   only:
     - master
