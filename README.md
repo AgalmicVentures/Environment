@@ -36,7 +36,7 @@ Converts CSV documents to JSON with a variety of transformation options.
 Generates the a set of JSON configurations given a base configuration and a second JSON object with lists of values for parameters (`{"a": [1, 2], "b": [3, 4, 5]}`). Useful with `Parallelize.py` and `Template.py`.
 
 #### `JsonToXml.py`
-Converts JSON documents to XML with a variety of transformation options./'/
+Converts JSON documents to XML with a variety of transformation options.
 
 #### `Parallelize.py`
 Given a process name, run ID, and set of configurations, runs the process in parallel over all of the configurations. For example,
@@ -81,3 +81,5 @@ Applies the same operation to all of the Mercurial repositories in the current w
 #### `setup_firewall.sh`
 Installs and configures a basic firewall (may need to run as root).
 
+#### `tabs_to_spaces.sh`
+Converts tabs to 4 spaces for a list of input files. WARNING: This operates in places, so it is best used in a repository where the changes can be reverted.
