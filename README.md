@@ -33,7 +33,7 @@ Augments lines of text (e.g. with a time stamp).
 Converts CSV documents to JSON with a variety of transformation options.
 
 #### `GenerateConfigs.py`
-Generates the a set of JSON configurations given a base configuration and a second JSON object with lists of values for parameters (`{"a": [1, 2], "b": [3, 4, 5]}`). Useful with `Parallelize.py`.
+Generates the a set of JSON configurations given a base configuration and a second JSON object with lists of values for parameters (`{"a": [1, 2], "b": [3, 4, 5]}`). Useful with `Parallelize.py` and `Template.py`.
 
 #### `JsonToXml.py`
 Converts JSON documents to XML with a variety of transformation options./'/
@@ -41,10 +41,13 @@ Converts JSON documents to XML with a variety of transformation options./'/
 #### `Parallelize.py`
 Given a process name, run ID, and set of configurations, runs the process in parallel over all of the configurations. For example,
 `./Parallelize.py ./xyz run134 config1 config2 config3 config4 config5` will run `./xyz1 run134 config1`, ..., `./xyz1 run134 config5`.
-It will use as many CPU's as are available. Useful with `GenerateConfigs.py`.
+It will use as many CPU's as are available. Useful with `GenerateConfigs.py` and `Template.py`.
 
 #### `RandomSleep.py`
 Sleeps for a random amount of time given a minimum and maximum bound. Useful for randomizing the start time of processes.
+
+#### `Template.py`
+Instantiates a template with values from a JSON configuration. Useful with `GenerateConfigs.py` and `Parallelize.py`.
 
 ### Shell
 
