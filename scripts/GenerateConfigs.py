@@ -5,6 +5,7 @@ import datetime
 import itertools
 import json
 import os
+import random
 import sys
 
 try:
@@ -15,13 +16,25 @@ except ImportError:
 def main():
 	#Parse arguments
 	parser = argparse.ArgumentParser(description='Parallize helper script.')
+	parser.add_argument('--fraction', type=float, default=1.0, help='Fraction of configs to sample, in the interval (0.0 to 1.0] (default=1.0).')
+	parser.add_argument('--seed', default=None, help='Seed for the random number generator if sampling.')
 	parser.add_argument('config', help='Path to the base configuration.')
 	parser.add_argument('parameters', help='Path to the parameter configuration.')
 	parser.add_argument('output_path', help='Output path.')
 	arguments = parser.parse_args(sys.argv[1:])
 
+	if arguments.fraction > 1.0:
+		print('WARNING: Fraction must be in the interval (0.0, 1.0] -- capping at 1.0')
+		arguments.fraction = 1.0
+	elif arguments.fraction <= 0.0:
+		print('ERROR: Fraction must be positive.')
+		return 1
+
 	startTime = datetime.datetime.now()
 	print('[%s] Starting config generation...' % (startTime))
+
+	if arguments.seed is not None:
+		random.seed(arguments.seed)
 
 	with open(arguments.config) as configFile:
 		configData = configFile.read()
@@ -36,6 +49,10 @@ def main():
 	parameterNames = sorted(parameters.keys())
 	parameterValueLists = [parameters[k] for k in parameterNames]
 	for parameterValues in itertools.product(*parameterValueLists):
+		#Random sampling
+		if arguments.fraction < 1.0 and arguments.fraction < random.random():
+			continue
+
 		#Generate the updated config
 		#This could use the same dictionary over and over but that would be less clear
 		updatedConfig = dict(config)
