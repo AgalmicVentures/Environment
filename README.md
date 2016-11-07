@@ -49,6 +49,9 @@ Sleeps for a random amount of time given a minimum and maximum bound. Useful for
 #### `Template.py`
 Instantiates a template with values from a JSON configuration. Useful with `GenerateConfigs.py` and `Parallelize.py`.
 
+#### `WatchFiles.py`
+Watches one or more files for modifications and runs a command when they are changed (e.g. for automating local builds).
+
 ### Shell
 
 #### `check_config.sh`

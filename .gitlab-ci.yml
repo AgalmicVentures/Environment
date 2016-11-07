@@ -12,6 +12,7 @@ smoke_test_job:
     - scripts/Parallelize.py -h
     - scripts/RandomSleep.py 0 2
     - scripts/Template.py -h
+    - scripts/WatchFiles.py -h
 
     - scripts/check_config.sh
     - scripts/git
