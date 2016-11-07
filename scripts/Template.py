@@ -4,44 +4,6 @@ import argparse
 import json
 import sys
 
-def encodeXmlEntities(data):
-	"""
-	Encodes strings for inclusion in XML.
-
-	:param data: str
-	:return: str
-	"""
-	#TODO: not complete
-	return data.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace("'", '&apos;').replace('"', '&quot;')
-
-def jsonToXml(tag, data, indent='\t', newline='\n', ignores=set(), prefix='', suffix='', transform=lambda x: x, depth=0):
-	t = type(data)
-	if t is dict:
-		dataXmls = [newline]
-		for k in sorted(data.keys()):
-			if k in ignores:
-				continue
-
-			v = data[k]
-			dataXmls.append(jsonToXml(k, v, indent=indent, newline=newline,
-				ignores=ignores, prefix=prefix, suffix=suffix, transform=transform, depth=depth + 1))
-		dataXml = ''.join(dataXmls)
-	elif t is str:
-		dataXml = encodeXmlEntities(data)
-	else:
-		dataXml = str(data)
-
-	transformedTag = prefix + transform(tag) + suffix
-	indentString = indent * depth
-	return '%s<%s>%s%s</%s>%s' % (
-		indentString,
-		transformedTag,
-		dataXml,
-		indentString if dataXml[-1] == '\n' else '',
-		transformedTag,
-		newline
-	)
-
 def main():
 	"""
 	The main function of this script. Instantiates a template based on a JSON config.
