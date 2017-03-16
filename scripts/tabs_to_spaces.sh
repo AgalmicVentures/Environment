@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -u
+
 if [[ $# -eq 0 ]]
 then
 	echo "Usage: ./tabs_to_spaces.sh <FILE> [<FILE> ...]"

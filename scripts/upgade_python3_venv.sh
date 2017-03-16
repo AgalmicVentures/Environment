@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -u
+
 if [[ $# -lt 2 ]]
 then
 	echo 'Usage: ./upgrade_python3_venv.sh <INPUT_REQUIREMENTS_TXT> <OUTPUT_REQUIREMENTS_TXT>'

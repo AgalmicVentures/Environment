@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -u
+
 #NOTE: This script may need to be run under sudo
 
 apt-get install ufw

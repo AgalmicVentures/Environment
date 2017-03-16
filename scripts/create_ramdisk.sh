@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -u
+
 if [[ $# -lt 2 ]]
 then
 	echo "Usage:   ./create_ramdisk.sh <NAME> <SIZE>"
