@@ -16,7 +16,7 @@ do
 	echo -e "${BLUE}****************************** ${BASE} ******************************${NC}"
 	echo
 	cd $BASE
-	git $@
+	git "$@"
 	cd $OLD_PWD
 	echo
 done
