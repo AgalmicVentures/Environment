@@ -1,18 +1,15 @@
 
 #Load colors
-NC='\033[00m'
-RED='\033[1;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
+readonly NC='\033[00m'
+readonly RED='\033[1;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[1;33m'
+readonly BLUE='\033[0;34m'
 
 #Load Mercurial completions
-if [ -e /etc/bash_completion.d/mercurial ]
-then
+if [ -e /etc/bash_completion.d/mercurial ] ; then
 	source /etc/bash_completion.d/mercurial
 fi
-
-UNAME=`uname`
 
 ########## Prompt ##########
 
@@ -33,8 +30,8 @@ PROMPT_COMMAND=prompt
 ########## Aliases ##########
 
 #Flags are slightly different on Mac than Linux
-if [[ $UNAME == "Darwin" ]]
-then
+UNAME=$(uname)
+if [[ $UNAME == "Darwin" ]] ; then
 	export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
 
 	alias ls="ls -G"
@@ -52,12 +49,11 @@ alias egrep="egrep --color=auto"
 up() {
 	local d=""
 	limit=$1
-	for ((i=1 ; i <= limit ; i++))
-		do
-			d=$d/..
-		done
+	for ((i=1 ; i <= limit ; i++)) ; do
+		d=$d/..
+	done
 	d=$(echo $d | sed 's/^\///')
-	if [ -z "$d" ]; then
+	if [ -z "$d" ] ; then
 		d=..
 	fi
 	cd $d

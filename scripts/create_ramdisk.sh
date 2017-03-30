@@ -2,8 +2,7 @@
 
 set -u
 
-if [[ $# -lt 2 ]]
-then
+if [[ $# -lt 2 ]] ; then
 	echo "Usage:   ./create_ramdisk.sh <NAME> <SIZE>"
 	echo "Example: ./create_ramdisk.sh ramdisk 16G"
 	exit 1

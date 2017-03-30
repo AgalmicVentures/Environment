@@ -2,8 +2,7 @@
 
 set -u
 
-if [[ $# -lt 2 ]]
-then
+if [[ $# -lt 2 ]] ; then
 	echo 'Usage: ./upgrade_python3_venv.sh <INPUT_REQUIREMENTS_TXT> <OUTPUT_REQUIREMENTS_TXT>'
 	exit 1
 fi
@@ -15,4 +14,3 @@ python3 -m pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pyth
 python3 -m pip freeze > $2
 deactivate
 rm -r _upgrade_env
-
