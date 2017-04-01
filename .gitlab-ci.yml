@@ -2,7 +2,7 @@
 stages:
   - test
 
-smoke_test_job:
+help_test_job:
   stage: test
   script:
     - scripts/AugmentLines.py -h
@@ -10,9 +10,19 @@ smoke_test_job:
     - scripts/GenerateConfigs.py -h
     - scripts/JsonToXml.py -h
     - scripts/Parallelize.py -h
-    - scripts/RandomSleep.py 0 2
+    - scripts/RandomSleep.py -h
     - scripts/Template.py -h
     - scripts/WatchFiles.py -h
+  only:
+    - master
+
+smoke_test_job:
+  stage: test
+  script:
+    - scripts/RandomSleep.py 0 2
+    #Not the most traditional use of this script, but since the "run ID" is 0,
+    #it will make the random sleeps be between 0 and n seconds
+    - scripts/Parallelize.py -p 2 -s 1 scripts/RandomSleep.py 0 4 2 3 3 4 3 2 3
 
     - scripts/check_config.sh
     - scripts/git
