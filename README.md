@@ -55,6 +55,10 @@ parallel over all of the configurations. For example,
 It will use as many CPU's as are available. Useful with `GenerateConfigs.py` and
 `Template.py`.
 
+#### `Prepend.py`
+Prepends a file to a number of target files, optionally skipping their first
+line if it is a shebang. Useful for e.g. prepending license files to code.
+
 #### `RandomSleep.py`
 Sleeps for a random amount of time given a minimum and maximum bound. Useful for
 randomizing the start time of processes.
