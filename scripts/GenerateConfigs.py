@@ -15,7 +15,7 @@ except ImportError:
 
 def main():
 	#Parse arguments
-	parser = argparse.ArgumentParser(description='Parallize helper script.')
+	parser = argparse.ArgumentParser(description='JSON Config Generator')
 	parser.add_argument('--fraction', type=float, default=1.0, help='Fraction of configs to sample, in the interval (0.0 to 1.0] (default=1.0).')
 	parser.add_argument('--seed', default=None, help='Seed for the random number generator if sampling.')
 	parser.add_argument('config', help='Path to the base configuration.')

@@ -9,9 +9,9 @@ import time
 
 def main():
 	#Parse arguments
-	parser = argparse.ArgumentParser(description='Parallize helper script.')
-	parser.add_argument('run_script', help='Find to do comments.')
-	parser.add_argument('run_id', help='A unique identifier for the run')
+	parser = argparse.ArgumentParser(description='Parallel Runner')
+	parser.add_argument('run_script', help='The script to execute.')
+	parser.add_argument('run_id', help='A unique identifier for the run.')
 	parser.add_argument('configs', nargs='*', help='A set of configurations to run.')
 	parser.add_argument('-p', '--processes', type=int, default=multiprocessing.cpu_count(),
 		help='Time to sleep between checking process completions.')

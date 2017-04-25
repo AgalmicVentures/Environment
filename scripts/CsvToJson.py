@@ -30,7 +30,7 @@ def main():
 	:return: int
 	"""
 	#Parse arguments
-	parser = argparse.ArgumentParser(description='Converts CSV files to JSON.')
+	parser = argparse.ArgumentParser(description='CSV -> JSON Converter')
 
 	parser.add_argument('-S', '--single', action='store_true',
 		help='Generate a single document, rather than 1 document per line')
