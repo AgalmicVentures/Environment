@@ -21,11 +21,7 @@
 # SOFTWARE.
 
 import argparse
-import datetime
-import multiprocessing
-import subprocess
 import sys
-import time
 
 def main():
 	#Parse arguments
