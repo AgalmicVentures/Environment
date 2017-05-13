@@ -41,9 +41,9 @@ def main():
 	extensionsRegex = '|'.join(arguments.extension) if len(arguments.extension) > 0 else '.*'
 	fileNameRegex = (
 		#Main name + date
-		r'[a-zA-Z_-]+_([0-9]{4})[_-]?([0-9]{2})[_-]?([0-9]{2})' +
+		r'[a-zA-Z_-]+([0-9]{4})[_-]?([0-9]{2})[_-]?([0-9]{2})' +
 		#Optional timestamp
-		r'(?:[_-]?([0-9]{2})(?:[:_-]?([0-9]{2})(?:[:_-]?([0-9]{2}))?)?)?' +
+		r'(?:[_-]?([0-9]{2})(?:[:_-]?([0-9]{2})(?:[:_-]?([0-9]{2}(?:[.:_-]?([0-9]{3-6}))?))?)?)?' +
 		#Extension
 		r'.(%s)' % extensionsRegex
 	)
