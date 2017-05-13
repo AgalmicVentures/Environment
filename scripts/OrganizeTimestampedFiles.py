@@ -30,22 +30,29 @@ def main():
 	parser = argparse.ArgumentParser(description='Organizes files with timestamps in their name into directories.')
 	parser.add_argument('-P', '--path', default='.', help='Where to look for files.')
 	parser.add_argument('-d', '--dir', default='%Y/%m',
-		help='The new directory files should be put in (timestamp format, default %Y/%m).')
+		help='The new directory files should be put in (timestamp format, default %%Y/%%m).')
+	parser.add_argument('-x', '--extension', default=[], action='append',
+		help='Add extension to look for (default all files).')
 	parser.add_argument('-v', '--verbose', action='store_true', help='Output more information.')
 	arguments = parser.parse_args(sys.argv[1:])
 
+	#Create regular expressions
+	#TODO: compile
+	extensionsRegex = '|'.join(arguments.extension) if len(arguments.extension) > 0 else '.*'
+	fileNameRegex = (
+		#Main name + date
+		r'[a-zA-Z_-]+_([0-9]{4})[_-]?([0-9]{2})[_-]?([0-9]{2})' +
+		#Optional timestamp
+		r'(?:[_-]?([0-9]{2})(?:[:_-]?([0-9]{2})(?:[:_-]?([0-9]{2}))?)?)?' +
+		#Extension
+		r'.(%s)' % extensionsRegex
+	)
+
 	for fileName in os.listdir(arguments.path):
 		#Parse the file name, skipping those without timestamps at the end
-		match = re.match(
-			#Main name + date
-			r'[a-zA-Z_-]+_([0-9]{4})[_-]?([0-9]{2})[_-]?([0-9]{2})' +
-			#Optional timestamp
-			r'(?:[_-]?([0-9]{2})(?:[:_-]?([0-9]{2})(?:[:_-]?([0-9]{2}))?)?)?' +
-			#Extension
-			r'.(csv|xls)', fileName)
+		match = re.match(fileNameRegex, fileName)
 		if match is None:
 			continue
-		print(match.groups())
 
 		#Read the timestamp
 		year = int(match.groups()[0])
