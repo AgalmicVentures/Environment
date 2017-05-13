@@ -47,6 +47,10 @@ second JSON object with lists of values for parameters
 #### `JsonToXml.py`
 Converts JSON documents to XML with a variety of transformation options.
 
+#### `OrganizeTimestampedFiles.py`
+Moves files with timestamps at then end of their names into subdirectories
+based on a given timestamp format (default `%Y/%m` for monthly buckets).
+
 #### `Parallelize.py`
 Given a process name, run ID, and set of configurations, runs the process in
 parallel over all of the configurations. For example,
