@@ -31,13 +31,14 @@ fi
 NAME=$1
 SIZE=$2
 
-cd /mnt
-mkdir $NAME
+cd /mnt || exit 1
+mkdir "$NAME"
 mount -t tmpfs -o size=$SIZE tmpfs $NAME
-cd -
 
 echo
 df -h
 echo
 free -g
 echo
+
+cd - || exit 1

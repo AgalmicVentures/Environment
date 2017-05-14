@@ -31,5 +31,5 @@ fi
 
 git log --pretty="%H" --author="$1" |
 	while read HASH ; do
-		git show --oneline --name-only $HASH | tail -n+2
+		git show --oneline --name-only "$HASH" | tail -n+2
 	done | sort | uniq

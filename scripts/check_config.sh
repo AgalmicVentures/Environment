@@ -36,7 +36,7 @@ else
 fi
 
 #Check OS before hardware
-UNAME=$(uname)
+readonly UNAME=$(uname)
 if [[ $UNAME == "Linux" ]] ; then
 	echo -e "${GREEN}Detected Linux${NC}"
 elif [[ $UNAME == "FreeBSD" ]] ; then
@@ -50,7 +50,7 @@ else
 fi
 
 #Check for single core (bad VM?)
-NUM_CPUS=$(cat /proc/cpuinfo | grep processor | wc -l)
+readonly NUM_CPUS=$(grep -c processor < /proc/cpuinfo)
 if [[ $NUM_CPUS -gt 1 ]] ; then
 	echo -e "${GREEN}Detected $NUM_CPUS CPUs${NC}"
 else
@@ -61,7 +61,7 @@ fi
 numactl -H
 
 #Check for too little RAM (bad VM?)
-MEMORY_KB=$(cat /proc/meminfo | grep MemTotal | awk '{print $2}')
+readonly MEMORY_KB=$(grep MemTotal < /proc/meminfo | awk '{print $2}')
 if [[ $MEMORY_KB -gt 4000000 ]] ; then
 	echo -e "${GREEN}Detected ${MEMORY_KB}K of memory${NC}"
 elif [[ $MEMORY_KB -gt 2000000 ]] ; then
@@ -73,7 +73,7 @@ fi
 #Check if sysctl limits are reasonable
 
 #Max network buffer sizes
-RMEM_MAX=$(sysctl -n net.core.rmem_max)
+readonly RMEM_MAX=$(sysctl -n net.core.rmem_max)
 if [[ $RMEM_MAX -gt 4000000 ]] ; then
 	echo -e "${GREEN}Detected ${RMEM_MAX} max network read buffer size${NC}"
 elif [[ $RMEM_MAX -gt 1000000 ]] ; then
@@ -82,7 +82,7 @@ else
 	echo -e "${RED}Detected very low max network read buffer size (net.core.rmem_max): ${RMEM_MAX}${NC}"
 fi
 
-WMEM_MAX=$(sysctl -n net.core.wmem_max)
+readonly WMEM_MAX=$(sysctl -n net.core.wmem_max)
 if [[ $WMEM_MAX -gt 4000000 ]] ; then
 	echo -e "${GREEN}Detected ${WMEM_MAX} max network write buffer size${NC}"
 elif [[ $WMEM_MAX -gt 1000000 ]] ; then
@@ -92,7 +92,7 @@ else
 fi
 
 #Default network buffer sizes
-RMEM_DEFAULT=$(sysctl -n net.core.rmem_default)
+readonly RMEM_DEFAULT=$(sysctl -n net.core.rmem_default)
 if [[ $RMEM_DEFAULT -gt 4000000 ]] ; then
 	echo -e "${GREEN}Detected ${RMEM_DEFAULT} default network read buffer size${NC}"
 elif [[ $RMEM_DEFAULT -gt 1000000 ]] ; then
@@ -101,7 +101,7 @@ else
 	echo -e "${RED}Detected very low default network read buffer size (net.core.rmem_default): ${RMEM_DEFAULT}${NC}"
 fi
 
-WMEM_DEFAULT=$(sysctl -n net.core.wmem_default)
+readonly WMEM_DEFAULT=$(sysctl -n net.core.wmem_default)
 if [[ $WMEM_DEFAULT -gt 4000000 ]] ; then
 	echo -e "${GREEN}Detected ${WMEM_DEFAULT} default network write buffer size${NC}"
 elif [[ $WMEM_DEFAULT -gt 1000000 ]] ; then
@@ -112,7 +112,7 @@ fi
 
 #Check for important packages
 for PACKAGE in fail2ban ufw ; do
-	if $(dpkg -s $PACKAGE &> /dev/null) ; then
+	if dpkg -s $PACKAGE &> /dev/null ; then
 		echo -e "${GREEN}${PACKAGE} installed."
 	else
 		echo -e "${RED}${PACKAGE} not installed."

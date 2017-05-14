@@ -27,8 +27,8 @@ if [[ $# -eq 0 ]] ; then
 fi
 
 readonly UNAME=$(uname)
-if [ $UNAME == "Darwin" ] ; then
-	sed -i '' -e $'s|[\t]|    |g' $@
+if [ "$UNAME" == "Darwin" ] ; then
+	sed -i '' -e $'s|[\t]|    |g' "$@"
 else
-	sed --in-place -e $'s|[\t]|    |g' $@
+	sed --in-place -e $'s|[\t]|    |g' "$@"
 fi

@@ -29,4 +29,4 @@ if [[ $# -lt 1 ]] ; then
 	exit 1
 fi
 
-git blame --line-porcelain $1 | sed -n 's/^author //p' | sort | uniq -c | sort -rn
+git blame --line-porcelain "$1" | sed -n 's/^author //p' | sort | uniq -c | sort -rn
