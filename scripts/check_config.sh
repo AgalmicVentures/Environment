@@ -109,3 +109,12 @@ elif [[ $WMEM_DEFAULT -gt 1000000 ]] ; then
 else
 	echo -e "${RED}Detected very low default network write buffer size (net.core.wmem_default): ${WMEM_DEFAULT}${NC}"
 fi
+
+#Check for important packages
+for PACKAGE in fail2ban ufw ; do
+	if $(dpkg -s $PACKAGE &> /dev/null) ; then
+		echo -e "${GREEN}${PACKAGE} installed."
+	else
+		echo -e "${RED}${PACKAGE} not installed."
+	fi
+done
