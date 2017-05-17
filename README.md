@@ -81,6 +81,9 @@ changed (e.g. for automating local builds).
 Checks the configuration of the system, including network buffer sizes and other
 commonly problematic values.
 
+#### `cleanup_tmp.sh`
+Cleans up temporary files more than a week old in `/tmp`.
+
 #### `create_ramdisk.sh`
 Creates a named RAM disk (tmpfs) under `/mnt` with the specified size.
 
