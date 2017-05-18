@@ -22,7 +22,10 @@
 
 set -u
 
-#NOTE: This script may need to be run under sudo
+if [ "$EUID" -ne 0 ] ; then
+	echo "Must be run as root."
+	exit 1
+fi
 
 apt-get install ufw
 

@@ -22,6 +22,11 @@
 
 set -eu
 
+if [ "$EUID" -ne 0 ] ; then
+	echo "Must be run as root."
+	exit 1
+fi
+
 #Simplify logging
 echo
 date +%Y%m%d

@@ -33,7 +33,7 @@ SIZE=$2
 
 cd /mnt || exit 1
 mkdir "$NAME"
-mount -t tmpfs -o size=$SIZE tmpfs $NAME
+mount -t tmpfs -o size="$SIZE" tmpfs "$NAME"
 
 echo
 df -h
