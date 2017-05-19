@@ -31,6 +31,14 @@ if [ -e /etc/bash_completion.d/mercurial ] ; then
 	source /etc/bash_completion.d/mercurial
 fi
 
+#Check the configuration at regular intervals
+if [ -e ~/check_config.sh ] || [ -L ~/check_config.sh ] ; then
+	if [ "$(find ~ -name .check_config -maxdepth 1 -mtime +30)" == "" ] ; then
+		touch ~/.check_config
+		~/check_config.sh
+	fi
+fi
+
 ########## Prompt ##########
 
 prompt() {
