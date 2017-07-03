@@ -28,8 +28,8 @@ if [[ $# -lt 2 ]] ; then
 	exit 1
 fi
 
-NAME=$1
-SIZE=$2
+readonly NAME="$1"
+readonly SIZE="$2"
 
 cd /mnt || exit 1
 mkdir "$NAME"

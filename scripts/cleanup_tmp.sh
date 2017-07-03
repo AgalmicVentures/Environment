@@ -23,4 +23,3 @@
 set -u
 
 find /tmp -mindepth 1 -atime +7 -delete
-

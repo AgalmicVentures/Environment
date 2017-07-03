@@ -30,7 +30,7 @@ readonly BLUE='\033[0;34m'
 
 for DIR in $(ls -F | grep /) ; do
 	if [ -d $DIR/.hg ] ; then
-		BASE=$(basename ${DIR})
+		BASE=$(basename "${DIR}")
 		echo -e "${BLUE}****************************** ${BASE} ******************************${NC}"
 		echo
 		cd $DIR
