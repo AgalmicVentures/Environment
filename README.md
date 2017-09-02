@@ -67,6 +67,9 @@ line if it is a shebang. Useful for e.g. prepending license files to code.
 Sleeps for a random amount of time given a minimum and maximum bound. Useful for
 randomizing the start time of processes.
 
+#### `SpacesToTabs.py`
+Converts spaces to tabs in place one or more files.
+
 #### `Template.py`
 Instantiates a template with values from a JSON configuration. Useful with
 `GenerateConfigs.py` and `Parallelize.py`.
