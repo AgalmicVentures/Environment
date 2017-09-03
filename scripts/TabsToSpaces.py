@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env python3
 
 # Copyright (c) 2015-2017 Agalmic Ventures LLC (www.agalmicventures.com)
 #
@@ -20,15 +20,38 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -u
+import argparse
+import sys
 
-if [[ $# -eq 0 ]] ; then
-	echo "Usage: ./tabs_to_spaces.sh <FILE> [<FILE> ...]"
-fi
+def spacesToTabs(filename, spacesPerTab):
+	with open(filename) as inf:
+		lines = inf.readlines()
 
-readonly UNAME=$(uname)
-if [ "$UNAME" == "Darwin" ] ; then
-	sed -i '' -e $'s|[\t]|    |g' "$@"
-else
-	sed --in-place -e $'s|[\t]|    |g' "$@"
-fi
+	with open(filename, 'w') as outf:
+		for line in lines:
+			numTabs = 0
+			for n, ch in enumerate(line):
+				if ch != '\t':
+					numTabs = n
+					break
+
+			numSpaces = int(numTabs * spacesPerTab)
+			numSpacesToRemove = numSpaces * spacesPerTab
+			newLine = (' ' * numSpaces) + line[numTabs:]
+
+			outf.write(newLine)
+
+def main():
+	#Parse arguments
+	parser = argparse.ArgumentParser(description='Tabs To Spaces Converter')
+	parser.add_argument('-n', '--spaces', type=int, default=4, help='Spaces per tab (default=4).')
+	parser.add_argument('input_files', nargs='+', help='Input files.')
+	arguments = parser.parse_args(sys.argv[1:])
+
+	for filename in arguments.input_files:
+		spacesToTabs(filename, arguments.spaces)
+
+	return 0
+
+if __name__ == '__main__':
+	sys.exit(main())

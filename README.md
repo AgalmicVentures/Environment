@@ -68,7 +68,12 @@ Sleeps for a random amount of time given a minimum and maximum bound. Useful for
 randomizing the start time of processes.
 
 #### `SpacesToTabs.py`
-Converts spaces to tabs in place one or more files.
+Converts spaces to tabs in place one or more files. WARNING: This operates
+in-place, so it is best used in a repository where the changes can be reverted.
+
+#### `tabs_to_spaces.sh`
+Converts tabs to spaces in place one or more files. WARNING: This operates
+in-place, so it is best used in a repository where the changes can be reverted.
 
 #### `Template.py`
 Instantiates a template with values from a JSON configuration. Useful with
@@ -120,10 +125,6 @@ working directory. Especially useful when you have a large number of projects.
 
 #### `setup_firewall.sh`
 Installs and configures a basic firewall (may need to run as root).
-
-#### `tabs_to_spaces.sh`
-Converts tabs to 4 spaces for a list of input files. WARNING: This operates
-in-place, so it is best used in a repository where the changes can be reverted.
 
 #### `upgrade_python3_venv.sh`
 Upgrades a `requirements.txt` for a Python 3 virtual environment to the latest

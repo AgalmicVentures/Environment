@@ -37,7 +37,7 @@ def spacesToTabs(filename, spacesPerTab):
 
 			numTabs = int(numSpaces / spacesPerTab)
 			numSpacesToRemove = numTabs * spacesPerTab
-			newLine = ('\t' * numTabs) + line[n:]
+			newLine = ('\t' * numTabs) + line[numSpaces:]
 
 			outf.write(newLine)
 
