@@ -71,7 +71,7 @@ randomizing the start time of processes.
 Converts spaces to tabs in place one or more files. WARNING: This operates
 in-place, so it is best used in a repository where the changes can be reverted.
 
-#### `tabs_to_spaces.sh`
+#### `TabsToSpaces.sh`
 Converts tabs to spaces in place one or more files. WARNING: This operates
 in-place, so it is best used in a repository where the changes can be reverted.
 
