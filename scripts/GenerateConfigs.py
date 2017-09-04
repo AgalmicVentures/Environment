@@ -83,7 +83,8 @@ def main():
 
 		#Write it to a file
 		outputFileName = '%s.json' % '_'.join(outputFileNameParts)
-		with open(os.path.join(arguments.output_path, outputFileName), 'w') as outputFile:
+		outputFilePath = os.path.join(arguments.output_path, outputFileName)
+		with open(outputFilePath, 'w') as outputFile:
 			outputFile.write(json.dumps(updatedConfig, indent=2, separators=(',', ': '), sort_keys=True))
 
 		count += 1

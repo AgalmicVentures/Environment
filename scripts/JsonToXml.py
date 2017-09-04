@@ -35,6 +35,19 @@ def encodeXmlEntities(data):
 	return data.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace("'", '&apos;').replace('"', '&quot;')
 
 def jsonToXml(tag, data, indent='\t', newline='\n', ignores=set(), prefix='', suffix='', transform=lambda x: x, depth=0):
+	"""
+	Converts a JSON dictionary to an XML string by recursively calling itself.
+
+	:param tag: str Tag name of the current level
+	:param data: dict JSON data at the current level
+	:param indent: str Indent string (default `'\t'`)
+	:param newline: str New line string (default `'\n'`)
+	:param ignores: set Keys to ignore
+	:param prefix: str Prefix to prepend to keys
+	:param suffix: str Suffix to append to keys
+	:param transform: function Transformation to apply to keys (e.g. to lower case)
+	:return: str
+	"""
 	t = type(data)
 	if t is dict:
 		dataXmls = [newline]
@@ -97,13 +110,6 @@ def main():
 	#TODO: underscores to camel
 
 	arguments = parser.parse_args(sys.argv[1:])
-	indent = arguments.indent
-	newline = arguments.newline
-	root = arguments.root
-	ignores = set(arguments.ignore)
-	prefix = arguments.prefix
-	suffix = arguments.suffix
-	transform = arguments.transform
 
 	#Read input
 	inputString = sys.stdin.read()
@@ -114,7 +120,13 @@ def main():
 		return 1
 
 	#Convert
-	outputXml = jsonToXml(root, inputJson, indent=indent, newline=newline, ignores=ignores, prefix=prefix, suffix=suffix, transform=transform)
+	outputXml = jsonToXml(arguments.root, inputJson,
+		indent=arguments.indent,
+		newline=arguments.newline,
+		ignores=set(arguments.ignores),
+		prefix=arguments.prefix,
+		suffix=arguments.suffix,
+		transform=arguments.transform)
 
 	#Output
 	print(outputXml)

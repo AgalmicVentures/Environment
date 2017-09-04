@@ -38,14 +38,17 @@ def main():
 
 	#Write it to the targets
 	for target in arguments.targets:
+		#Read the target
 		with open(target) as targetFile:
 			targetContents = targetFile.readlines()
 
+		#Join the content, optionally skipping the first line if it's a shebang
 		if arguments.skip_shebang and len(targetContents) > 0 and targetContents[0].startswith('#!'):
 			newContents = [targetContents[0]] + sourceContents + targetContents[1:]
 		else:
 			newContents = sourceContents + targetContents
 
+		#Write the target
 		with open(target, 'w') as targetFile:
 			targetFile.write(''.join(newContents))
 
