@@ -24,6 +24,12 @@ import argparse
 import sys
 
 def spacesToTabs(filename, spacesPerTab):
+	"""
+	Converts spaces to tabs in-place given a filename and a number of spaces per tab.
+
+	:param filename: str
+	:param spacesPerTab: int
+	"""
 	with open(filename) as inf:
 		lines = inf.readlines()
 
