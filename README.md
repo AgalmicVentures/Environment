@@ -126,6 +126,9 @@ working directory. Especially useful when you have a large number of projects.
 #### `setup_firewall.sh`
 Installs and configures a basic firewall (may need to run as root).
 
+#### `setup_sensors.sh`
+Installs and configures the lm_sensors package (e.g. for temperature sensors).
+
 #### `upgrade_python3_venv.sh`
 Upgrades a `requirements.txt` for a Python 3 virtual environment to the latest
 versions of each of its packages, then saves the result to the target location.
