@@ -23,14 +23,17 @@
 import argparse
 import sys
 
-def main():
+def main(argv=None):
 	#Parse arguments
 	parser = argparse.ArgumentParser(description='Prepend Files')
 	parser.add_argument('source', help='File to prepend to others.')
 	parser.add_argument('targets', nargs='*', help='A set of configurations to run.')
 	parser.add_argument('-s', '--skip-shebang', action='store_true',
 		help='In files with a shebang on the first line, insert the file after that line.')
-	arguments = parser.parse_args(sys.argv[1:])
+
+	if argv is None:
+		argv = sys.argv
+	arguments = parser.parse_args(argv[1:])
 
 	#Read the source file
 	with open(arguments.source) as sourceFile:

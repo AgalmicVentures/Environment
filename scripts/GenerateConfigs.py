@@ -33,7 +33,7 @@ try:
 except ImportError:
     izip = zip
 
-def main():
+def main(argv=None):
 	#Parse arguments
 	parser = argparse.ArgumentParser(description='JSON Config Generator')
 	parser.add_argument('--fraction', type=float, default=1.0, help='Fraction of configs to sample, in the interval (0.0 to 1.0] (default=1.0).')
@@ -41,7 +41,10 @@ def main():
 	parser.add_argument('config', help='Path to the base configuration.')
 	parser.add_argument('parameters', help='Path to the parameter configuration.')
 	parser.add_argument('output_path', help='Output path.')
-	arguments = parser.parse_args(sys.argv[1:])
+
+	if argv is None:
+		argv = sys.argv
+	arguments = parser.parse_args(argv[1:])
 
 	if arguments.fraction > 1.0:
 		print('WARNING: Fraction must be in the interval (0.0, 1.0] -- capping at 1.0')

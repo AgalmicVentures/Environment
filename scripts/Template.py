@@ -24,7 +24,7 @@ import argparse
 import json
 import sys
 
-def main():
+def main(argv=None):
 	"""
 	The main function of this script. Instantiates a template based on a JSON config.
 
@@ -35,7 +35,9 @@ def main():
 	parser.add_argument('template', help='Path to the template file.')
 	parser.add_argument('config', help='Path to the configuration JSON file.')
 
-	arguments = parser.parse_args(sys.argv[1:])
+	if argv is None:
+		argv = sys.argv
+	arguments = parser.parse_args(argv[1:])
 
 	with open(arguments.template) as templateFile, open(arguments.config) as configFile:
 		#Read template

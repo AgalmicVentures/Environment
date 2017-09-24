@@ -27,7 +27,7 @@ import os
 import sys
 import time
 
-def main():
+def main(argv=None):
 	"""
 	The main function of this script. Watches a number of files by polling their modified times, and runs a command when they change.
 
@@ -41,7 +41,9 @@ def main():
 	parser.add_argument('command', help='Command to run when one or more files change.')
 	parser.add_argument('files', metavar='FILE', nargs='+', help='Files to watch')
 
-	arguments = parser.parse_args(sys.argv[1:])
+	if argv is None:
+		argv = sys.argv
+	arguments = parser.parse_args(argv[1:])
 
 	if arguments.verbose:
 		print('Watching %s...' % ', '.join(arguments.files))

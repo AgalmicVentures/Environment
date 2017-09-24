@@ -47,12 +47,15 @@ def spacesToTabs(filename, spacesPerTab):
 
 			outf.write(newLine)
 
-def main():
+def main(argv=None):
 	#Parse arguments
 	parser = argparse.ArgumentParser(description='Spaces To Tabs Converter')
 	parser.add_argument('-n', '--spaces', type=int, default=4, help='Spaces per tab (default=4).')
 	parser.add_argument('input_files', nargs='+', help='Input files.')
-	arguments = parser.parse_args(sys.argv[1:])
+
+	if argv is None:
+		argv = sys.argv
+	arguments = parser.parse_args(argv[1:])
 
 	for filename in arguments.input_files:
 		spacesToTabs(filename, arguments.spaces)

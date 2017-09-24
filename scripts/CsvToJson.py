@@ -43,7 +43,7 @@ def csvToJson(reader, transform=lambda x: x, prefix='', suffix='', ignores=[]):
 
 		yield outputJson
 
-def main():
+def main(argv=None):
 	"""
 	The main function of this script. Converts CSV to JSON based on the arguments provided.
 
@@ -79,7 +79,9 @@ def main():
 		help='Uppercases column names when converting to keys (default=None)')
 	#TODO: underscores to camel
 
-	arguments = parser.parse_args(sys.argv[1:])
+	if argv is None:
+		argv = sys.argv
+	arguments = parser.parse_args(argv[1:])
 
 	#Read input
 	if arguments.single:

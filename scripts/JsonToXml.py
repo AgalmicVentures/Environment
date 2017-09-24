@@ -75,7 +75,7 @@ def jsonToXml(tag, data, indent='\t', newline='\n', ignores=set(), prefix='', su
 		newline
 	)
 
-def main():
+def main(argv=None):
 	"""
 	The main function of this script. Converts JSON to XML based on the arguments provided.
 
@@ -109,7 +109,9 @@ def main():
 		help='Uppercases tag names (default=None)')
 	#TODO: underscores to camel
 
-	arguments = parser.parse_args(sys.argv[1:])
+	if argv is None:
+		argv = sys.argv
+	arguments = parser.parse_args(argv[1:])
 
 	#Read input
 	inputString = sys.stdin.read()

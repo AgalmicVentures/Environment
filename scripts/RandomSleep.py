@@ -25,12 +25,15 @@ import random
 import sys
 import time
 
-def main():
+def main(argv=None):
 	parser = argparse.ArgumentParser(description='Randomized sleep script (e.g. for offseting process start times).')
 	parser.add_argument('min', type=float, help='Minimum time to sleep (seconds).')
 	parser.add_argument('max', type=float, help='Maximum time to sleep (seconds).')
 	parser.add_argument('-v', '--verbose', action='store_true', help='Output wait time in seconds.')
-	arguments = parser.parse_args(sys.argv[1:])
+
+	if argv is None:
+		argv = sys.argv
+	arguments = parser.parse_args(argv[1:])
 
 	sleepTime = random.uniform(arguments.min, arguments.max)
 	if arguments.verbose:

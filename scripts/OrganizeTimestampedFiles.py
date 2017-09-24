@@ -26,7 +26,7 @@ import os
 import re
 import sys
 
-def main():
+def main(argv=None):
 	parser = argparse.ArgumentParser(description='Organizes files with timestamps in their name into directories.')
 	parser.add_argument('-P', '--path', default='.', help='Where to look for files.')
 	parser.add_argument('-d', '--dir', default='%Y/%m',
@@ -34,7 +34,10 @@ def main():
 	parser.add_argument('-x', '--extension', default=[], action='append',
 		help='Add extension to look for (default all files).')
 	parser.add_argument('-v', '--verbose', action='store_true', help='Output more information.')
-	arguments = parser.parse_args(sys.argv[1:])
+
+	if argv is None:
+		argv = sys.argv
+	arguments = parser.parse_args(argv[1:])
 
 	#Create regular expressions
 	extensionsRegexStr = '|'.join(arguments.extension) if len(arguments.extension) > 0 else '.*'

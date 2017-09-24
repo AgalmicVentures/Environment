@@ -27,7 +27,7 @@ import subprocess
 import sys
 import time
 
-def main():
+def main(argv=None):
 	#Parse arguments
 	parser = argparse.ArgumentParser(description='Parallel Runner')
 	parser.add_argument('run_script', help='The script to execute.')
@@ -37,7 +37,10 @@ def main():
 		help='Time to sleep between checking process completions.')
 	parser.add_argument('-s', '--sleep', type=float, default=5.0,
 		help='Time to sleep between checking process completions.')
-	arguments = parser.parse_args(sys.argv[1:])
+
+	if argv is None:
+		argv = sys.argv
+	arguments = parser.parse_args(argv[1:])
 
 	startTime = datetime.datetime.now()
 	print('[%s] Starting %d processes for %d configs' % (startTime, arguments.processes, len(arguments.configs)))
