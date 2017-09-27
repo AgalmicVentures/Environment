@@ -1,7 +1,57 @@
 [alias]
+	#Shortcuts
+	ci = commit
+	co = checkout
+	d = diff
+	df = diff
+	l = log
+	s = status
 	st = status
+
+	#Misspellings
+	brach = branch
+	brnch = branch
+
+	cmmit = commit
+	comit = commit
+	commi = commit
+	commt = commit
+
+	dff = diff
+	doff = diff
+	idff = diff
+
+	pll = pull
+	pul = pull
+
+	psh = push
+	puhs = push
+	pus = push
+
+	#Accidental doublings (e.g. git git)
+	git = !exec git
+
+	#How things could have been
+	praise = blame
+
+[color]
+	diff = auto
+	status = auto
+
+[color "diff"]
+	meta = yellow bold
+	frag = cyan
+	old = red
+	new = green
+
+[color "status"]
+	added = green
+	changed = red
+	untracked = cyan
+
+[push]
+	default = simple
+
 [user]
 	name = Ian Hutchinson
 	email = ihutchinson@agalmicventures.com
-[push]
-	default = simple
