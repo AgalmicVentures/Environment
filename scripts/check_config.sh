@@ -35,6 +35,32 @@ else
 	echo -e "${RED}No SSH key detected (run setup_keys.sh or ssh-keygen)!${NC}"
 fi
 
+#Check if ulimit limits are reasonable
+readonly CORE_SIZE_LIMIT=$(ulimit -c)
+if [[ $CORE_SIZE_LIMIT == "unlimited" ]] ; then
+	echo -e "${GREEN}Core files enabled${NC}"
+elif [[ $CORE_SIZE_LIMIT == "0" ]] ; then
+	echo -e "${RED}Core files disabled -- run 'ulimit -c unlimited' to enable them${NC}"
+else
+	echo -e "${YELLOW}Core file size limited ${CORE_SIZE_LIMIT} -- run 'ulimit -c unlimited' to remvoe this limit${NC}"
+fi
+
+readonly FILE_SIZE_LIMIT=$(ulimit -f)
+if [[ $FILE_SIZE_LIMIT == "unlimited" ]] ; then
+	echo -e "${GREEN}No file size limit${NC}"
+else
+	echo -e "${RED}File size limited to ${FILE_SIZE_LIMIT} -- run 'ulimit -f unlimited' to remvoe this limit${NC}"
+fi
+
+readonly OPEN_FILES_LIMIT=$(ulimit -n)
+if [[ $OPEN_FILES_LIMIT == "unlimited" || $OPEN_FILES_LIMIT -gt 65535 ]] ; then
+	echo -e "${GREEN}Max open files ${OPEN_FILES_LIMIT}${NC}"
+elif [[ $OPEN_FILES_LIMIT -gt 1023 ]] ; then
+	echo -e "${YELLOW}Max open files ${OPEN_FILES_LIMIT} is lowK${NC}"
+else
+	echo -e "${RED}Max open files ${OPEN_FILES_LIMIT} is VERY low${NC}"
+fi
+
 #Check OS before hardware
 readonly UNAME=$(uname)
 if [[ $UNAME == "Linux" ]] ; then
