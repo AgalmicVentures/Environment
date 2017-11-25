@@ -27,11 +27,20 @@ if [ "$EUID" -ne 0 ] ; then
 	exit 1
 fi
 
+#In case this is run from cron in an impoverished environment
+#Really, then unattended-upgrades should be used, but just in case
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
+
 #Simplify logging
-echo
+echo "Starting..."
 date +%Y%m%d
 echo
 
 apt-get update
 apt-get upgrade -y
 apt-get autoclean
+
+echo
+echo "Finished."
+date +%Y%m%d
+echo
