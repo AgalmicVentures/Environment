@@ -18,13 +18,13 @@ help_test_job:
     - scripts/Template.py -h
     - scripts/WatchFiles.py -h
 
-    - scripts/create_ramdisk.sh
-    - scripts/git_author_files.sh
-    - scripts/git_author_line_counts.sh
-    - scripts/git_file_authors.sh
-    - scripts/git
-    - scripts/hg
-    - scripts/upgrade_python3_venv.sh
+    - "! scripts/create_ramdisk.sh"
+    - "! scripts/git_author_files.sh"
+    - "! scripts/git_author_line_counts.sh"
+    - "! scripts/git_file_authors.sh"
+    - "! scripts/git"
+    - "! scripts/hg"
+    - "! scripts/upgrade_python3_venv.sh"
   only:
     - master
 
