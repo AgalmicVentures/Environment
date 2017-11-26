@@ -13,17 +13,39 @@ help_test_job:
     - scripts/RandomSleep.py -h
     - scripts/Template.py -h
     - scripts/WatchFiles.py -h
+
+    - scripts/git
+    - scripts/hg
   only:
     - master
 
-smoke_test_job:
+functional_test_check_config_job:
   stage: test
   script:
-    - scripts/RandomSleep.py 0 2
+    - scripts/check_config.sh
+  only:
+    - master
+
+functional_test_parallelize_job:
+  stage: test
+  script:
     #Not the most traditional use of this script, but since the "run ID" is 0,
     #it will make the random sleeps be between 0 and n seconds
-    - scripts/Parallelize.py -p 2 -s 1 scripts/RandomSleep.py 0 4 2 3 3 4 3 2 3
+    - time scripts/Parallelize.py -p 2 -s 1 scripts/RandomSleep.py 0 4 2 3 3 4 3 2 3
+  only:
+    - master
 
+functional_test_sleep_job:
+  stage: test
+  script:
+    - time scripts/RandomSleep.py 0 1
+    - time scripts/RandomSleep.py 1 3
+  only:
+    - master
+
+functional_test_spaces_tabs_job:
+  stage: test
+  script:
     #These should be commutative and idempotent when applied repeatedly
     #Original script starts with tabs
     - TEST_SCRIPT=scripts/Parallelize.py
@@ -35,9 +57,5 @@ smoke_test_job:
     - scripts/SpacesToTabs.py Test.py
     - diff $TEST_SCRIPT Test.py
     - rm Test.py
-
-    - scripts/check_config.sh
-    - scripts/git
-    - scripts/hg
   only:
     - master
