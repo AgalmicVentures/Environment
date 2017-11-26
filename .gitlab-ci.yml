@@ -24,6 +24,18 @@ smoke_test_job:
     #it will make the random sleeps be between 0 and n seconds
     - scripts/Parallelize.py -p 2 -s 1 scripts/RandomSleep.py 0 4 2 3 3 4 3 2 3
 
+    #These should be commutative and idempotent when applied repeatedly
+    #Original script starts with tabs
+    - TEST_SCRIPT=scripts/Parallelize.py
+    - cp $TEST_SCRIPT Test.py
+    - scripts/SpacesToTabs.py Test.py
+    - diff $TEST_SCRIPT Test.py
+    - scripts/TabsToSpaces.py Test.py
+    - "[ ! diff $TEST_SCRIPT Test.py ]"
+    - scripts/SpacesToTabs.py Test.py
+    - diff $TEST_SCRIPT Test.py
+    - rm Test.py
+
     - scripts/check_config.sh
     - scripts/git
     - scripts/hg
