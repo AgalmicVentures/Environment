@@ -126,8 +126,15 @@ working directory. Especially useful when you have a large number of projects.
 #### `setup_firewall.sh`
 Installs and configures a basic firewall (may need to run as root).
 
+#### `setup_keys.sh`
+Setup SSH keys by following some prompts (wraps `ssh-keygen`).
+
 #### `setup_sensors.sh`
 Installs and configures the lm_sensors package (e.g. for temperature sensors).
+
+#### `update_packages.sh`
+Updates and upgrades the system packages. Usable in cron (though
+`unattended-upgrades` is recommended).
 
 #### `upgrade_python3_venv.sh`
 Upgrades a `requirements.txt` for a Python 3 virtual environment to the latest
