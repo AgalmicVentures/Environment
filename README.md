@@ -1,18 +1,19 @@
 # Development Environment
-This repository contains basic helper scripts and configuration files needed to
-setup a development environment on a variety of platforms.
+This repository contains basic helper scripts and configuration files needed for
+a development environment on a variety of platforms.
 
-## Configs
+## Configs (`configs/`)
 
 ### `.bashrc`
 Many features including:
-* Custom colorized prompt with timestamp and current working directory
-* Warnings on non-zero return values
-* Aliases for common commands, e.g. `ll` for `ls -lAh`
-* `extract` function for generic archive decompression
+* Custom colorized prompt with timestamp and current working directory.
+* Warnings on non-zero return values.
+* Aliases for common commands, e.g. `ll` for `ls -lAh`.
+* `extract` function for generic archive decompression.
 
 ### `.gitconfig`
-Git default settings.
+Git default settings. Includes many convenient aliases, with not only standard
+abbreviations, but also common typos.
 
 ### `.hgrc`
 Mercurial default settings.
@@ -28,7 +29,11 @@ arrow can scroll back lines, etc.
 ### `Preferences.sublime-settings`
 Sublime Text user preferences.
 
-## Scripts
+## Licenses (`licenses/`)
+Copies of the MIT license in a variety of language formats are included for use
+with the `Prepend.py` script (see below).
+
+## Scripts (`scripts/`)
 
 ### Python
 
