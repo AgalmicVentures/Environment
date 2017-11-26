@@ -31,7 +31,7 @@ smoke_test_job:
     - scripts/SpacesToTabs.py Test.py
     - diff $TEST_SCRIPT Test.py
     - scripts/TabsToSpaces.py Test.py
-    - "[ ! diff $TEST_SCRIPT Test.py ]"
+    - "! diff $TEST_SCRIPT Test.py"
     - scripts/SpacesToTabs.py Test.py
     - diff $TEST_SCRIPT Test.py
     - rm Test.py
