@@ -39,6 +39,7 @@ echo
 apt-get update
 apt-get upgrade -y
 apt-get autoclean
+apt-get autoremove
 
 echo
 echo "Finished."
