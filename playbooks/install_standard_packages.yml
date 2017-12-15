@@ -38,4 +38,16 @@
       name: [fail2ban, sudo, ufw]
       state: latest
 
-  #TODO: configure ufw
+  - name: Configuring firewall (ufw)
+    ufw:
+      logging: on
+      policy: deny
+
+  - name: Allowing SSH connections
+    ufw:
+      rule: allow
+      name: ssh
+
+  - name: Enabling firewall
+    ufw:
+      state: enabled
