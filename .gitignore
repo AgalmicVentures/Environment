@@ -56,6 +56,9 @@ docs/_build/
 # PyBuilder
 target/
 
+#Ansible generated files
+*.retry
+
 # Other
 myenv/
 nohup.out

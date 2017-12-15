@@ -33,6 +33,10 @@ Sublime Text user preferences.
 Copies of the MIT license in a variety of language formats are included for use
 with the `Prepend.py` script (see below).
 
+## Playbooks (`playbooks/`)
+Ansible playbooks for configuring development environments on both desktops and
+servers.
+
 ## Scripts (`scripts/`)
 
 ### Python
