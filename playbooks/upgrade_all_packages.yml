@@ -28,7 +28,7 @@
       update_cache: yes
       cache_valid_time: 3600
 
-  - name: Updating all packages
+  - name: Upgrading all packages
     apt:
       name: "*"
       state: latest
