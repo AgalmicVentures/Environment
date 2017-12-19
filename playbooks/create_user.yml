@@ -19,18 +19,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Creates a personal user on remote machines with an SSH key and a copy of this repo
+#Creates a user on remote machines with an SSH key and a copy of this repo
 
 - hosts: all
   vars:
     - user: ihutchinson
+    - full_name: "Ian Hutchinson"
     - home_path: "/home/{{ user }}/"
     - environment_path: "{{ home_path }}/Code/OpenSource/Environment"
   tasks:
   - name: Creating account
     user:
       name: "{{ user }}"
-      comment: "Ian Hutchinson"
+      comment: "{{ full_name }}"
       shell: /bin/bash
       generate_ssh_key: yes
       ssh_key_type: ed25519
