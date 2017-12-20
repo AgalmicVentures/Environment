@@ -22,13 +22,21 @@
 #Development package install for both servers and desktops
 
 - hosts: all
+  vars:
+    desktop: true
   tasks:
   - name: Updating apt cache if the last one is more than 3600 seconds ago
     apt:
       update_cache: yes
       cache_valid_time: 3600
 
-  - name: Installing development packages
+  - name: Installing server packages
     apt:
-      name: [geany, gparted, valgrind]
+      name: [valgrind]
       state: latest
+
+  - name: Installing desktop packages
+    apt:
+      name: [geany]
+      state: latest
+    when: desktop
