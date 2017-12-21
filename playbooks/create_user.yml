@@ -21,6 +21,10 @@
 
 #Creates a user on remote machines with an SSH key and a copy of this repo
 
+#NOTE: Since root has a special home directory, you probably want something
+#like this to run as root:
+#  ansible-playbook playbooks/create_user.yml -e "user=root home_path=/root full_name="
+
 - hosts: all
   vars:
     - user: ihutchinson
