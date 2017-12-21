@@ -46,6 +46,14 @@
       dest: "{{ environment_path }}"
     remote_user: "{{ user }}"
 
+  - name: Symlinking git helper
+    file:
+      src: "{{ environment_path }}/scripts/git"
+      dest: "{{ home_path }}/Code/git"
+      state: link
+      force: yes
+    remote_user: "{{ user }}"
+
   - name: Symlinking .bashrc
     file:
       src: "{{ environment_path }}/configs/.bashrc"
