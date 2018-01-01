@@ -21,4 +21,4 @@
 
 #Amalgamates all desktop tasks
 
-- import_tasks: install_dev_packages.yml
+- import_tasks: install_desktop_packages.yml

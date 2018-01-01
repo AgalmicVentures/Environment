@@ -28,5 +28,5 @@
 
 - name: Installing desktop packages
   apt:
-    name: [geany]
+    name: [geany, gparted, libreoffice]
     state: latest
