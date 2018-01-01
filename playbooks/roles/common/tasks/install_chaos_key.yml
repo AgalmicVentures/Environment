@@ -31,3 +31,8 @@
     name: Seed entropy pool from ChaosKey
     job: "dd if=/dev/chaoskey0 of=/dev/random bs=4k count=256 > /dev/null"
     state: "{{ 'present' if stat_result.stat.exists else 'absent' }}"
+  register: cron_result
+
+- name: Immediately seeding entropy pool from ChaosKey
+  shell: dd if=/dev/chaoskey0 of=/dev/random bs=4k count=256
+  when: cron_result.changed and stat_result.stat.exists
