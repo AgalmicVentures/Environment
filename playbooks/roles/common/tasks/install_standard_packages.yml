@@ -19,24 +19,33 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Upgrades all packages to their latest versions
+#Standard package install for both servers and desktops
 
-- hosts: all
-  tasks:
-  - name: Updating apt cache if the last one is more than 3600 seconds ago
-    apt:
-      update_cache: yes
-      cache_valid_time: 3600
+- name: Updating apt cache if the last one is more than 3600 seconds ago
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
 
-  - name: Upgrading all packages
-    apt:
-      name: "*"
-      state: latest
+- name: Installing security packages
+  apt:
+    name: [fail2ban, sudo, ufw]
+    state: latest
 
-  - name: Removing useless packages from the cache
-    apt:
-      autoclean: yes
+- name: Configuring firewall (ufw)
+  ufw:
+    logging: on
+    policy: deny
 
-  - name: Removing unused packages
-    apt:
-      autoremove: yes
+- name: Allowing SSH connections
+  ufw:
+    rule: allow
+    name: ssh
+
+- name: Enabling firewall
+  ufw:
+    state: enabled
+
+- name: Installing basic packages
+  apt:
+    name: [git, python3-pip, python3-venv, ssh, vim]
+    state: latest

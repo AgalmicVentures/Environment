@@ -19,24 +19,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Development package install for both servers and desktops
+#Amalgamates all desktop tasks
 
-- hosts: all
-  vars:
-    desktop: true
-  tasks:
-  - name: Updating apt cache if the last one is more than 3600 seconds ago
-    apt:
-      update_cache: yes
-      cache_valid_time: 3600
-
-  - name: Installing server packages
-    apt:
-      name: [valgrind]
-      state: latest
-
-  - name: Installing desktop packages
-    apt:
-      name: [geany]
-      state: latest
-    when: desktop
+- import_tasks: install_dev_packages.yml

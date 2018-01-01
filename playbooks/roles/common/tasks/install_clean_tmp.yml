@@ -19,35 +19,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Standard package install for both servers and desktops
+#Creates a cron job to clean old temporary files
 
-- hosts: all
-  tasks:
-  - name: Updating apt cache if the last one is more than 3600 seconds ago
-    apt:
-      update_cache: yes
-      cache_valid_time: 3600
-
-  - name: Installing basic packages
-    apt:
-      name: [git, python3-pip, python3-venv, ssh, vim]
-      state: latest
-
-  - name: Installing security packages
-    apt:
-      name: [fail2ban, sudo, ufw]
-      state: latest
-
-  - name: Configuring firewall (ufw)
-    ufw:
-      logging: on
-      policy: deny
-
-  - name: Allowing SSH connections
-    ufw:
-      rule: allow
-      name: ssh
-
-  - name: Enabling firewall
-    ufw:
-      state: enabled
+- name: Creating cron job to clean old temporary files
+  cron:
+    name: Clean old temporary files
+    job: find /tmp -mindepth 1 -atime +7 -delete
+    minute: "*/15"
