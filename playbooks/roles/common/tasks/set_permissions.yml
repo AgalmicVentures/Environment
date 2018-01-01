@@ -19,17 +19,27 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Amalgamates all common tasks
+#Sets permissions on system files to what they should be
+#In a perfect world, this won't result in any action, but ours is not a perfect world
 
-#Get entropy before doing anything else, if possible
-- import_tasks: install_chaos_key.yml
+#TODO: should these be 600?
 
-#Setup the system
-- import_tasks: upgrade_all_packages.yml
-- import_tasks: install_standard_packages.yml
+- name: Setting root-only permissions on {{ item }}
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - /etc/cron.d/
+    - /etc/cron.daily/
+    - /etc/cron.hourly/
+    - /etc/cron.monthly/
+    - /etc/cron.weekly/
+    - /etc/crontab
+    - /etc/group
+    - /etc/ssh/ssh_config
+    - /etc/ssh/sshd_config
 
-#Fix permissions
-- import_tasks: set_permissions.yml
+#TODO: check system keys?
 
-#Automate administration
-- import_tasks: install_clean_tmp.yml
