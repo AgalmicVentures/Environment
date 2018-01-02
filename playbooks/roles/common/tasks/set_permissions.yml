@@ -52,7 +52,10 @@
     mode: 0644
   with_items:
     - /etc/crontab
+    - /etc/fstab
     - /etc/group
+    - /etc/host.conf
+    - /etc/hostname
     - /etc/hosts
     - /etc/hosts.allow
     - /etc/hosts.deny
