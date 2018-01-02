@@ -22,24 +22,77 @@
 #Sets permissions on system files to what they should be
 #In a perfect world, this won't result in any action, but ours is not a perfect world
 
-#TODO: should these be 600?
+- name: Setting root and group read permissions on...
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0440
+  with_items:
+    - /etc/sudoers
 
-- name: Setting root-only permissions on {{ item }}
+- name: Setting root-only read-write permissions on...
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0600
+  with_items:
+    - /etc/ssh/ssh_host_dsa_key
+    - /etc/ssh/ssh_host_ecdsa_key
+    - /etc/ssh/ssh_host_ed25519_key
+    - /etc/ssh/ssh_host_rsa_key
+
+#TODO: optionally tighten some of this, e.g. 644 -> 600
+- name: Setting root-only write, world read permissions on...
   file:
     path: "{{ item }}"
     owner: root
     group: root
     mode: 0644
   with_items:
+    - /etc/crontab
+    - /etc/group
+    - /etc/hosts
+    - /etc/hosts.allow
+    - /etc/hosts.deny
+    - /etc/sysctl.conf
+    - /etc/ssh/ssh_config
+    - /etc/ssh/sshd_config
+    - /etc/ssh/ssh_host_dsa_key.pub
+    - /etc/ssh/ssh_host_ecdsa_key.pub
+    - /etc/ssh/ssh_host_ed25519_key.pub
+    - /etc/ssh/ssh_host_rsa_key.pub
+
+#TODO: optionally tighten some of this, e.g. 755 -> 644
+- name: Setting root-only write, world read, execute permissions on...
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
     - /etc/cron.d/
     - /etc/cron.daily/
     - /etc/cron.hourly/
     - /etc/cron.monthly/
     - /etc/cron.weekly/
-    - /etc/crontab
-    - /etc/group
-    - /etc/ssh/ssh_config
-    - /etc/ssh/sshd_config
 
-#TODO: check system keys?
+- name: Setting world read, write permissions on...
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0666
+  with_items:
+    - /dev/random
+    - /dev/urandom
 
+- name: Opening permissions on...
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 01777
+  with_items:
+    - /tmp/
