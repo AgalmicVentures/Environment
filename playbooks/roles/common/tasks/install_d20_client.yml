@@ -25,6 +25,7 @@
   git:
     repo: https://github.com/AgalmicVentures/D20.git
     dest: /root/Code/OpenSource/D20
+  register: git_result
 
 #TODO: figure out how to vary this time randomly
 - name: Creating cron job to seed entropy pool from D20 once per hour
@@ -37,4 +38,4 @@
 
 - name: Immediately seeding entropy pool from D20
   shell: /root/Code/OpenSource/D20/roll.sh
-  when: cron_result.changed
+  when: git_result.changed or cron_result.changed
