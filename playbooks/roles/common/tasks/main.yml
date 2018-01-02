@@ -28,8 +28,9 @@
 - import_tasks: upgrade_all_packages.yml
 - import_tasks: install_standard_packages.yml
 
-#Fix permissions
+#Fix permissions, settings
 - import_tasks: set_permissions.yml
+- import_tasks: set_sysctl.yml
 
 #Automate administration
 - import_tasks: install_clean_tmp.yml
