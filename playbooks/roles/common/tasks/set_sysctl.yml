@@ -46,13 +46,35 @@
     value: 1
     sysctl_set: yes
 
-#TODO: kernel panic settings
+- name: Setting kernel panic delay
+  sysctl:
+    name: kernel.panic
+    value: 60
+    sysctl_set: yes
+
+- name: Enabling panic on oops
+  sysctl:
+    name: kernel.panic_on_oops
+    value: 1
+    sysctl_set: yes
 
 #TODO: arguably this should be 2, but 1 seems like a reasonable compromise for now
 - name: Disabling tracing for unpriveleged users
   sysctl:
     name: kernel.perf_event_paranoid
     value: 1
+    sysctl_set: yes
+
+- name: Enabling watchdog timers
+  sysctl:
+    name: kernel.watchdog
+    value: 1
+    sysctl_set: yes
+
+- name: Setting watchdog timer threshold
+  sysctl:
+    name: kernel.watchdog_thresh
+    value: 10
     sysctl_set: yes
 
 - name: Enabling ASLR for code and data
