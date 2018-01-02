@@ -32,5 +32,13 @@
 - import_tasks: set_permissions.yml
 - import_tasks: set_sysctl.yml
 
+#Setup root user environment
+- import_tasks: create_user.yml
+  vars:
+    user: root
+    home_path: /root
+    full_name: ""
+    environment_path: /root/Code/OpenSource/Environment
+
 #Automate administration
 - import_tasks: install_clean_tmp.yml
