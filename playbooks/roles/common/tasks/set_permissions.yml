@@ -31,6 +31,15 @@
   with_items:
     - /etc/sudoers
 
+- name: Setting root-only read-write-execute permissions on...
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0700
+  with_items:
+    - /root/
+
 - name: Setting root-only read-write permissions on...
   file:
     path: "{{ item }}"
@@ -68,7 +77,7 @@
     - /etc/ssh/ssh_host_rsa_key.pub
 
 #TODO: optionally tighten some of this, e.g. 755 -> 644
-- name: Setting root-only write, world read, execute permissions on...
+- name: Setting root-only write, world read-execute permissions on...
   file:
     path: "{{ item }}"
     owner: root
@@ -81,7 +90,7 @@
     - /etc/cron.monthly/
     - /etc/cron.weekly/
 
-- name: Setting world read, write permissions on...
+- name: Setting world read-write permissions on...
   file:
     path: "{{ item }}"
     owner: root
