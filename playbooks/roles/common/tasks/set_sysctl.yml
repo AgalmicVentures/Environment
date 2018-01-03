@@ -27,36 +27,51 @@
     name: fs.protected_hardlinks
     value: 1
     sysctl_set: yes
+  tags:
+    - security
+    - sysctl
 
 - name: Enabling symlink protection
   sysctl:
     name: fs.protected_symlinks
     value: 1
     sysctl_set: yes
+  tags:
+    - security
+    - sysctl
 
 - name: Disabling core dumps for setuid processes
   sysctl:
     name: fs.suid_dumpable
     value: 0
     sysctl_set: yes
+  tags:
+    - security
+    - sysctl
 
 - name: Enabling PIDs on core files
   sysctl:
     name: kernel.core_uses_pid
     value: 1
     sysctl_set: yes
+  tags:
+    - sysctl
 
 - name: Setting kernel panic delay
   sysctl:
     name: kernel.panic
     value: 60
     sysctl_set: yes
+  tags:
+    - sysctl
 
 - name: Enabling panic on oops
   sysctl:
     name: kernel.panic_on_oops
     value: 1
     sysctl_set: yes
+  tags:
+    - sysctl
 
 #TODO: arguably this should be 2, but 1 seems like a reasonable compromise for now
 - name: Disabling tracing for unpriveleged users
@@ -64,24 +79,33 @@
     name: kernel.perf_event_paranoid
     value: 1
     sysctl_set: yes
+  tags:
+    - security
 
 - name: Enabling watchdog timers
   sysctl:
     name: kernel.watchdog
     value: 1
     sysctl_set: yes
+  tags:
+    - sysctl
 
 - name: Setting watchdog timer threshold
   sysctl:
     name: kernel.watchdog_thresh
     value: 10
     sysctl_set: yes
+  tags:
+    - sysctl
 
 - name: Enabling ASLR for code and data
   sysctl:
     name: kernel.randomize_va_space
     value: 2
     sysctl_set: yes
+  tags:
+    - security
+    - sysctl
 
 - name: Enabling logging of spoofed, source-routed, and redirect packets
   sysctl:
@@ -89,6 +113,9 @@
     value: 1
     #TODO: why does this cause it to always appear changed on DO?
     #sysctl_set: yes
+  tags:
+    - security
+    - sysctl
 
 - name: Enabling SYN cookie protection
   sysctl:
@@ -96,4 +123,7 @@
     value: 1
     #TODO: why does this cause it to always appear changed on DO?
     #sysctl_set: yes
+  tags:
+    - security
+    - sysctl
 

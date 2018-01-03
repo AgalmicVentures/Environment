@@ -25,39 +25,53 @@
   apt:
     update_cache: yes
     cache_valid_time: 3600
+  tags:
+    - security
 
 - name: Installing security packages
   apt:
-    name: [fail2ban, ntp, sudo, ufw]
+    name: [fail2ban, ntp, ssh, sudo, ufw]
     state: latest
+  tags:
+    - security
 
 - name: Enabling cron
   service:
     name: cron
     state: started
     enabled: yes
+  tags:
+    - security
 
 - name: Enabling NTP
   service:
     name: ntp
     state: started
     enabled: yes
+  tags:
+    - security
 
 - name: Configuring firewall (ufw)
   ufw:
     logging: on
     policy: deny
+  tags:
+    - security
 
 - name: Allowing SSH connections
   ufw:
     rule: allow
     name: ssh
+  tags:
+    - security
 
 - name: Enabling firewall
   ufw:
     state: enabled
+  tags:
+    - security
 
 - name: Installing standard packages
   apt:
-    name: [curl, git, python3-pip, python3-venv, ssh, vim, wget]
+    name: [curl, git, python3-pip, python3-venv, vim, wget]
     state: latest
