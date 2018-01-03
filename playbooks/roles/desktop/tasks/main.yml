@@ -22,3 +22,6 @@
 #Amalgamates all desktop tasks
 
 - import_tasks: install_desktop_packages.yml
+
+#TODO: eclipse
+#TODO: sublime text

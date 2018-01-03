@@ -28,8 +28,20 @@
 
 - name: Installing security packages
   apt:
-    name: [fail2ban, sudo, ufw]
+    name: [fail2ban, ntp, sudo, ufw]
     state: latest
+
+- name: Enabling cron
+  service:
+    name: cron
+    state: started
+    enabled: yes
+
+- name: Enabling NTP
+  service:
+    name: ntp
+    state: started
+    enabled: yes
 
 - name: Configuring firewall (ufw)
   ufw:
