@@ -29,6 +29,7 @@
   tags:
     - d20
     - entropy
+    - security
 
 #TODO: figure out how to vary this time randomly
 - name: Creating cron job to seed entropy pool from D20 once per hour
@@ -39,8 +40,10 @@
     state: present
   register: cron_result
   tags:
+    - cron
     - d20
     - entropy
+    - security
 
 - name: Immediately seeding entropy pool from D20
   shell: /root/Code/OpenSource/D20/roll.sh
@@ -48,3 +51,4 @@
   tags:
     - d20
     - entropy
+    - security

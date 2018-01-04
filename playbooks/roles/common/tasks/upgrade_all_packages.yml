@@ -25,11 +25,15 @@
   apt:
     update_cache: yes
     cache_valid_time: 3600
+  tags:
+    - security
 
 - name: Upgrading all packages
   apt:
     name: "*"
     state: latest
+  tags:
+    - security
 
 - name: Removing useless packages from the cache
   apt:

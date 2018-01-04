@@ -30,6 +30,8 @@
     mode: 0440
   with_items:
     - /etc/sudoers
+  tags:
+    - security
 
 - name: Setting root-only read-write-execute permissions on...
   file:
@@ -39,6 +41,8 @@
     mode: 0700
   with_items:
     - /root/
+  tags:
+    - security
 
 - name: Setting root-only read-write permissions on...
   file:
@@ -51,6 +55,8 @@
     - /etc/ssh/ssh_host_ecdsa_key
     - /etc/ssh/ssh_host_ed25519_key
     - /etc/ssh/ssh_host_rsa_key
+  tags:
+    - security
 
 #TODO: optionally tighten some of this, e.g. 644 -> 600
 - name: Setting root-only write, world read permissions on...
@@ -75,6 +81,8 @@
     - /etc/ssh/ssh_host_ecdsa_key.pub
     - /etc/ssh/ssh_host_ed25519_key.pub
     - /etc/ssh/ssh_host_rsa_key.pub
+  tags:
+    - security
 
 #TODO: optionally tighten some of this, e.g. 755 -> 644
 - name: Setting root-only write, world read-execute permissions on...
@@ -89,6 +97,8 @@
     - /etc/cron.hourly/
     - /etc/cron.monthly/
     - /etc/cron.weekly/
+  tags:
+    - security
 
 - name: Setting world read-write permissions on...
   file:
@@ -99,6 +109,8 @@
   with_items:
     - /dev/random
     - /dev/urandom
+  tags:
+    - security
 
 - name: Opening permissions on...
   file:
@@ -108,3 +120,5 @@
     mode: 01777
   with_items:
     - /tmp/
+  tags:
+    - security

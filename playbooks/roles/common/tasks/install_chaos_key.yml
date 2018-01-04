@@ -27,6 +27,7 @@
   register: stat_result
   tags:
     - entropy
+    - security
 
 - name: "{{ 'Creating' if stat_result.stat.exists else 'Removing' }} cron job to seed entropy pool once per minute"
   cron:
@@ -35,10 +36,13 @@
     state: "{{ 'present' if stat_result.stat.exists else 'absent' }}"
   register: cron_result
   tags:
+    - cron
     - entropy
+    - security
 
 - name: Immediately seeding entropy pool from ChaosKey
   shell: dd if=/dev/chaoskey0 of=/dev/random bs=4k count=256
   when: cron_result.changed and stat_result.stat.exists
   tags:
     - entropy
+    - security
