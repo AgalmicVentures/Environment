@@ -28,3 +28,11 @@
     minute: "*/15"
   tags:
     - cron
+
+- name: Creating cron job to clean old scratch files
+  cron:
+    name: Clean old scratch files
+    job: find /mnt/scratch -mindepth 1 -atime +7 -delete
+    minute: "*/15"
+  tags:
+    - cron
