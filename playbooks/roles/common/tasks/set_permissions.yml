@@ -120,5 +120,6 @@
     mode: 01777
   with_items:
     - /tmp/
+    - /mnt/scratch/
   tags:
     - security

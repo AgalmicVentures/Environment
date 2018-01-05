@@ -31,12 +31,12 @@
 #Now that git is installed, setup an entropy source everyone can enjoy
 - import_tasks: install_d20_client.yml
 
+#Setup other mounts
+- import_tasks: mount_ramdisks.yml
+
 #Fix permissions, settings
 - import_tasks: set_permissions.yml
 - import_tasks: set_sysctl.yml
-
-#Setup other mounts
-- import_tasks: mount_ramdisks.yml
 
 #Setup root user environment
 - import_tasks: create_user.yml
