@@ -52,11 +52,24 @@
   tags:
     - security
 
+- name: Disabling ufw sysctl updates
+  replace:
+    path: /etc/default/ufw
+    regexp: "^IPT_SYSCTL=/etc/ufw/sysctl.conf$"
+    replace: "#IPT_SYSCTL=/etc/ufw/sysctl.conf"
+    backup: yes
+  tags:
+    - test
+    - network
+    - security
+
 - name: Configuring firewall (ufw)
   ufw:
     logging: on
     policy: deny
   tags:
+    - test
+    - network
     - security
 
 - name: Allowing SSH connections
@@ -64,12 +77,14 @@
     rule: allow
     name: ssh
   tags:
+    - network
     - security
 
 - name: Enabling firewall
   ufw:
     state: enabled
   tags:
+    - network
     - security
 
 - name: Installing standard packages

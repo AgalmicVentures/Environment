@@ -107,13 +107,46 @@
     - security
     - sysctl
 
+- name: Disabling ICMP redirect messages (IPv4)
+  sysctl:
+    name: net.ipv4.conf.all.accept_redirects
+    value: 0
+    sysctl_set: yes
+  tags:
+    - network
+    - security
+    - sysctl
+
+#TODO: do this on all interfaces?
 - name: Enabling logging of spoofed, source-routed, and redirect packets
   sysctl:
     name: net.ipv4.conf.all.log_martians
     value: 1
-    #TODO: why does this cause it to always appear changed on DO?
-    #sysctl_set: yes
+    sysctl_set: yes
   tags:
+    - test
+    - network
+    - security
+    - sysctl
+
+#TODO: do this on all interfaces?
+- name: Enabling reverse path filtering
+  sysctl:
+    name: net.ipv4.conf.all.rp_filter
+    value: 1
+    sysctl_set: yes
+  tags:
+    - network
+    - security
+    - sysctl
+
+- name: Disabling IP forwarding (IPv4)
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 0
+    sysctl_set: yes
+  tags:
+    - network
     - security
     - sysctl
 
@@ -121,9 +154,18 @@
   sysctl:
     name: net.ipv4.tcp_syncookies
     value: 1
-    #TODO: why does this cause it to always appear changed on DO?
-    #sysctl_set: yes
+    sysctl_set: yes
   tags:
+    - network
     - security
     - sysctl
 
+- name: Disabling ICMP redirect messages (IPv6)
+  sysctl:
+    name: net.ipv6.conf.all.accept_redirects
+    value: 0
+    sysctl_set: yes
+  tags:
+    - network
+    - security
+    - sysctl
