@@ -89,5 +89,5 @@
 
 - name: Installing standard packages
   apt:
-    name: [curl, git, python3-pip, python3-venv, vim, wget]
+    name: [curl, git, jq, python3-pip, python3-venv, vim, wget]
     state: latest
