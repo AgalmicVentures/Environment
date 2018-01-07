@@ -28,6 +28,7 @@
     value: 1
     sysctl_set: yes
   tags:
+    - filesystem
     - security
     - sysctl
 
@@ -37,6 +38,7 @@
     value: 1
     sysctl_set: yes
   tags:
+    - filesystem
     - security
     - sysctl
 
@@ -46,6 +48,7 @@
     value: 0
     sysctl_set: yes
   tags:
+    - filesystem
     - security
     - sysctl
 

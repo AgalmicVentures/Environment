@@ -28,3 +28,5 @@
     fstype: tmpfs
     opts: size=1G
     state: mounted
+  tags:
+    - filesystem
