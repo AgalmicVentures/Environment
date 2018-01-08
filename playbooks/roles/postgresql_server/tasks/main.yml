@@ -47,7 +47,7 @@
   - security
 
 #TODO: should this be optional?
-- name: Configuring Postgresql to listen on 0.0.0.0 (set listen_addresses
+- name: Configuring Postgresql to listen on 0.0.0.0
   replace:
     path: /etc/postgresql/9.6/main/postgresql.conf
     regexp: "^#listen_addresses = 'localhost'"
@@ -59,3 +59,10 @@
   - postgresql
 
 #TODO: setup backups
+
+- name: Starting PostgreSQL
+  systemd:
+    name: postgresql
+    state: started
+  tags:
+  - postgresql
