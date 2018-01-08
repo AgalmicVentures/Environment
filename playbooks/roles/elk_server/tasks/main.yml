@@ -1,0 +1,127 @@
+
+# Copyright (c) 2015-2018 Agalmic Ventures LLC (www.agalmicventures.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+#Installation for ELK stack servers
+
+- name: Adding apt key for ELK packages
+  apt_key:
+    id: 46095ACC8548582C1A2699A9D27D666CD88E42B4
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+  register: apt_key_result
+  tags:
+  - elk
+
+- name: Adding Elasticsearch repository to apt
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+    state: present
+  register: apt_elasticsearch_repo_result
+  tags:
+  - elk
+
+- name: Adding Kibana repository to apt
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+    state: present
+  register: apt_kibana_repo_result
+  tags:
+  - elk
+
+- name: Updating apt cache for changes
+  apt:
+    update_cache: yes
+  when: apt_key_result.changed or apt_elasticsearch_repo_result.changed or apt_kibana_repo_result.changed
+  tags:
+  - elk
+
+- name: Updating apt cache if the last one is more than 3600 seconds ago
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  tags:
+  - postgresql
+
+- name: Installing supporting packages
+  apt:
+    name: [apt-transport-https, default-jre, ufw]
+    state: latest
+  tags:
+  - elk
+
+- name: Install Elasticsearch
+  apt:
+    name: [elasticsearch]
+    state: latest
+  tags:
+  - elk
+
+- name: Install Kibana
+  apt:
+    name: [kibana]
+    state: latest
+  tags:
+  - elk
+
+#TODO: change the default password to something that won't be hit automatically
+
+- name: Allowing Elasticsearch connections through the firewall (ufw, port 9200)
+  ufw:
+    rule: allow
+    port: 9200
+  tags:
+  - elk
+  - network
+  - security
+
+- name: Allowing Elasticsearch connections through the firewall (ufw, port 9300)
+  ufw:
+    rule: allow
+    port: 9300
+  tags:
+  - elk
+  - network
+  - security
+
+- name: Allowing Kibana connections through the firewall (ufw, port 5601)
+  ufw:
+    rule: allow
+    port: 5601
+  tags:
+  - elk
+  - network
+  - security
+
+#TODO: setup backups
+
+- name: Starting Elasticsearch
+  systemd:
+    name: elasticsearch
+    state: started
+  tags:
+  - elk
+
+- name: Starting Kibana
+  systemd:
+    name: kibana
+    state: started
+  tags:
+  - elk
