@@ -103,6 +103,14 @@ Setup SSH keys by following some prompts (wraps `ssh-keygen`).
 #### `setup_sensors.sh`
 Installs and configures the lm_sensors package (e.g. for temperature sensors).
 
+#### `ssh_tunnel.sh`
+Helper script for setting up SSH tunnels: it passes its arguments to `ssh`
+along with options to fork it to run in the background, and heartbeat once per
+minute, allowing up to 60 misses. This results in unobtrusive tunnels that are
+resilient to short disruptions in the connection. For example:
+
+	scripts/ssh_tunnel.sh -L 12222:localhost:80 ihutchinson@AAA.BBB.CCC.DDD
+
 #### `update_packages.sh`
 Updates and upgrades the system packages. Usable in cron (though
 `unattended-upgrades` is recommended).
