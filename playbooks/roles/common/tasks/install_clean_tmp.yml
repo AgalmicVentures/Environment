@@ -28,6 +28,7 @@
     minute: "*/15"
   tags:
     - cron
+    - housekeeping
 
 - name: Creating cron job to clean old scratch files
   cron:
@@ -36,3 +37,4 @@
     minute: "*/15"
   tags:
     - cron
+    - housekeeping

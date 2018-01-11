@@ -26,6 +26,7 @@
     update_cache: yes
     cache_valid_time: 3600
   tags:
+    - housekeeping
     - security
 
 - name: Upgrading all packages
@@ -33,12 +34,17 @@
     name: "*"
     state: latest
   tags:
+    - housekeeping
     - security
 
 - name: Removing useless packages from the cache
   apt:
     autoclean: yes
+  tags:
+    - housekeeping
 
 - name: Removing unused packages
   apt:
     autoremove: yes
+  tags:
+    - housekeeping

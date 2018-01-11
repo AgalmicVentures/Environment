@@ -51,6 +51,8 @@
   rabbitmq_plugin:
     names: rabbitmq_management
     state: enabled
+  tags:
+  - rabbitmq
 
 #TODO: setup users
 
