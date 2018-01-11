@@ -60,9 +60,6 @@ changed (e.g. for automating local builds).
 Checks the configuration of the system, including network buffer sizes and other
 commonly problematic values.
 
-#### `cleanup_tmp.sh`
-Cleans up temporary files more than a week old in `/tmp`.
-
 #### `create_ramdisk.sh`
 Creates a named RAM disk (tmpfs) under `/mnt` with the specified size.
 
@@ -94,12 +91,6 @@ working directory.
 Applies the same operation to all of the Mercurial repositories in the current
 working directory. Especially useful when you have a large number of projects.
 
-#### `setup_firewall.sh`
-Installs and configures a basic firewall (may need to run as root).
-
-#### `setup_keys.sh`
-Setup SSH keys by following some prompts (wraps `ssh-keygen`).
-
 #### `setup_sensors.sh`
 Installs and configures the lm_sensors package (e.g. for temperature sensors).
 
@@ -110,10 +101,6 @@ minute, allowing up to 60 misses. This results in unobtrusive tunnels that are
 resilient to short disruptions in the connection. For example:
 
 	scripts/ssh_tunnel.sh -L 12222:localhost:80 ihutchinson@AAA.BBB.CCC.DDD
-
-#### `update_packages.sh`
-Updates and upgrades the system packages. Usable in cron (though
-`unattended-upgrades` is recommended).
 
 #### `upgrade_python3_venv.sh`
 Upgrades a `requirements.txt` for a Python 3 virtual environment to the latest
