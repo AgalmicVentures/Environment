@@ -30,7 +30,7 @@
 
 - name: Installing developer packages
   apt:
-    name: [libboost-dev, valgrind]
+    name: [gdb, libboost-dev, make, valgrind]
     state: latest
   tags:
   - developer

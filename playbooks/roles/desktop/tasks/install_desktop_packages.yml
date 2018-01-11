@@ -30,7 +30,7 @@
 
 - name: Installing desktop packages
   apt:
-    name: [geany, gparted, libreoffice]
+    name: [geany, gparted, libreoffice, kdiff3]
     state: latest
   tags:
   - desktop
