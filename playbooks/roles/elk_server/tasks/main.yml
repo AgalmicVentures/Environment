@@ -58,7 +58,7 @@
     update_cache: yes
     cache_valid_time: 3600
   tags:
-  - postgresql
+  - elk
 
 - name: Installing supporting packages
   apt:
