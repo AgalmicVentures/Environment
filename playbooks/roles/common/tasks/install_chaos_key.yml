@@ -24,6 +24,7 @@
 - name: Checking for ChaosKey 0
   stat:
     path: /dev/chaoskey0
+  when: ansible_virtualization_role != 'guest'
   register: stat_result
   tags:
     - entropy
@@ -34,6 +35,7 @@
     name: Seed entropy pool from ChaosKey
     job: "dd if=/dev/chaoskey0 of=/dev/random bs=4k count=256 > /dev/null"
     state: "{{ 'present' if stat_result.stat.exists else 'absent' }}"
+  when: ansible_virtualization_role != 'guest'
   register: cron_result
   tags:
     - cron
