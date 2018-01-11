@@ -44,6 +44,14 @@
     - cron
     - security
 
+- name: Enabling fail2ban
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes
+  tags:
+    - security
+
 - name: Enabling NTP
   service:
     name: ntp
