@@ -33,6 +33,7 @@
     name: [fail2ban, ntp, ssh, sudo, ufw]
     state: latest
   tags:
+    - firewall
     - security
 
 - name: Enabling cron
@@ -67,7 +68,7 @@
     replace: "#IPT_SYSCTL=/etc/ufw/sysctl.conf"
     backup: yes
   tags:
-    - test
+    - firewall
     - network
     - security
 
@@ -76,7 +77,7 @@
     logging: on
     policy: deny
   tags:
-    - test
+    - firewall
     - network
     - security
 
@@ -85,6 +86,7 @@
     rule: allow
     name: ssh
   tags:
+    - firewall
     - network
     - security
 
@@ -92,6 +94,7 @@
   ufw:
     state: enabled
   tags:
+    - firewall
     - network
     - security
 

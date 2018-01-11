@@ -89,6 +89,7 @@
     port: 9200
   tags:
   - elk
+  - firewall
   - network
   - security
 
@@ -98,6 +99,7 @@
     port: 9300
   tags:
   - elk
+  - firewall
   - network
   - security
 
@@ -107,6 +109,7 @@
     port: 5601
   tags:
   - elk
+  - firewall
   - network
   - security
 

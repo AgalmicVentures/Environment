@@ -42,6 +42,7 @@
     rule: allow
     port: 5432
   tags:
+  - firewall
   - network
   - postgresql
   - security

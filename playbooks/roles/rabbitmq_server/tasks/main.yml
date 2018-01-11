@@ -42,6 +42,7 @@
     rule: allow
     port: 5672
   tags:
+  - firewall
   - network
   - rabbitmq
   - security
