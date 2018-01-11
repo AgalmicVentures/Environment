@@ -127,7 +127,6 @@
     value: 1
     sysctl_set: yes
   tags:
-    - test
     - network
     - security
     - sysctl
@@ -147,6 +146,26 @@
   sysctl:
     name: net.ipv4.ip_forward
     value: 0
+    sysctl_set: yes
+  tags:
+    - network
+    - security
+    - sysctl
+
+- name: Increasing maximum TCP SYN backlog
+  sysctl:
+    name: net.ipv4.tcp_max_syn_backlog
+    value: 1024
+    sysctl_set: yes
+  tags:
+    - network
+    - security
+    - sysctl
+
+- name: Reducing TCP SYN-ACK to 3
+  sysctl:
+    name: net.ipv4.tcp_synack_retries
+    value: 3
     sysctl_set: yes
   tags:
     - network
