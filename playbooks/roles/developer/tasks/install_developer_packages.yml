@@ -26,11 +26,11 @@
     update_cache: yes
     cache_valid_time: 3600
   tags:
-  - desktop
+  - developer
 
-- name: Installing desktop packages
+- name: Installing developer packages
   apt:
-    name: [geany, gparted, libreoffice]
+    name: [libboost-dev, valgrind]
     state: latest
   tags:
-  - desktop
+  - developer

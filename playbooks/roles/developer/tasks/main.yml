@@ -19,18 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Development package install for both servers and desktops
+#Amalgamates all developer tasks
 
-- name: Updating apt cache if the last one is more than 3600 seconds ago
-  apt:
-    update_cache: yes
-    cache_valid_time: 3600
-  tags:
-  - desktop
+- import_tasks: install_developer_packages.yml
 
-- name: Installing desktop packages
-  apt:
-    name: [geany, gparted, libreoffice]
-    state: latest
-  tags:
-  - desktop
+#TODO: eclipse
