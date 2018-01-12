@@ -33,6 +33,7 @@
   apt:
     name: "*"
     state: latest
+    force_apt_get: yes #Fresh Debian 9.3 breaks without this
   tags:
     - housekeeping
     - security
