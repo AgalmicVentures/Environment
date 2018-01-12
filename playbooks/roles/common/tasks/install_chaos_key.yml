@@ -30,7 +30,7 @@
     - entropy
     - security
 
-- name: "{{ 'Creating' if stat_result.stat.exists else 'Removing' }} cron job to seed entropy pool once per minute"
+- name: Creating/removing cron job to seed entropy pool once per minute
   cron:
     name: Seed entropy pool from ChaosKey
     job: "dd if=/dev/chaoskey0 of=/dev/random bs=4k count=256 > /dev/null"
