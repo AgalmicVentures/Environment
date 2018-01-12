@@ -53,7 +53,7 @@
     group: root
     mode: 0600
   with_items:
-    - /etc/ssh/ssh_host_dsa_key
+    #XXX: not always present - /etc/ssh/ssh_host_dsa_key
     - /etc/ssh/ssh_host_ecdsa_key
     - /etc/ssh/ssh_host_ed25519_key
     - /etc/ssh/ssh_host_rsa_key
@@ -80,7 +80,7 @@
     - /etc/sysctl.conf
     - /etc/ssh/ssh_config
     - /etc/ssh/sshd_config
-    - /etc/ssh/ssh_host_dsa_key.pub
+    #XXX: not always present - /etc/ssh/ssh_host_dsa_key.pub
     - /etc/ssh/ssh_host_ecdsa_key.pub
     - /etc/ssh/ssh_host_ed25519_key.pub
     - /etc/ssh/ssh_host_rsa_key.pub
