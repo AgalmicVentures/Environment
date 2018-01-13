@@ -91,9 +91,6 @@ working directory.
 Applies the same operation to all of the Mercurial repositories in the current
 working directory. Especially useful when you have a large number of projects.
 
-#### `setup_sensors.sh`
-Installs and configures the lm_sensors package (e.g. for temperature sensors).
-
 #### `ssh_tunnel.sh`
 Helper script for setting up SSH tunnels: it passes its arguments to `ssh`
 along with options to fork it to run in the background, and heartbeat once per
