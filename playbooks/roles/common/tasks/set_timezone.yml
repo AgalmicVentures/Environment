@@ -27,4 +27,5 @@
   timezone:
     name: Etc/UTC
   tags:
+    - time
     - timezone

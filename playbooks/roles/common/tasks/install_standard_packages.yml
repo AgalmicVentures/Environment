@@ -28,9 +28,17 @@
   tags:
     - security
 
+- name: Installing NTP
+  apt:
+    name: [ntp]
+    state: latest
+  tags:
+    - security
+    - time
+
 - name: Installing security packages
   apt:
-    name: [fail2ban, ntp, ssh, sudo, ufw]
+    name: [fail2ban, ssh, sudo, ufw]
     state: latest
   tags:
     - firewall
@@ -44,6 +52,7 @@
   tags:
     - cron
     - security
+    - time
 
 - name: Enabling fail2ban
   service:
@@ -60,6 +69,7 @@
     enabled: yes
   tags:
     - security
+    - time
 
 - name: Disabling ufw sysctl updates
   replace:
