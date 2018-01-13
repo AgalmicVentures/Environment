@@ -19,35 +19,38 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Amalgamates all common tasks
+#Install sensors
 
-#Get entropy before doing anything else, if possible
-- import_tasks: install_chaos_key.yml
+- name: Updating apt cache if the last one is more than 3600 seconds ago
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_virtualization_role != 'guest'
+  tags:
+    - sensors
 
-#Setup the system
-- import_tasks: upgrade_all_packages.yml
-- import_tasks: install_standard_packages.yml
+- name: Installing sensors packages
+  apt:
+    name: [lm-sensors]
+    state: latest
+  when: ansible_virtualization_role != 'guest'
+  register: install_packages
+  tags:
+    - sensors
 
-#Now that git is installed, setup an entropy source everyone can enjoy
-- import_tasks: install_d20_client.yml
+- name: Detecting sensors
+  command: sensors-detect
+  when: ansible_virtualization_role != 'guest' and install_packages.changed
+  tags:
+    - sensors
 
-#Install hardware
-- import_tasks: install_sensors.yml
+- name: Starting kmod service
+  service:
+    name: kmod
+    state: started
+    enabled: yes
+  when: ansible_virtualization_role != 'guest'
+  tags:
+    - sensors
 
-#Setup other mounts
-- import_tasks: mount_ramdisks.yml
-
-#Fix permissions, settings
-- import_tasks: set_permissions.yml
-- import_tasks: set_sysctl.yml
-
-#Setup root user environment
-- import_tasks: create_user.yml
-  vars:
-    user: root
-    home_path: /root
-    full_name: ""
-    environment_path: /root/Code/OpenSource/Environment
-
-#Automate administration
-- import_tasks: install_clean_tmp.yml
+#To see the sesnsors that are installed, run `sensors`
