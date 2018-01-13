@@ -26,6 +26,7 @@
     update_cache: yes
     cache_valid_time: 3600
   tags:
+    - firewall
     - security
 
 - name: Installing NTP
@@ -36,13 +37,15 @@
     - security
     - time
 
-- name: Installing security packages
-  apt:
-    name: [fail2ban, ssh, sudo, ufw]
-    state: latest
+- name: Enabling NTP
+  service:
+    name: ntp
+    state: started
+    enabled: yes
   tags:
-    - firewall
     - security
+    - services
+    - time
 
 - name: Enabling cron
   service:
@@ -52,7 +55,16 @@
   tags:
     - cron
     - security
+    - services
     - time
+
+- name: Installing security packages
+  apt:
+    name: [fail2ban, git, ssh, sudo, ufw]
+    state: latest
+  tags:
+    - firewall
+    - security
 
 - name: Enabling fail2ban
   service:
@@ -61,15 +73,7 @@
     enabled: yes
   tags:
     - security
-
-- name: Enabling NTP
-  service:
-    name: ntp
-    state: started
-    enabled: yes
-  tags:
-    - security
-    - time
+    - services
 
 - name: Disabling ufw sysctl updates
   replace:
@@ -110,5 +114,5 @@
 
 - name: Installing standard packages
   apt:
-    name: [curl, git, jq, python3-pip, python3-venv, vim, wget]
+    name: [curl, jq, python3-pip, python3-venv, vim, wget]
     state: latest
