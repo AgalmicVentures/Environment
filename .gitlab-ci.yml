@@ -2,7 +2,7 @@
 before_script:
   - python3 -m venv myenv
   - source myenv/bin/activate
-  - pythn3 -m pip install -r requirements.txt
+  - python3 -m pip install -r requirements.txt
 
 stages:
   - test
