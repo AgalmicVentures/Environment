@@ -11,7 +11,7 @@ stages:
 smoke_test_playbooks_job:
   stage: test
   script:
-    - ansible-playbook playbook/site.yml --list-tags
+    - ansible-playbook playbooks/site.yml --list-tags
   only:
     - master
 
