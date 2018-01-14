@@ -29,3 +29,40 @@
   tags:
     - time
     - timezone
+
+- name: Updating apt cache if the last one is more than 3600 seconds ago
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  tags:
+    - security
+    - time
+
+- name: Installing NTP
+  apt:
+    name: [ntp]
+    state: latest
+  tags:
+    - security
+    - time
+
+- name: Enabling NTP
+  service:
+    name: ntp
+    state: started
+    enabled: yes
+  tags:
+    - security
+    - services
+    - time
+
+- name: Enabling cron
+  service:
+    name: cron
+    state: started
+    enabled: yes
+  tags:
+    - cron
+    - security
+    - services
+    - time

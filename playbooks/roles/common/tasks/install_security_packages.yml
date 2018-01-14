@@ -19,40 +19,66 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Amalgamates all common tasks
+#Standard package install for both servers and desktops
 
-#Set the time zone first
-- import_tasks: set_timezone.yml
+- name: Updating apt cache if the last one is more than 3600 seconds ago
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  tags:
+    - firewall
+    - security
 
-#Get entropy before doing anything else, if possible
-- import_tasks: install_chaos_key.yml
+- name: Installing security packages
+  apt:
+    name: [fail2ban, git, ssh, sudo, ufw]
+    state: latest
+  tags:
+    - firewall
+    - security
 
-#Setup the system
-- import_tasks: upgrade_all_packages.yml
-- import_tasks: setup_time.yml
-- import_tasks: install_security_packages.yml
-- import_tasks: install_standard_packages.yml
+- name: Enabling fail2ban
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes
+  tags:
+    - security
+    - services
 
-#Now that git is installed, setup an entropy source everyone can enjoy
-- import_tasks: install_d20_client.yml
+- name: Disabling ufw sysctl updates
+  replace:
+    path: /etc/default/ufw
+    regexp: "^IPT_SYSCTL=/etc/ufw/sysctl.conf$"
+    replace: "#IPT_SYSCTL=/etc/ufw/sysctl.conf"
+    backup: yes
+  tags:
+    - firewall
+    - network
+    - security
 
-#Install hardware
-- import_tasks: install_sensors.yml
+- name: Configuring firewall (ufw)
+  ufw:
+    logging: on
+    policy: deny
+  tags:
+    - firewall
+    - network
+    - security
 
-#Setup other mounts
-- import_tasks: mount_ramdisks.yml
+- name: Allowing SSH connections
+  ufw:
+    rule: allow
+    name: ssh
+  tags:
+    - firewall
+    - network
+    - security
 
-#Fix permissions, settings
-- import_tasks: set_permissions.yml
-- import_tasks: set_sysctl.yml
-
-#Setup root user environment
-- import_tasks: create_user.yml
-  vars:
-    user: root
-    home_path: /root
-    full_name: ""
-    environment_path: /root/Code/OpenSource/Environment
-
-#Automate administration
-- import_tasks: install_clean_tmp.yml
+- name: Enabling firewall
+  ufw:
+    state: enabled
+  tags:
+    - firewall
+    - network
+    - security
