@@ -73,6 +73,9 @@ alias ll="ls -lAh"
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
 
+#Handle typos
+alias gti=git
+
 #Moving up directories
 up() {
 	local d=""
