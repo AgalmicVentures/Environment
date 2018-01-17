@@ -21,9 +21,6 @@
 
 #Amalgamates all common tasks
 
-#Set the time zone first
-- import_tasks: set_timezone.yml
-
 #Get entropy before doing anything else, if possible
 - import_tasks: install_chaos_key.yml
 
