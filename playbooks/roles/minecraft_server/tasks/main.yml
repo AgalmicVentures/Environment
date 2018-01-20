@@ -1,0 +1,125 @@
+
+# Copyright (c) 2015-2018 Agalmic Ventures LLC (www.agalmicventures.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+#Installation for Postgres servers
+
+- name: Updating apt cache if the last one is more than 3600 seconds ago
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  tags:
+    - minecraft
+
+- name: Installing Minecraft supporting packages
+  apt:
+    name: [default-jre, ufw]
+    state: latest
+  tags:
+    - minecraft
+
+- name: Allowing Minecraft connections through the firewall (ufw, port 25565)
+  ufw:
+    rule: allow
+    port: 25565
+  tags:
+    - firewall
+    - network
+    - minecraft
+    - security
+
+- name: Creating account
+  user:
+    name: minecraft
+    comment: Minecraft
+    shell: /bin/bash
+    generate_ssh_key: yes
+    ssh_key_type: ed25519
+  tags:
+    - minecraft
+
+- name: Creating server directory
+  file:
+    dest: /home/minecraft/minecraft
+    state: directory
+  become: yes
+  become_user: minecraft
+  tags:
+    - minecraft
+
+- name: Downloading latest Minecraft
+  get_url:
+    url: https://s3.amazonaws.com/Minecraft.Download/versions/1.12.2/minecraft_server.1.12.2.jar
+    dest: /home/minecraft/minecraft/minecraft_server.1.12.2.jar
+  become: yes
+  become_user: minecraft
+  register: download_result
+  tags:
+    - minecraft
+
+- name: Symlinking to standard path
+  file:
+    src: "{{ download_result.dest }}"
+    dest: /home/minecraft/minecraft/minecraft_server.jar
+    state: link
+    force: yes
+  become: yes
+  become_user: minecraft
+  tags:
+    - minecraft
+
+- name: Setting EULA flag to true
+  replace:
+    path: /home/minecraft/minecraft/eula.txt
+    regexp: "^eula=false"
+    replace: "eula=true"
+    backup: yes
+  notify:
+    - restart minecraft
+  tags:
+    - minecraft
+
+- name: Setting up Minecraft service
+  copy:
+    content: |
+      [Unit]
+      Description=Minecraft Service
+      After=network.target
+
+      [Service]
+      Type=simple
+      User=minecraft
+      Group=minecraft
+      WorkingDirectory=/home/minecraft/minecraft
+      ExecStart=/usr/bin/java -Xmx1024M -Xms1024M -jar minecraft_server.jar
+
+      [Install]
+      WantedBy=multi-user.target
+    dest: /lib/systemd/system/minecraft.service
+  tags:
+    - minecraft
+
+- name: Starting Minecraft
+  systemd:
+    name: minecraft
+    state: started
+    daemon_reload: yes
+  tags:
+    - minecraft
