@@ -26,11 +26,11 @@
     update_cache: yes
     cache_valid_time: 3600
   tags:
-  - developer
+    - developer
 
 - name: Installing developer packages
   apt:
     name: [gdb, libboost-dev, make, valgrind]
     state: latest
   tags:
-  - developer
+    - developer

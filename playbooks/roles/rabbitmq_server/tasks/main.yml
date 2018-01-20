@@ -26,14 +26,14 @@
     update_cache: yes
     cache_valid_time: 3600
   tags:
-  - rabbitmq
+    - rabbitmq
 
 - name: Installing RabbitMQ packages
   apt:
     name: [rabbitmq-server, ufw]
     state: latest
   tags:
-  - rabbitmq
+    - rabbitmq
 
 #TODO: change the default password to something that won't be hit automatically
 
@@ -42,17 +42,17 @@
     rule: allow
     port: 5672
   tags:
-  - firewall
-  - network
-  - rabbitmq
-  - security
+    - firewall
+    - network
+    - rabbitmq
+    - security
 
 - name: Enables the rabbitmq_management plugin
   rabbitmq_plugin:
     names: rabbitmq_management
     state: enabled
   tags:
-  - rabbitmq
+    - rabbitmq
 
 #TODO: setup users
 
@@ -61,4 +61,4 @@
     name: rabbitmq-server
     state: started
   tags:
-  - rabbitmq
+    - rabbitmq

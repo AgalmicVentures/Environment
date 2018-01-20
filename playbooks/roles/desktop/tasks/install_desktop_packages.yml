@@ -26,11 +26,11 @@
     update_cache: yes
     cache_valid_time: 3600
   tags:
-  - desktop
+    - desktop
 
 - name: Installing desktop packages
   apt:
     name: [geany, gparted, libreoffice, kdiff3]
     state: latest
   tags:
-  - desktop
+    - desktop

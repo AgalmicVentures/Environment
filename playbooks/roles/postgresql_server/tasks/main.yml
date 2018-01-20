@@ -26,14 +26,14 @@
     update_cache: yes
     cache_valid_time: 3600
   tags:
-  - postgresql
+    - postgresql
 
 - name: Installing Postgres packages
   apt:
     name: [postgresql-9.6, ufw]
     state: latest
   tags:
-  - postgresql
+    - postgresql
 
 #TODO: change the default password to something that won't be hit automatically
 
@@ -42,10 +42,10 @@
     rule: allow
     port: 5432
   tags:
-  - firewall
-  - network
-  - postgresql
-  - security
+    - firewall
+    - network
+    - postgresql
+    - security
 
 #TODO: should this be optional?
 - name: Configuring Postgresql to listen on 0.0.0.0
@@ -55,9 +55,9 @@
     replace: "#listen_addresses = '*'"
     backup: yes
   notify:
-  - restart postgresql
+    - restart postgresql
   tags:
-  - postgresql
+    - postgresql
 
 #TODO: setup backups
 
@@ -66,4 +66,4 @@
     name: postgresql
     state: started
   tags:
-  - postgresql
+    - postgresql
