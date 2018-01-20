@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Installation for Postgres servers
+#Installation for Minecraft servers
 
 - name: Updating apt cache if the last one is more than 3600 seconds ago
   apt:
