@@ -70,6 +70,11 @@ Defines a variety of formatting specifications with
 #### `drop_caches.sh`
 Frees the page cache and all reclaimable slab objects (e.g. inodes).
 
+#### `find_duplicates.sh`
+Finds duplicate files, given a list of paths. Note that only neighboring
+duplicates are found and this operates in linear time. Typically, it is used
+like so: `find ... | xargs scripts/find_duplicates.sh | ...`.
+
 #### `git`
 Applies the same operation to all of the Git repositories in the current working
 directory. Especially useful when you have a large number of projects.
