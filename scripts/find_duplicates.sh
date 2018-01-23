@@ -22,11 +22,13 @@
 
 set -u
 
+#Look for pairwise duplicates, skipping the first item in $@
 LAST_ITEM=""
 for ITEM in ${@:2} ; do
 	if [ "$LAST_ITEM" != "" ] ; then
 		RESULT=$(diff "$ITEM" "$LAST_ITEM")
 		if [[ $? -eq 0 ]] ; then
+			#Output the name if it's the same as the last file
 			echo "$ITEM"
 		fi
 	fi

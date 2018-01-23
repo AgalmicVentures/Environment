@@ -27,6 +27,7 @@ if [[ $# -lt 2 ]] ; then
 	exit 1
 fi
 
+#Setup a temporary virtual environment, then upgrade each package there
 python3 -m venv _upgrade_env
 source _upgrade_env/bin/activate
 python3 -m pip install --upgrade -r "$1"
