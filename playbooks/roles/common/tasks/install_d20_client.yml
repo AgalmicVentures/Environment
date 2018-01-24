@@ -35,8 +35,8 @@
 - name: Creating cron job to seed entropy pool from D20 once per hour
   cron:
     name: Seed entropy pool from D20
-    job: "/root/Code/OpenSource/D20/roll.sh > /dev/null"
-    minute: 18
+    job: "/root/Code/OpenSource/D20/roll.py > /dev/null"
+    minute: 3,18,33,48
     state: present
   register: cron_result
   tags:
@@ -46,7 +46,7 @@
     - security
 
 - name: Immediately seeding entropy pool from D20
-  shell: /root/Code/OpenSource/D20/roll.sh
+  shell: /root/Code/OpenSource/D20/roll.py
   when: git_result.changed or cron_result.changed
   tags:
     - d20
