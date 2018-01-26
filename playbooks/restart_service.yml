@@ -23,7 +23,7 @@
 
 - hosts: all
   tasks:
-  - name: Restarting service
-    service:
-      name: "{{service}}"
-      state: restarted
+    - name: Restarting service
+      service:
+        name: "{{service}}"
+        state: restarted
