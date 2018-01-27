@@ -36,6 +36,7 @@
   tags:
     - firewall
     - security
+    - ssh
 
 - name: Enabling fail2ban
   service:
@@ -45,6 +46,7 @@
   tags:
     - security
     - services
+    - ssh
 
 - name: Disabling ufw sysctl updates
   replace:
@@ -74,6 +76,7 @@
     - firewall
     - network
     - security
+    - ssh
 
 - name: Enabling firewall
   ufw:

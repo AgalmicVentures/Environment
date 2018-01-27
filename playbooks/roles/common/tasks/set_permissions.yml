@@ -60,6 +60,7 @@
   tags:
     - filesystem
     - security
+    - ssh
 
 #TODO: optionally tighten some of this, e.g. 644 -> 600
 - name: Setting root-only write, world read permissions on...
@@ -87,6 +88,7 @@
   tags:
     - filesystem
     - security
+    - ssh
 
 #TODO: optionally tighten some of this, e.g. 755 -> 644
 - name: Setting root-only write, world read-execute permissions on...

@@ -27,6 +27,7 @@
     creates: /etc/ssh/ssh_known_hosts
   tags:
     - security
+    - ssh
 
 #NOTE: This is here, rather than in set_permissions.yml, because this file does
 #not exist by default on the system
@@ -39,3 +40,4 @@
   tags:
     - filesystem
     - security
+    - ssh
