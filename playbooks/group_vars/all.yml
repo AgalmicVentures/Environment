@@ -19,32 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Installs a ChaosKey hardware RNG by having it seed the entropy pool once per minute
-
-- name: Checking for ChaosKey 0
-  stat:
-    path: /dev/chaoskey0
-  when: is_physical_machine
-  register: stat_result
-  tags:
-    - entropy
-    - security
-
-- name: Creating/removing cron job to seed entropy pool once per minute
-  cron:
-    name: Seed entropy pool from ChaosKey
-    job: "dd if=/dev/chaoskey0 of=/dev/random bs=4k count=256 > /dev/null"
-    state: "{{ 'present' if stat_result.stat.exists else 'absent' }}"
-  when: is_physical_machine
-  register: cron_result
-  tags:
-    - cron
-    - entropy
-    - security
-
-- name: Immediately seeding entropy pool from ChaosKey
-  shell: dd if=/dev/chaoskey0 of=/dev/random bs=4k count=256
-  when: cron_result.changed and stat_result.stat.exists
-  tags:
-    - entropy
-    - security
+#NOTE: This check is to work around issues where ansible_virtualization_role is
+#incorrectly identified
+is_virtual_machine: ansible_virtualization_role == 'guest' or ansible_system_vendor == 'DigitalOcean'
+is_physical_machine: not is_virtual_machine
