@@ -36,7 +36,7 @@
   cron:
     name: Seed entropy pool from D20
     job: "/root/Code/OpenSource/D20/Roll.py > /dev/null"
-    minute: "*/5"
+    minute: "*"
     state: present
   register: cron_result
   tags:
