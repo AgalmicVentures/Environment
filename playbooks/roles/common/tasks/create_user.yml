@@ -43,29 +43,18 @@
     force: yes
   remote_user: "{{ user }}"
 
-- name: Symlinking .bashrc
+- name: Symlinking configs into home directory...
   file:
-    src: "{{ environment_path }}/configs/.bashrc"
-    dest: "{{ home_path }}/.bashrc"
+    src: "{{ environment_path }}/configs/{{ item }}"
+    dest: "{{ home_path }}/{{ item }}"
     state: link
     force: yes
   remote_user: "{{ user }}"
-
-- name: Symlinking .gitconfig
-  file:
-    src: "{{ environment_path }}/configs/.gitconfig"
-    dest: "{{ home_path }}/.gitconfig"
-    state: link
-    force: yes
-  remote_user: "{{ user }}"
-
-- name: Symlinking .vimrc
-  file:
-    src: "{{ environment_path }}/configs/.vimrc"
-    dest: "{{ home_path }}/.vimrc"
-    state: link
-    force: yes
-  remote_user: "{{ user }}"
+  with_items:
+    - .bashrc
+    - .gitconfig
+    - .hgrc
+    - .vimrc
 
 - name: Creating vim backups folder
   file:
