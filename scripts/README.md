@@ -6,6 +6,10 @@
 #### `AugmentLines.py`
 Augments lines of text (e.g. with a time stamp).
 
+#### `ConvertEpochTime.py`
+Converts an epoch time into UTC times for all possible divisors (seconds,
+milliseconds, microseconds, and nanoseconds).
+
 #### `CsvToJson.py`
 Converts CSV documents to JSON with a variety of transformation options.
 
