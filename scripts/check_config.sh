@@ -32,7 +32,7 @@ readonly BLUE='\033[0;34m'
 if [ -e ~/.ssh/id_*.pub ] ; then
 	echo -e "${GREEN}SSH key detected${NC}"
 else
-	echo -e "${RED}No SSH key detected (run setup_keys.sh or ssh-keygen)!${NC}"
+	echo -e "${RED}No SSH key detected (run ssh-keygen)!${NC}"
 fi
 
 #Check if ulimit limits are reasonable
