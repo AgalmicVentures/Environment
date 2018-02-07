@@ -31,7 +31,7 @@
 
 - name: Installing security packages
   apt:
-    name: [fail2ban, git, ssh, sudo, ufw]
+    name: [debsums, fail2ban, git, ssh, sudo, ufw]
     state: latest
   tags:
     - firewall
