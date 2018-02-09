@@ -85,3 +85,10 @@
     - firewall
     - network
     - security
+
+- name: Removing known-insecure packages
+  apt:
+    name: ['inetd', 'prelink', 'rsh-server', 'telnet-server', 'xinetd', 'ypserv']
+    state: absent
+  tags:
+    - security
