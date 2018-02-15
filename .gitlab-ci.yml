@@ -73,10 +73,10 @@ functional_test_check_config_job:
 functional_test_convert_epoch_time_job:
   stage: test
   script:
-    - scripts/ConvertEpochTime.sh 0
-    - scripts/ConvertEpochTime.sh 1000
-    - scripts/ConvertEpochTime.sh 1000000
-    - scripts/ConvertEpochTime.sh 1000000000
+    - scripts/ConvertEpochTime.py 0
+    - scripts/ConvertEpochTime.py 1000
+    - scripts/ConvertEpochTime.py 1000000
+    - scripts/ConvertEpochTime.py 1000000000
   only:
     - master
 
