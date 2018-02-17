@@ -23,11 +23,11 @@
 
 - hosts: all
   tasks:
-  - name: Reading entropy available
-    slurp:
-      src: /proc/sys/kernel/random/entropy_avail
-    register: entropy_available
+    - name: Reading entropy available
+      slurp:
+        src: /proc/sys/kernel/random/entropy_avail
+      register: entropy_available
 
-  - name: Available entropy
-    debug:
-      msg: "Available entropy: {{ entropy_available.content | b64decode | trim }} bits"
+    - name: Available entropy
+      debug:
+        msg: "Available entropy: {{ entropy_available.content | b64decode | trim }} bits"
