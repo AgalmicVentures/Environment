@@ -85,6 +85,18 @@
   tags:
     - minecraft
 
+- name: Copying EULA (does not exist on a fresh install)
+  copy:
+    content: "eula=true"
+    dest: /home/minecraft/minecraft/eula.txt
+    owner: minecraft
+    group: minecraft
+    mode: 0644
+  notify:
+    - restart minecraft
+  tags:
+    - minecraft
+
 - name: Setting EULA flag to true
   replace:
     path: /home/minecraft/minecraft/eula.txt
