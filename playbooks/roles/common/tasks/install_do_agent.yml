@@ -42,7 +42,7 @@
 - name: Updating apt cache for changes
   apt:
     update_cache: yes
-  when: is_digital_ocean and apt_key_result.changed or apt_repo_result.changed
+  when: is_digital_ocean and (apt_key_result.changed or apt_repo_result.changed)
   tags:
     - digital_ocean
 
@@ -50,6 +50,14 @@
   apt:
     update_cache: yes
     cache_valid_time: 3600
+  tags:
+    - digital_ocean
+
+- name: Installing supporting packages
+  apt:
+    name: [apt-transport-https]
+    state: latest
+  when: is_digital_ocean
   tags:
     - digital_ocean
 
