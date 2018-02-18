@@ -28,7 +28,7 @@
 
 - name: Installing packages
   apt:
-    name: [ca-certificates, certbot, openssh-server, pound, ufw]
+    name: [ca-certificates, certbot, curl, openssh-server, ufw]
     state: latest
   tags:
     - gitlab
@@ -49,24 +49,50 @@
     - security
     - gitlab
 
-#TODO: setup Gitlab CE (https://about.gitlab.com/installation/#debian)
-
-#TODO: - name: Setting up reverse proxy config (/etc/pound/pound.cfg)
-
-- name: Setting startup flag for reverse proxy
-  replace:
-    path: /etc/default/pound
-    regexp: startup=0
-    replace: startup=1
-    backup: yes
-  notify:
-    - restart pound
+- name: Downloading setup script
+  get_url:
+    url: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh
+    dest: /tmp/script.deb.sh
   tags:
     - gitlab
 
-- name: Starting reverse proxy service
+- name: Setting up dependencies
+  command: bash /tmp/script.deb.sh
+  tags:
+    - gitlab
+
+- name: Installing Gitlab CE
+  apt:
+    name: gitlab-ce
+    state: latest
+  register: apt_result
+  notify:
+    - restart gitlab
+  tags:
+    - gitlab
+
+#TODO: - name: Enable nginx
+#  replace:
+#    path: /etc/gitlab/gitlab.rb
+#    regexp: TODO
+#    replace: TODO
+#    backup: yes
+#  notify:
+#    - restart gitlab
+#  tags:
+#    - website
+
+- name: Reconfiguring Gitlab
+  command: gitlab-ctl reconfigure
+  when: apt_result.changed
+  notify:
+    - restart gitlab
+  tags:
+    - gitlab
+
+- name: Starting Gitlab service
   systemd:
-    name: pound
+    name: gitlab-runsvdir
     state: started
   tags:
     - gitlab
