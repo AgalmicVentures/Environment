@@ -19,9 +19,40 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Amalgamates all desktop tasks
+#Development package install for both servers and desktops
 
-- import_tasks: install_desktop_packages.yml
-- import_tasks: install_fonts.yml
+- name: Updating apt cache if the last one is more than 3600 seconds ago
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  tags:
+    - desktop
 
-#TODO: sublime text
+- name: Installing font tools
+  apt:
+    name: [fontconfig, fontconfig-config]
+    state: latest
+  tags:
+    - desktop
+
+- name: Installing fonts
+  apt:
+    name: [ttf-mscorefonts-installer]
+    state: latest
+  register: apt_result
+  tags:
+    - desktop
+
+- name: Installing Consolas
+  get_url:
+    url: https://github.com/kakkoyun/linux.files/blob/master/fonts/Consolas.ttf?raw=true
+    dest: /usr/share/fonts/Consolas.ttf
+  register: consolas_result
+  tags:
+    - desktop
+
+- name: Reloading font cache
+  command: fc-cache -f -v
+  when: apt_result.changed or consolas_result.changed
+  tags:
+    - desktop
