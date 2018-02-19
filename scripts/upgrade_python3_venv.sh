@@ -20,7 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -u
+#XXX: can't use this because of Python's virtual environments
+#set -u
 
 if [[ $# -lt 2 ]] ; then
 	echo 'Usage: ./upgrade_python3_venv.sh <INPUT_REQUIREMENTS_TXT> <OUTPUT_REQUIREMENTS_TXT>'
