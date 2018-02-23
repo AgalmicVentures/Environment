@@ -71,17 +71,6 @@
   tags:
     - gitlab
 
-#TODO: - name: Enable nginx
-#  replace:
-#    path: /etc/gitlab/gitlab.rb
-#    regexp: TODO
-#    replace: TODO
-#    backup: yes
-#  notify:
-#    - restart gitlab
-#  tags:
-#    - website
-
 - name: Reconfiguring Gitlab
   command: gitlab-ctl reconfigure
   when: apt_result.changed
