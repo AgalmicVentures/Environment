@@ -30,11 +30,20 @@
 
 - name: Installing SDR packages
   apt:
-    name: [gqrx-sdr, rtl-sdr]
+    name: [git, gqrx-sdr, rtl-sdr]
     state: latest
   tags:
     - sdr
 
-#TODO: create user
+- name: Creating account
+  user:
+    name: sdr
+    comment: SDR
+    shell: /bin/bash
+    generate_ssh_key: yes
+    ssh_key_type: ed25519
+  register: website_account
+  tags:
+    - sdr
 
 #TODO: setup TSL-SDR
