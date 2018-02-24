@@ -46,4 +46,11 @@
   tags:
     - sdr
 
-#TODO: setup TSL-SDR
+- name: Cloning TSL SDR repository
+  git:
+    repo: https://github.com/pvachon/tsl-sdr.git
+    dest: /home/sdr/tsl-sdr/
+  become: yes
+  become_user: sdr
+  tags:
+    - sdr
