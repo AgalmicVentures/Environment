@@ -68,3 +68,11 @@
   when: is_digital_ocean
   tags:
     - digital_ocean
+
+- name: Starting service
+  systemd:
+    name: do-agent
+    state: started
+  when: is_digital_ocean
+  tags:
+    - digital_ocean
