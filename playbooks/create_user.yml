@@ -23,7 +23,6 @@
 
 - hosts: all
   vars:
-    user: ihutchinson
     home_path: "/home/{{ user }}"
     full_name: ""
     environment_path: "{{ home_path }}/Code/OpenSource/Environment"
