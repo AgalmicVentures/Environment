@@ -49,6 +49,7 @@
   git:
     repo: https://github.com/pvachon/tsl-sdr.git
     dest: /home/sdr/tsl-sdr/
+  register: repo_result
   become: yes
   become_user: sdr
   tags:
@@ -58,6 +59,7 @@
   command: ./waf configure
   args:
     chdir: /home/sdr/tsl-sdr/
+  when: repo_result.changed
   become: yes
   become_user: sdr
   tags:
@@ -67,6 +69,7 @@
   command: ./waf build
   args:
     chdir: /home/sdr/tsl-sdr/
+  when: repo_result.changed
   become: yes
   become_user: sdr
   tags:
