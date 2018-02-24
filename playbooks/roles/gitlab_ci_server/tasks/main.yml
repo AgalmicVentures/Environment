@@ -24,64 +24,35 @@
     update_cache: yes
     cache_valid_time: 3600
   tags:
-    - gitlab
-
-- name: Installing packages
-  apt:
-    name: [ca-certificates, certbot, curl, openssh-server, ufw]
-    state: latest
-  tags:
-    - gitlab
-
-- name: Allowing HTTP (80) connections
-  ufw:
-    rule: allow
-    port: 80
-  tags:
-    - security
-    - gitlab
-
-- name: Allowing HTTPS (443) connections
-  ufw:
-    rule: allow
-    port: 443
-  tags:
-    - security
-    - gitlab
+    - gitlab-ci
 
 - name: Downloading setup script
   get_url:
-    url: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh
-    dest: /tmp/gitlab_ce_script.deb.sh
+    url: https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh
+    dest: /tmp/gitlab_runner_script.deb.sh
   tags:
-    - gitlab
+    - gitlab_ci
 
 - name: Setting up dependencies
-  command: bash /tmp/gitlab_ce_script.deb.sh
+  command: bash /tmp/gitlab_runner_script.deb.sh
   tags:
-    - gitlab
+    - gitlab_ci
 
-- name: Installing Gitlab CE
+- name: Installing Gitlab CI runner
   apt:
-    name: gitlab-ce
+    name: gitlab-runner
     state: latest
   register: apt_result
   notify:
-    - restart gitlab
+    - restart gitlab-runner
   tags:
-    - gitlab
+    - gitlab_ci
 
-- name: Reconfiguring Gitlab
-  command: gitlab-ctl reconfigure
-  when: apt_result.changed
-  notify:
-    - restart gitlab
-  tags:
-    - gitlab
+#TODO: figure out how to incorporate gitlab-runner register
 
-- name: Starting Gitlab service
+- name: Starting Gitlab CI runner service
   systemd:
-    name: gitlab-runsvdir
+    name: gitlab-runner
     state: started
   tags:
-    - gitlab
+    - gitlab_ci
