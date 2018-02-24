@@ -30,7 +30,7 @@
 
 - name: Installing SDR packages
   apt:
-    name: [git, gqrx-sdr, rtl-sdr]
+    name: [git, gqrx-sdr, libck-dev, libjansson-dev, librtlsdr-dev, rtl-sdr]
     state: latest
   tags:
     - sdr
@@ -42,7 +42,6 @@
     shell: /bin/bash
     generate_ssh_key: yes
     ssh_key_type: ed25519
-  register: website_account
   tags:
     - sdr
 
@@ -50,6 +49,24 @@
   git:
     repo: https://github.com/pvachon/tsl-sdr.git
     dest: /home/sdr/tsl-sdr/
+  become: yes
+  become_user: sdr
+  tags:
+    - sdr
+
+- name: Configuring TSL SDR build
+  command: ./waf configure
+  args:
+    chdir: /home/sdr/tsl-sdr/
+  become: yes
+  become_user: sdr
+  tags:
+    - sdr
+
+- name: Building TSL SDR
+  command: ./waf build
+  args:
+    chdir: /home/sdr/tsl-sdr/
   become: yes
   become_user: sdr
   tags:
