@@ -49,27 +49,17 @@
   git:
     repo: https://github.com/pvachon/tsl-sdr.git
     dest: /home/sdr/tsl-sdr/
-  register: repo_result
-  become: yes
-  become_user: sdr
-  tags:
-    - sdr
-
-- name: Configuring TSL SDR build
-  command: ./waf configure
-  args:
-    chdir: /home/sdr/tsl-sdr/
-  when: repo_result.changed
   become: yes
   become_user: sdr
   tags:
     - sdr
 
 - name: Building TSL SDR
-  command: ./waf build
+  command: ./waf configure build
   args:
     chdir: /home/sdr/tsl-sdr/
-  when: repo_result.changed
+  register: build_result
+  changed_when: "'Compiling' in build_result.stdout or 'Linking' in build_result.stdout"
   become: yes
   become_user: sdr
   tags:
