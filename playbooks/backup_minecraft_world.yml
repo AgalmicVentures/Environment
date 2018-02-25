@@ -21,7 +21,7 @@
 
 #Snapshots the world of a minecraft server
 
-- hosts: all
+- hosts: minecraft_servers
   tasks:
     - name: Stopping service
       service:
