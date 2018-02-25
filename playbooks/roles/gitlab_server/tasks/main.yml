@@ -28,7 +28,7 @@
 
 - name: Installing packages
   apt:
-    name: [ca-certificates, certbot, curl, openssh-server, ufw]
+    name: [ca-certificates, curl, openssh-server, ufw]
     state: latest
   tags:
     - gitlab
