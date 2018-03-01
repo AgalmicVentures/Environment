@@ -79,7 +79,7 @@
     - /etc/hosts
     - /etc/hosts.allow
     - /etc/hosts.deny
-    - /etc/password
+    - /etc/passwd
     - /etc/sysctl.conf
     - /etc/ssh/ssh_config
     - /etc/ssh/sshd_config

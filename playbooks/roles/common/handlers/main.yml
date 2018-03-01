@@ -19,42 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Amalgamates all common tasks
-
-#Get entropy before doing anything else, if possible
-- import_tasks: install_chaos_key.yml
-
-#Setup the system
-- import_tasks: upgrade_all_packages.yml
-- import_tasks: setup_time.yml
-- import_tasks: install_security_packages.yml
-- import_tasks: install_standard_packages.yml
-
-#Now that git is installed, setup an entropy source everyone can enjoy
-- import_tasks: install_d20_client.yml
-
-#Install hardware
-- import_tasks: install_sensors.yml
-
-#Setup other mounts
-- import_tasks: mount_ramdisks.yml
-
-#Setup SSH-related things
-- import_tasks: setup_known_hosts.yml
-- import_tasks: setup_sshd.yml
-
-#Fix permissions, settings
-- import_tasks: set_permissions.yml
-- import_tasks: set_sysctl.yml
-
-#Setup root user environment
-- import_tasks: create_user.yml
-  vars:
-    user: root
-    home_path: /root
-    full_name: ""
-    environment_path: /root/Code/OpenSource/Environment
-
-#Automate administration
-- import_tasks: install_clean_tmp.yml
-- import_tasks: install_do_agent.yml
+- name: restart sshd
+  systemd:
+    name: ssh
+    state: restarted
