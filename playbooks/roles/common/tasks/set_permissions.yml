@@ -53,6 +53,7 @@
     group: root
     mode: 0600
   with_items:
+    - /etc/shadow
     #XXX: not always present - /etc/ssh/ssh_host_dsa_key
     - /etc/ssh/ssh_host_ecdsa_key
     - /etc/ssh/ssh_host_ed25519_key
@@ -78,6 +79,7 @@
     - /etc/hosts
     - /etc/hosts.allow
     - /etc/hosts.deny
+    - /etc/password
     - /etc/sysctl.conf
     - /etc/ssh/ssh_config
     - /etc/ssh/sshd_config
