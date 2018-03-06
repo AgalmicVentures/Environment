@@ -22,5 +22,3 @@
 #Amalgamates all developer tasks
 
 - import_tasks: install_developer_packages.yml
-
-#TODO: eclipse
