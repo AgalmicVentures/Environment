@@ -19,9 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#Handlers Postgres servers
-
 - name: restart postgresql
   systemd:
     name: postgresql
     state: restarted
+    daemon_reload: yes
