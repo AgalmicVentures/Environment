@@ -43,6 +43,28 @@
     - security
     - ssh
 
+- name: Configuring sshd (disabling RSH emulation)
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^IgnoreRhosts"
+    line: "IgnoreRhosts yes"
+    state: present
+  notify: restart sshd
+  tags:
+    - security
+    - ssh
+
+- name: Configuring sshd (disallowing empty passwords)
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PermitEmptyPasswords"
+    line: "PermitEmptyPasswords no"
+    state: present
+  notify: restart sshd
+  tags:
+    - security
+    - ssh
+
 - name: Configuring sshd (enabling password authentication)
   lineinfile:
     dest: /etc/ssh/sshd_config
