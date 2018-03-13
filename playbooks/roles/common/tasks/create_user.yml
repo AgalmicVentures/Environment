@@ -42,6 +42,8 @@
     state: link
     force: yes
   remote_user: "{{ user }}"
+  tags:
+    - filesystem
 
 - name: Symlinking configs into home directory...
   file:
@@ -55,9 +57,13 @@
     - .gitconfig
     - .hgrc
     - .vimrc
+  tags:
+    - filesystem
 
 - name: Creating vim backups folder
   file:
     path: "{{ home_path }}/.vim/backups"
     state: directory
     mode: 0755
+  tags:
+    - filesystem

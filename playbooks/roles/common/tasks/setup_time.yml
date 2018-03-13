@@ -62,6 +62,7 @@
   register: cron_allow_check
   tags:
     - cron
+    - filesystem
     - security
     - time
 
@@ -75,6 +76,7 @@
     - cron_allow_check.stat.exists
   tags:
     - cron
+    - filesystem
     - security
     - time
 
@@ -84,6 +86,7 @@
     state: absent
   tags:
     - cron
+    - filesystem
     - security
     - time
 
@@ -93,6 +96,7 @@
   register: cron_allow_check
   tags:
     - cron
+    - filesystem
     - security
     - time
 
@@ -106,6 +110,7 @@
     - cron_allow_check.stat.exists
   tags:
     - cron
+    - filesystem
     - security
     - time
 
