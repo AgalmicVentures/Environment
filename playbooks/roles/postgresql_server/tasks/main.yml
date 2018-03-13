@@ -65,5 +65,6 @@
   systemd:
     name: postgresql
     state: started
+    enabled: yes
   tags:
     - postgresql

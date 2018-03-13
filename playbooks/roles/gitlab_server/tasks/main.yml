@@ -83,5 +83,6 @@
   systemd:
     name: gitlab-runsvdir
     state: started
+    enabled: yes
   tags:
     - gitlab

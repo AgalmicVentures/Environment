@@ -60,5 +60,6 @@
   systemd:
     name: rabbitmq-server
     state: started
+    enabled: yes
   tags:
     - rabbitmq

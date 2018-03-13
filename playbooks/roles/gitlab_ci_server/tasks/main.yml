@@ -54,5 +54,6 @@
   systemd:
     name: gitlab-runner
     state: started
+    enabled: yes
   tags:
     - gitlab_ci

@@ -119,6 +119,7 @@
   systemd:
     name: elasticsearch
     state: started
+    enabled: yes
   tags:
     - elk
 
@@ -126,5 +127,6 @@
   systemd:
     name: kibana
     state: started
+    enabled: yes
   tags:
     - elk
