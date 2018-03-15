@@ -26,6 +26,9 @@ generating all combations of values as JSON objects, using those to instantiate
 templates, then running a process with each configuration, up to the maximum
 parallelism supported by the processor.
 
+### SQL (`sql/`)
+Stubs of SQL scripts for setting up a database environment in PostgreSQL.
+
 ## Getting Started
 The best way to install this environment is to run the
 `playbooks/create_user.yml` Ansible playbook on the desired user@host.  It
