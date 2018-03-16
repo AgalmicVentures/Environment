@@ -19,50 +19,5 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-- hosts: all
-  roles:
-    - common
-
-- hosts: desktops
-  roles:
-    - desktop
-
-- hosts: developers
-  roles:
-    - developer
-
-- hosts: elk_servers
-  roles:
-    - elk_server
-
-- hosts: hft_servers
-  roles:
-    - hft_server
-
-- hosts: gitlab_ci_servers
-  roles:
-    - gitlab_ci_server
-
-- hosts: gitlab_servers
-  roles:
-    - gitlab_server
-
-- hosts: minecraft_servers
-  roles:
-    - minecraft_server
-
-- hosts: postgresql_servers
-  roles:
-    - postgresql_server
-
-- hosts: rabbitmq_servers
-  roles:
-    - rabbitmq_server
-
-- hosts: rpis
-  roles:
-    - rpi
-
-- hosts: sdrs
-  roles:
-    - sdr
+#Update system settings
+- import_tasks: set_sysctl.yml
