@@ -6,6 +6,10 @@
 #### `AugmentLines.py`
 Augments lines of text (e.g. with a time stamp).
 
+#### `CheckPythonSyntax.py`
+Checks the syntax of a Python file without actually executing it. Exits with
+code 1 if it is not valid.
+
 #### `ConvertEpochTime.py`
 Converts an epoch time into UTC times for all possible divisors (seconds,
 milliseconds, microseconds, and nanoseconds).
