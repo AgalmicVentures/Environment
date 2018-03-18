@@ -26,6 +26,8 @@ import sys
 
 def main(argv=None):
 	parser = argparse.ArgumentParser(description='Epoch Time Converter')
+	parser.add_argument('-f', '--format', default='%Y-%m-%dT%H:%M:%S.%f',
+		help='Output format (default: ISO 8601).')
 	parser.add_argument('time', type=float, help='Epoch time in arbitrary units.')
 
 	if argv is None:
@@ -43,7 +45,7 @@ def main(argv=None):
 		quotient = arguments.time / divisor
 		try:
 			utcTime = datetime.datetime.utcfromtimestamp(quotient)
-			print('%d %s --> %s' % (arguments.time, unit, utcTime.strftime('%Y-%m-%d %H:%M:%S.%f')))
+			print('%d %s --> %s' % (arguments.time, unit, utcTime.strftime(arguments.format)))
 		except ValueError:
 			pass #Skip year out of range errors
 
