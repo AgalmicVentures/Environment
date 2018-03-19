@@ -23,6 +23,9 @@ second JSON object with lists of values for parameters
 (`{"a": [1, 2], "b": [3, 4, 5]}`). Useful with `Parallelize.py` and
 `Template.py`.
 
+#### `IPythonCleanup.py`
+Cleans up an IPython notebook file by removing outputs and reseting other state.
+
 #### `JsonToXml.py`
 Converts JSON documents to XML with a variety of transformation options.
 
