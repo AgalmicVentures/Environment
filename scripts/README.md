@@ -26,6 +26,9 @@ second JSON object with lists of values for parameters
 #### `IPythonCleanup.py`
 Cleans up an IPython notebook file by removing outputs and reseting other state.
 
+#### `IPythonExtractCode.py`
+Extracts code from an IPython notebook.
+
 #### `JsonToXml.py`
 Converts JSON documents to XML with a variety of transformation options.
 
