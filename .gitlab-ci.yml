@@ -38,9 +38,12 @@ help_test_job:
   stage: test
   script:
     - scripts/AugmentLines.py -h
+    - scripts/CheckPythonSyntax.py -h
     - scripts/ConvertEpochTime.py -h
     - scripts/CsvToJson.py -h
     - scripts/GenerateConfigs.py -h
+    - scripts/IPythonCleanup.py -h
+    - scripts/IPythonExtractCode.py -h
     - scripts/JsonToXml.py -h
     - scripts/OrganizeTimestampedFiles.py -h
     - scripts/Parallelize.py -h
@@ -65,6 +68,19 @@ functional_test_check_config_job:
   stage: test
   script:
     - scripts/check_config.sh
+  only:
+    - master
+
+functional_test_check_python_syntax_job:
+  stage: test
+  script:
+    - scripts/CheckPythonSyntax.py scripts/AugmentLines.py
+    - scripts/CheckPythonSyntax.py scripts/CheckPythonSyntax.py
+    - scripts/CheckPythonSyntax.py scripts/ConvertEpochTime.py
+    #Probably don't need to do lots more of this
+
+    - "! scripts/CheckPythonSyntax.py scripts/create_ramdisk.sh"
+    - "! scripts/CheckPythonSyntax.py scripts/git_author_files.sh"
   only:
     - master
 
