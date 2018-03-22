@@ -14,8 +14,8 @@ Copies of the MIT license in a variety of language formats are included for use
 with the `Prepend.py` script (see below).
 
 ### Playbooks (`playbooks/`)
-Ansible playbooks for configuring development environments on both desktops and
-servers.
+Ansible playbooks for configuring development and production environments,
+including security hardening and standard installations of common services.
 
 ### Scripts (`scripts/`)
 Python and shell scripts for automating common development and operations
@@ -28,6 +28,9 @@ parallelism supported by the processor.
 
 ### SQL (`sql/`)
 Stubs of SQL scripts for setting up a database environment in PostgreSQL.
+
+### System (`system/`)
+System files, usually for Linux, such as `udev` rules.
 
 ## Getting Started
 The best way to install this environment is to run the
