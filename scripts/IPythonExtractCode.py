@@ -44,9 +44,10 @@ def main(argv=None):
 	except ValueError:
 		return 2
 
-	#Remove the outputs
+	#Grab code from cells
 	first = True
 	for cell in sourceJson.get('cells', []):
+		#Skip everything else
 		if cell.get('cell_type') != 'code':
 			continue
 

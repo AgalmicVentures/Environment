@@ -27,7 +27,8 @@ second JSON object with lists of values for parameters
 Cleans up an IPython notebook file by removing outputs and reseting other state.
 
 #### `IPythonExtractCode.py`
-Extracts code from an IPython notebook.
+Extracts code from an IPython notebook. Note that `nbconvert` may be more
+suitable (see http://nbconvert.readthedocs.io/en/latest/external_exporters.html).
 
 #### `JsonToXml.py`
 Converts JSON documents to XML with a variety of transformation options.
