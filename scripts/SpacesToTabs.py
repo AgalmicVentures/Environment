@@ -30,10 +30,10 @@ def spacesToTabs(filename, spacesPerTab):
 	:param filename: str
 	:param spacesPerTab: int
 	"""
-	with open(filename) as inf:
-		lines = inf.readlines()
+	with open(filename) as inFile:
+		lines = inFile.readlines()
 
-	with open(filename, 'w') as outf:
+	with open(filename, 'w') as outFile:
 		for line in lines:
 			numSpaces = 0
 			for n, ch in enumerate(line):
@@ -45,19 +45,19 @@ def spacesToTabs(filename, spacesPerTab):
 			numSpacesToRemove = numTabs * spacesPerTab
 			newLine = ('\t' * numTabs) + line[numSpaces:]
 
-			outf.write(newLine)
+			outFile.write(newLine)
 
 def main(argv=None):
 	#Parse arguments
 	parser = argparse.ArgumentParser(description='Spaces To Tabs Converter')
 	parser.add_argument('-n', '--spaces', type=int, default=4, help='Spaces per tab (default=4).')
-	parser.add_argument('input_files', nargs='+', help='Input files.')
+	parser.add_argument('files', nargs='+', help='Input files.')
 
 	if argv is None:
 		argv = sys.argv
 	arguments = parser.parse_args(argv[1:])
 
-	for filename in arguments.input_files:
+	for filename in arguments.files:
 		spacesToTabs(filename, arguments.spaces)
 
 	return 0
