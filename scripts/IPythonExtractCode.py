@@ -57,7 +57,13 @@ def main(argv=None):
 			print()
 		first = False
 
-		source = ''.join(cell.get('source', []))
+		#Join the lines (which already have newlines in normal notebooks)
+		source = ''.join(
+			#Automatically comment out magic commands
+			#TODO: support other language comment types?
+			'# ' + line if line.startswith('%') else line
+			 for line in cell.get('source', []))
+
 		print(source)
 
 	return 0
