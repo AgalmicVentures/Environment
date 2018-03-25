@@ -44,6 +44,19 @@ def main(argv=None):
 	except ValueError:
 		return 2
 
+	#Add a shebang, if one can be identified
+	# "metadata": {
+	#  "kernelspec": {
+	#   "display_name": "Python 3",
+	#   "language": "python",
+	#   "name": "python3"
+	#  },
+	languageName = sourceJson.get('metadata', {}).get('kernelspec', {}).get('name')
+	if languageName is not None:
+		#TODO: handle translation for other languages?
+		print('#!/usr/bin/env %s' % languageName)
+		print()
+
 	#Grab code from cells
 	first = True
 	for cell in sourceJson.get('cells', []):
