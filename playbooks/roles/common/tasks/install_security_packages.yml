@@ -71,7 +71,7 @@
 - name: Allowing SSH connections
   ufw:
     rule: allow
-    name: ssh
+    port: 22
   tags:
     - firewall
     - network
