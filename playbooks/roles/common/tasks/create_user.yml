@@ -56,6 +56,7 @@
     - .bashrc
     - .gitconfig
     - .hgrc
+    - .psqlrc
     - .vimrc
   tags:
     - filesystem
