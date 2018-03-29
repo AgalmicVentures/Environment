@@ -60,5 +60,4 @@ target/
 *.retry
 
 # Other
-myenv/
 nohup.out
