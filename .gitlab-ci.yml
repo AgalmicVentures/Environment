@@ -41,6 +41,7 @@ help_test_job:
     - scripts/CheckPythonSyntax.py -h
     - scripts/ConvertEpochTime.py -h
     - scripts/CsvToJson.py -h
+    - scripts/ExamineBinary.py -h
     - scripts/GenerateConfigs.py -h
     - scripts/IPythonCleanup.py -h
     - scripts/IPythonExtractCode.py -h
@@ -91,6 +92,16 @@ functional_test_convert_epoch_time_job:
     - scripts/ConvertEpochTime.py 1000
     - scripts/ConvertEpochTime.py 1000000
     - scripts/ConvertEpochTime.py 1000000000
+  only:
+    - master
+
+functional_test_examine_binary:
+  stage: test
+  script:
+    #Code
+    - scripts/ExamineBinary.py scripts/ExamineBinary.py
+    #English
+    - scripts/ExamineBinary.py scripts/README.md
   only:
     - master
 

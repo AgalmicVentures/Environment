@@ -17,6 +17,10 @@ milliseconds, microseconds, and nanoseconds).
 #### `CsvToJson.py`
 Converts CSV documents to JSON with a variety of transformation options.
 
+#### `ExamineBinary.py`
+Examines a binary file of unknown format to determine as much as possible
+about it e.g. by finding the most common substrings.
+
 #### `GenerateConfigs.py`
 Generates the a set of JSON configurations given a base configuration and a
 second JSON object with lists of values for parameters
