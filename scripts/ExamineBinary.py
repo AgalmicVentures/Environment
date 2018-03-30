@@ -31,6 +31,7 @@ def examineSubstrings(data, length):
 
 	:param data: bytes
 	:param length: int
+	:return: collections.Counter
 	"""
 	#Count values in a sliding window over the data
 	total = len(data) - length
@@ -38,6 +39,7 @@ def examineSubstrings(data, length):
 	counts = collections.Counter(window)
 	print((' %s Byte Substrings ' % length).center(100, '*'))
 	print()
+	print('%10s %s' % (total, 'Total'))
 	for values, count in counts.most_common(20):
 		if count <= 1:
 			break
@@ -45,20 +47,22 @@ def examineSubstrings(data, length):
 	print()
 
 	#If a value is more common than expected, it may be a divider that separates tokens
-	mostCommon, mostCommonCount = counts.most_common(1)[0]
-	mostCommonFraction = float(mostCommonCount) / total
-	#TODO: use real statistics here for a certain significance level
-	if mostCommonFraction > 64.0 / (256 ** length):
-		print(' Common Tokens '.center(80, '*'))
-		print('Most common divider found: %s %s' % (mostCommon, tuple(mostCommon)))
-		print()
-		tokens = data.split(mostCommon)
-		tokenCounts = collections.Counter(tokens)
-		for token, count in tokenCounts.most_common(20):
-			if count <= 1:
-				break
-			print('%10s   %30s %s' % (count, token, tuple(token)))
-		print()
+	for common, commonCount in counts.most_common(5):
+		commonFraction = float(commonCount) / total
+		#TODO: use real statistics here for a certain significance level
+		if commonFraction > 28.0 / (256 ** length):
+			print(' Common Tokens '.center(60, '*'))
+			print('Common divider found: %s %s' % (common, tuple(common)))
+			print()
+			tokens = data.split(common)
+			tokenCounts = collections.Counter(tokens)
+			for token, count in tokenCounts.most_common(20):
+				if count <= 1:
+					break
+				print('%10s   %30s %s' % (count, token, tuple(token)))
+			print()
+
+	return counts
 
 def main(argv=None):
 	parser = argparse.ArgumentParser(description='Binary Examiner')
@@ -75,6 +79,7 @@ def main(argv=None):
 	except IOError:
 		return 3
 
+	#Look at substrings at common lengths of plain old data types
 	for length in [1, 2, 4, 8]:
 		examineSubstrings(data, length)
 
