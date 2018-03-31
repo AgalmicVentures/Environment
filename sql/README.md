@@ -16,5 +16,8 @@ the schema is created.*
 Creates a simple example schema for tracking when a bit of software runs and
 throws exceptions.
 
+### `Diagnostics.sql`
+Reference sheet of diagnostic queries, e.g. for checking on locks.
+
 ### `DropSchema.sql`
 Drops everything created by `CreateSchema.sql` in the correct order.
