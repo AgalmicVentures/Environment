@@ -22,7 +22,7 @@
 
 import argparse
 import collections
-import pprint
+import math
 import sys
 
 def examineSubstrings(data, length):
@@ -48,19 +48,32 @@ def examineSubstrings(data, length):
 
 	#If a value is more common than expected, it may be a divider that separates tokens
 	for common, commonCount in counts.most_common(5):
-		commonFraction = float(commonCount) / total
-		#TODO: use real statistics here for a certain significance level
-		if commonFraction > 28.0 / (256 ** length):
-			print(' Common Tokens '.center(60, '*'))
-			print('Common divider found: %s %s' % (common, tuple(common)))
-			print()
-			tokens = data.split(common)
-			tokenCounts = collections.Counter(tokens)
-			for token, count in tokenCounts.most_common(20):
-				if count <= 1:
-					break
-				print('%10s   %30s %s' % (count, token, tuple(token)))
-			print()
+		#Statistically, this means we are looking for values where the lower end of the
+		#proportion confidence interval is still sufficiently high.
+		#
+		#To compute that, remember the formula for the confidence interval:
+		#	p_hat +/- z * sqrt(p_hat * (1 - p_hat) / n)
+		z = 3.0 #99.7% confidence, TODO: make this an option
+		fraction = float(commonCount) / total
+		conservativeFraction = fraction - math.sqrt(fraction * (1.0 - fraction) / total)
+		expectedFraction = 1.0 / (256 ** length)
+		if conservativeFraction < 24.0 * expectedFraction:
+			break
+
+		#Look for common tokens, skipping if there are none
+		tokens = data.split(common)
+		tokenCounts = collections.Counter(tokens)
+		if tokenCounts.most_common(1)[0][1] == 1:
+			continue
+
+		print(' Common Tokens '.center(60, '*'))
+		print('Common divider found: %s %s (%d times)' % (common, tuple(common), commonCount))
+		print()
+		for token, count in tokenCounts.most_common(20):
+			if count <= 1:
+				break
+			print('%10s   %30s %s' % (count, token, tuple(token)))
+		print()
 
 	return counts
 
