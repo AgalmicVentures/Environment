@@ -30,7 +30,7 @@
 
 - name: Installing developer packages
   apt:
-    name: [eclipse, gdb, libboost-dev, make, pgadmin3, pyflakes3, pylint, valgrind]
+    name: [eclipse, gdb, libboost-dev, make, pgadmin3, pyflakes3, pylint, shellcheck, valgrind]
     state: latest
   tags:
     - developer
