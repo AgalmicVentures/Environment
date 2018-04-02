@@ -26,7 +26,7 @@
   tags:
     - gitlab
 
-- name: Installing packages
+- name: Installing supporting packages
   apt:
     name: [ca-certificates, curl, openssh-server, ufw]
     state: latest

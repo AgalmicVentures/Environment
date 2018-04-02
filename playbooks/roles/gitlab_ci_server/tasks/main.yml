@@ -19,13 +19,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-- name: Updating apt cache if the last one is more than 3600 seconds ago
-  apt:
-    update_cache: yes
-    cache_valid_time: 3600
-  tags:
-    - gitlab-ci
-
 - name: Downloading setup script
   get_url:
     url: https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh
@@ -35,6 +28,20 @@
 
 - name: Setting up dependencies
   command: bash /tmp/gitlab_runner_script.deb.sh
+  tags:
+    - gitlab_ci
+
+- name: Updating apt cache if the last one is more than 3600 seconds ago
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  tags:
+    - gitlab_ci
+
+- name: Installing supporting packages
+  apt:
+    name: [libboost-dev, make, pyflakes3, pylint, shellcheck, valgrind]
+    state: latest
   tags:
     - gitlab_ci
 
