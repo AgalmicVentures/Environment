@@ -28,5 +28,5 @@
 
 - name: Installing standard packages
   apt:
-    name: [curl, htop, jq, python3-pip, python3-venv, screen, vim, wget]
+    name: [binutils, curl, htop, jq, python3-pip, python3-venv, screen, vim, wget]
     state: latest
