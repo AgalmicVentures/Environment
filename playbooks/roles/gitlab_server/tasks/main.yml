@@ -19,10 +19,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-- name: Updating apt cache if the last one is more than 3600 seconds ago
+- name: Updating apt cache
   apt:
     update_cache: yes
-    cache_valid_time: 3600
+    cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
     - gitlab
 
