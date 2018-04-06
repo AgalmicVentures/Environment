@@ -1,0 +1,86 @@
+
+# Copyright (c) 2015-2018 Agalmic Ventures LLC (www.agalmicventures.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+#Installation for MongoDB servers
+#There is no Debian package for Stretch, so use the default used
+
+- name: Updating apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_time }}"
+  tags:
+    - mongodb
+
+- name: Installing supporting packages
+  apt:
+    name: [ufw]
+    state: latest
+  tags:
+    - mongodb
+
+- name: Install MongoDB
+  apt:
+    name: [mongodb]
+    state: latest
+  tags:
+    - mongodb
+
+- name: Configuring MongoDB (enabling HTTP interface)
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^[# ]*nohttpinterface ="
+    line: "nohttpinterface = false"
+    state: present
+  notify: restart mongodb
+  tags:
+    - mongodb
+
+- name: Starting MongoDb
+  systemd:
+    name: mongodb
+    state: started
+    enabled: yes
+  tags:
+    - mongodb
+
+#TODO: change the default password to something that won't be hit automatically
+
+- name: Allowing MongoDB connections through the firewall (ufw, port 27017)
+  ufw:
+    rule: allow
+    port: 27017
+  tags:
+    - firewall
+    - mongodb
+    - network
+    - security
+
+- name: Allowing MongoDB admin connections through the firewall (ufw, port 28017)
+  ufw:
+    rule: allow
+    port: 28017
+  tags:
+    - firewall
+    - mongodb
+    - network
+    - security
+
+#TODO: setup backups
