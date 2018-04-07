@@ -61,6 +61,18 @@
   tags:
     - filesystem
 
+- name: Symlinking scripts into home directory...
+  file:
+    src: "{{ environment_path }}/scripts/{{ item }}"
+    dest: "{{ home_path }}/{{ item }}"
+    state: link
+    force: yes
+  remote_user: "{{ user }}"
+  with_items:
+    - check_config.sh
+  tags:
+    - filesystem
+
 - name: Creating vim backups folder
   file:
     path: "{{ home_path }}/.vim/backups"
