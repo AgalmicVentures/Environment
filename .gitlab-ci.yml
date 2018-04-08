@@ -19,10 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-before_script:
-  - python3 -m venv env
-  - source env/bin/activate
-  - python3 -m pip install -r requirements.txt
+#No before script because the virtual environment is only used for Ansible
 
 stages:
   - test
@@ -30,6 +27,9 @@ stages:
 smoke_test_playbooks_job:
   stage: test
   script:
+    - python3 -m venv env
+    - source env/bin/activate
+    - python3 -m pip install -r requirements.txt
     - ansible-playbook -i playbooks/local_inventory playbooks/site.yml --list-tags
   only:
     - master
