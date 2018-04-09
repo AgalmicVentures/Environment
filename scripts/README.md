@@ -21,6 +21,10 @@ Converts CSV documents to JSON with a variety of transformation options.
 Examines a binary file of unknown format to determine as much as possible
 about it e.g. by finding the most common substrings.
 
+#### `FindHomoglyphs.py`
+Finds unicode homoglyphs used in fingerprinting files and optionally removes
+them.
+
 #### `GenerateConfigs.py`
 Generates the a set of JSON configurations given a base configuration and a
 second JSON object with lists of values for parameters

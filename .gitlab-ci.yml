@@ -42,6 +42,7 @@ help_test_job:
     - scripts/ConvertEpochTime.py -h
     - scripts/CsvToJson.py -h
     - scripts/ExamineBinary.py -h
+    - scripts/FindHomoglyphs.py -h
     - scripts/GenerateConfigs.py -h
     - scripts/IPythonCleanup.py -h
     - scripts/IPythonExtractCode.py -h
