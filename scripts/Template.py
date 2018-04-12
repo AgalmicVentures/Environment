@@ -25,12 +25,6 @@ import json
 import sys
 
 def main(argv=None):
-	"""
-	The main function of this script. Instantiates a template based on a JSON config.
-
-	:return: int
-	"""
-	#Parse arguments
 	parser = argparse.ArgumentParser(description='Fills out templates with JSON configurations.')
 	parser.add_argument('template', help='Path to the template file.')
 	parser.add_argument('config', help='Path to the configuration JSON file.')

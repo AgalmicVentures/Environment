@@ -24,7 +24,6 @@ import argparse
 import sys
 
 def main(argv=None):
-	#Parse arguments
 	parser = argparse.ArgumentParser(description='Prepend Files')
 	parser.add_argument('source', help='File to prepend to others.')
 	parser.add_argument('targets', nargs='*', help='A set of configurations to run.')

@@ -34,7 +34,6 @@ except ImportError:
     izip = zip
 
 def main(argv=None):
-	#Parse arguments
 	parser = argparse.ArgumentParser(description='JSON Config Generator')
 	parser.add_argument('--fraction', type=float, default=1.0, help='Fraction of configs to sample, in the interval (0.0 to 1.0] (default=1.0).')
 	parser.add_argument('--seed', default=None, help='Seed for the random number generator if sampling.')
@@ -46,6 +45,7 @@ def main(argv=None):
 		argv = sys.argv
 	arguments = parser.parse_args(argv[1:])
 
+	#Validate parameters
 	if arguments.fraction > 1.0:
 		print('WARNING: Fraction must be in the interval (0.0, 1.0] -- capping at 1.0')
 		arguments.fraction = 1.0
@@ -55,7 +55,6 @@ def main(argv=None):
 
 	startTime = datetime.datetime.now()
 	print('[%s] Starting config generation...' % (startTime))
-
 	if arguments.seed is not None:
 		random.seed(arguments.seed)
 

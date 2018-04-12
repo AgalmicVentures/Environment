@@ -25,7 +25,6 @@ import re
 import sys
 
 def main(argv=None):
-	#Parse arguments
 	parser = argparse.ArgumentParser(description='Homoglyph Finder')
 	parser.add_argument('-r', '--replace', action='store_true', help='Replace the characters when found?')
 	parser.add_argument('--line-break', default='\n', help='String to replace line break-like with.')

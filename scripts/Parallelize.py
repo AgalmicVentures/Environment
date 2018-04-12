@@ -28,7 +28,6 @@ import sys
 import time
 
 def main(argv=None):
-	#Parse arguments
 	parser = argparse.ArgumentParser(description='Parallel Runner')
 	parser.add_argument('run_script', help='The script to execute.')
 	parser.add_argument('run_id', help='A unique identifier for the run.')

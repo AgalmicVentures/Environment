@@ -31,10 +31,12 @@ fi
 readonly NAME="$1"
 readonly SIZE="$2"
 
+#Create the mount
 cd /mnt || exit 1
 mkdir "$NAME"
 mount -t tmpfs -o size="$SIZE" tmpfs "$NAME"
 
+#Verify that it worked
 echo
 df -h
 echo
