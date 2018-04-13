@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import argparse
+import datetime
 import socket
 import struct
 import sys
@@ -48,7 +49,7 @@ def main(argv=None):
 	count = 0
 	while True:
 		packet = listeningSocket.recv(4096)
-		print((' %d ' % count).center(80, '*'))
+		print(('[%s] Packet %d ' % (datetime.datetime.now().strftime('%y-%m-%d %H:%M:%S.%f'), count)).ljust(80, '*'))
 		print()
 		print('Python value: %s' % packet)
 		print()
