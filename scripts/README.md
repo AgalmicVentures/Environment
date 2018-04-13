@@ -41,6 +41,14 @@ suitable (see http://nbconvert.readthedocs.io/en/latest/external_exporters.html)
 #### `JsonToXml.py`
 Converts JSON documents to XML with a variety of transformation options.
 
+#### `MulticastPeek.py`
+Listens to a multicast group and dumps the packets it receives in a
+human-readable format.
+
+#### `MulticastPoke.py`
+Sends a packet to a multicast group, optionally repeating it a number of times.
+Useful for keeping groups alive.
+
 #### `OrganizeTimestampedFiles.py`
 Moves files with timestamps at then end of their names into subdirectories
 based on a given timestamp format (default `%Y/%m` for monthly buckets).

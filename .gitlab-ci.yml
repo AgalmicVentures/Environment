@@ -47,6 +47,8 @@ help_test_job:
     - scripts/IPythonCleanup.py -h
     - scripts/IPythonExtractCode.py -h
     - scripts/JsonToXml.py -h
+    - scripts/MulticastPeek.py -h
+    - scripts/MulticastPoke.py -h
     - scripts/OrganizeTimestampedFiles.py -h
     - scripts/Parallelize.py -h
     - scripts/Prepend.py -h
