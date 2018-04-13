@@ -22,6 +22,7 @@
 
 import argparse
 import ast
+import datetime
 import socket
 import struct
 import sys
@@ -35,6 +36,8 @@ def main(argv=None):
 
 	parser.add_argument('-c', '--count', action='store', type=int, default=1,
 		help='Number of times to send.')
+	parser.add_argument('-v', '--verbose', action='store_true',
+		help='Verbose mode (announce when sending).')
 	parser.add_argument('-w', '--wait', action='store', type=float, default=0.0,
 		help='Wait time before sending again.')
 
@@ -54,6 +57,8 @@ def main(argv=None):
 	while True:
 		#Send the data
 		sendingSocket.sendto(data, (arguments.group, arguments.port))
+		if arguments.verbose:
+			print('[%s] Sent packet %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'), count))
 
 		#Wait
 		if arguments.wait > 0 and i != arguments.count - 1:
