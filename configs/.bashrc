@@ -33,7 +33,7 @@ fi
 
 #Check the configuration at regular intervals
 if [ -e ~/check_config.sh ] || [ -L ~/check_config.sh ] ; then
-	if [ "$(find ~ -name .check_config -maxdepth 1 -mtime +30)" == "" ] ; then
+	if [ "$(find ~ -maxdepth 1 -name .check_config -mtime +30)" == "" ] ; then
 		touch ~/.check_config
 		~/check_config.sh
 	fi
