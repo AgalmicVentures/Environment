@@ -24,7 +24,7 @@
 - name: Creating cron job to clean old temporary files
   cron:
     name: Clean old temporary files
-    job: find /tmp -mindepth 1 -atime +7 -delete
+    job: find /tmp -mindepth 1 -not -path /tmp/scratch -atime +7 -delete
     minute: "*/15"
   tags:
     - cron
@@ -33,7 +33,7 @@
 - name: Creating cron job to clean old scratch files
   cron:
     name: Clean old scratch files
-    job: find /mnt/scratch -mindepth 1 -atime +7 -delete
+    job: find /mnt/scratch -mindepth 1 -not -path /tmp/scratch -atime +7 -delete
     minute: "*/15"
   tags:
     - cron
