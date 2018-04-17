@@ -29,7 +29,7 @@ readonly YELLOW='\033[1;33m'
 readonly BLUE='\033[0;34m'
 
 #Check for generated SSH keys
-if [ -e ~/.ssh/id_*.pub ] ; then
+if [ "$(find ~/.ssh -name 'id_*.pub')" != "" ] ; then
 	echo -e "${GREEN}SSH key detected${NC}"
 else
 	echo -e "${RED}No SSH key detected (run ssh-keygen)!${NC}"
