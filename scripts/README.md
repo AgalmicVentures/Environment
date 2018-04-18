@@ -98,10 +98,6 @@ Creates a named RAM disk (tmpfs) under `/mnt` with the specified size.
 Creates a Python virtual environment (by default at `env/`) and loads
 dependencies from `requirements.txt`, if it exists.
 
-#### `colors.sh`
-Defines a variety of formatting specifications with
-[ANSI codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
-
 #### `drop_caches.sh`
 Frees the page cache and all reclaimable slab objects (e.g. inodes).
 
