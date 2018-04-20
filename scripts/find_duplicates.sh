@@ -26,7 +26,7 @@ set -u
 LAST_ITEM=""
 for ITEM in "${@:2}" ; do
 	if [ "$LAST_ITEM" != "" ] ; then
-		RESULT=$(diff "$ITEM" "$LAST_ITEM")
+		diff "$ITEM" "$LAST_ITEM" > /dev/null
 		if [[ $? -eq 0 ]] ; then
 			#Output the name if it's the same as the last file
 			echo "$ITEM"
