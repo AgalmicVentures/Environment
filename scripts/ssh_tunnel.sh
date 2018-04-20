@@ -24,4 +24,5 @@ set -u
 
 #Heartbeat once per minute, and allow up to an hour of missed heartbeats
 #Also fork to a background process and run no command
+# shellcheck disable=SC2029
 ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=60 -fN "$@"

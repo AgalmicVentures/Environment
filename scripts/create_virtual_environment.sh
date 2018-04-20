@@ -33,6 +33,7 @@ python3 -m venv "$NAME"
 
 #Install requirements if they exist
 if [ -e requirements.txt ] ; then
+	# shellcheck disable=SC1090
 	source "$NAME/bin/activate"
 	python3 -m pip install --upgrade pip
 	python3 -m pip install -r requirements.txt
