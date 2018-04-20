@@ -22,7 +22,15 @@
 #No before script because the virtual environment is only used for Ansible
 
 stages:
+  - lint
   - test
+
+shellcheck_lint_job:
+  stage: lint
+  script:
+    - shellcheck scripts/*.sh
+  only:
+    - master
 
 smoke_test_playbooks_job:
   stage: test
