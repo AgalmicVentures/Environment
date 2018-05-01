@@ -21,6 +21,7 @@
 
 [alias]
 	#Shortcuts
+	c = commit
 	ci = commit
 	co = checkout
 	d = diff
@@ -28,6 +29,7 @@
 	l = log
 	s = status
 	st = status
+	stat = status
 
 	#Misspellings
 	brach = branch
@@ -49,7 +51,15 @@
 	puhs = push
 	pus = push
 
-	#Accidental doublings (e.g. git git)
+	ssave = "!f() { git stash save $1; }; f"
+	sshow = "!f() { git stash show stash^{/$*} -p; }; f"
+	sdrop = "!f() { git stash drop stash^{/$*}; }; f"
+	sapply = "!f() { git stash apply stash^{/$*}; }; f"
+
+	diffr  = !"git diff "$1"^.."$1"" # diff-revision (usage: diffr <hash> <hash>)
+	ia = merge-base --is-ancestor # is-ancestor (usage: ia <hash> <hash>)
+
+	#Accidental doublings (e.g. git git)=
 	git = !exec git
 
 	#How things could have been
@@ -70,8 +80,19 @@
 	changed = red
 	untracked = cyan
 
+[core]
+	#Only activate paging if output doesn't fit on one screen
+	pager = "less -F"
+
+[grep]
+	extendRegexp = true  # use extended regex
+
 [push]
 	default = simple
+
+[status]
+	submoduleSummary = true
+	showUntrackedFiles = all
 
 [user]
 	name = Ian Hutchinson
