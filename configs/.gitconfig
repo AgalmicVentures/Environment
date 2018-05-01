@@ -51,6 +51,16 @@
 	puhs = push
 	pus = push
 
+	#More advanced shortcuts
+	ls = log --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(bold cyan)[%aD]%C(reset) %C(white)%s%C(reset) %C(dim white)- %ae%C(reset) %C(bold yellow)%d%C(reset)'
+	lsa = !"git ls --all"    # log (all branches)
+	g = !"git ls --graph"    # graph
+	ga = !"git g --all"      # graph (all branches)
+	ll = !"git ls --stat=80" # summary of file changes
+	lla = !"git ll --all"    # summary of file changes (all branches)
+	today = !"git lla --since='12 hours ago'"
+	recent = !"git lla --since='36 hours ago'"
+
 	ssave = "!f() { git stash save $1; }; f"
 	sshow = "!f() { git stash show stash^{/$*} -p; }; f"
 	sdrop = "!f() { git stash drop stash^{/$*}; }; f"
