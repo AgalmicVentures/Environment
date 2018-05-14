@@ -86,3 +86,13 @@
   tags:
     - security
     - ssh
+
+- name: Enabling sshd
+  service:
+    name: ssh
+    state: started
+    enabled: yes
+  tags:
+    - security
+    - services
+    - ssh
