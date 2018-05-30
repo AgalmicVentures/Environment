@@ -21,7 +21,10 @@
 # SOFTWARE.
 
 import argparse
-import json
+try:
+	import ujson as json
+except ImportError:
+	import json
 import sys
 
 def encodeXmlEntities(data):

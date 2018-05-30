@@ -35,7 +35,7 @@ def examineSubstrings(data, length):
 	"""
 	#Count values in a sliding window over the data
 	total = len(data) - length
-	window = (data[k:k+length] for k in range(0, total))
+	window = (data[k:k+length] for k in range(total))
 	counts = collections.Counter(window)
 	print((' %s Byte Substrings ' % length).center(100, '*'))
 	print()

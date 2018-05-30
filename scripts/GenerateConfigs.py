@@ -23,7 +23,10 @@
 import argparse
 import datetime
 import itertools
-import json
+try:
+	import ujson as json
+except ImportError:
+	import json
 import os
 import random
 import sys

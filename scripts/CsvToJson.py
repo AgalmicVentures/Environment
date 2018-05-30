@@ -22,7 +22,10 @@
 
 import argparse
 import csv
-import json
+try:
+	import ujson as json
+except ImportError:
+	import json
 import sys
 
 def csvToJson(reader, transform=lambda x: x, prefix='', suffix='', ignores=[]):

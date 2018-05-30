@@ -24,7 +24,6 @@ import argparse
 import ast
 import datetime
 import socket
-import struct
 import sys
 import time
 
