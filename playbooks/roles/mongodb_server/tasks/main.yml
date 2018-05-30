@@ -45,7 +45,7 @@
 
 - name: Configuring MongoDB (enabling HTTP interface)
   lineinfile:
-    dest: /etc/ssh/sshd_config
+    dest: /etc/mongod.conf
     regexp: "^[# ]*nohttpinterface ="
     line: "nohttpinterface = false"
     state: present
