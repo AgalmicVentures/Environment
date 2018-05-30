@@ -54,10 +54,11 @@ def main(argv=None):
 			#Check for finished processes
 			finishedConfigs = []
 			for runningConfig, process in processes.items():
-				returnCode = process.poll()
-				if returnCode is not None:
-					if returnCode != 0:
-						sys.stdout.write('[%s] Config %s failed with return code %d.' % (datetime.datetime.now(), runningConfig, returnCode))
+				exitCode = process.poll()
+				if exitCode is not None:
+					if exitCode != 0:
+						sys.stdout.write('[%s] Config %s failed with exit code %d.' % (
+							datetime.datetime.now(), runningConfig, exitCode))
 						sys.stdout.flush()
 
 					finishedConfigs.append(runningConfig)

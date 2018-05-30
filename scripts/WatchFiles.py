@@ -63,7 +63,9 @@ def main(argv=None):
 					print('Changed %s:' % ', '.join(changedFiles))
 
 				command = '%s %s' % (arguments.command, ' '.join(changedFiles)) if arguments.pass_files else arguments.command
-				os.system(command)
+				exitCode = os.system(command)
+				if exitCode != 0:
+					print('Failed with exit code: %d' % (exitCode))
 
 			#Wait to poll again
 			time.sleep(arguments.interval)

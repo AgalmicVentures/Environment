@@ -60,7 +60,7 @@ def main(argv=None):
 			print('[%s] Sent packet %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'), count))
 
 		#Wait
-		if arguments.wait > 0 and i != arguments.count - 1:
+		if arguments.wait > 0 and count != arguments.count - 1:
 			time.sleep(arguments.wait)
 
 		count += 1
