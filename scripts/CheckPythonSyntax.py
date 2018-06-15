@@ -25,6 +25,12 @@ import ast
 import sys
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='Python Syntax Checker')
 	parser.add_argument('file', help='File to check.')
 

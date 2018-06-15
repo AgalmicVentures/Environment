@@ -28,6 +28,12 @@ import sys
 import time
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='Parallel Runner')
 	parser.add_argument('run_script', help='The script to execute.')
 	parser.add_argument('run_id', help='A unique identifier for the run.')

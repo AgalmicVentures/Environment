@@ -28,6 +28,12 @@ import sys
 import time
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='Watches files and runs a command when they change.')
 	parser.add_argument('-i', '--interval', action='store', type=float, default=0.1, help='Polling interval in seconds when not using inotify (default=0.1).')
 	parser.add_argument('-p', '--pass-files', action='store_true', help='Flag indicating whether to pass changed files to the command.')

@@ -27,6 +27,12 @@ import struct
 import sys
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='Listen to a multicast group.')
 	parser.add_argument('group', help='Multicast group to listen to (e.g. 224.1.1.1).')
 	parser.add_argument('port', type=int, help='Multicast port to listen to (e.g. 5007).')

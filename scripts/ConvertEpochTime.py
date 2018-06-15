@@ -25,6 +25,12 @@ import datetime
 import sys
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='Epoch Time Converter')
 	parser.add_argument('-f', '--format', default='%Y-%m-%dT%H:%M:%S.%f',
 		help='Output format (default: ISO 8601).')

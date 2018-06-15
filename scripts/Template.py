@@ -28,6 +28,12 @@ except ImportError:
 import sys
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='Fills out templates with JSON configurations.')
 	parser.add_argument('template', help='Path to the template file.')
 	parser.add_argument('config', help='Path to the configuration JSON file.')

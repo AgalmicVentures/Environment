@@ -27,6 +27,12 @@ import re
 import sys
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='Organizes files with timestamps in their name into directories.')
 	parser.add_argument('-P', '--path', default='.', help='Where to look for files.')
 	parser.add_argument('-d', '--dir', default='%Y/%m',

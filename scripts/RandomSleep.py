@@ -26,6 +26,12 @@ import sys
 import time
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='Randomized sleep script (e.g. for offseting process start times).')
 	parser.add_argument('min', type=float, help='Minimum time to sleep (seconds).')
 	parser.add_argument('max', type=float, help='Maximum time to sleep (seconds).')

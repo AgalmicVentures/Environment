@@ -28,6 +28,12 @@ except ImportError:
 import sys
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='IPython Cleanup Tool')
 	parser.add_argument('file', help='IPython note book file to clean.')
 

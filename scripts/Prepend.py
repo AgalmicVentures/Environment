@@ -24,6 +24,12 @@ import argparse
 import sys
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='Prepend Files')
 	parser.add_argument('source', help='File to prepend to others.')
 	parser.add_argument('targets', nargs='*', help='A set of configurations to run.')

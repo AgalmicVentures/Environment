@@ -25,6 +25,12 @@ import datetime
 import sys
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='Augment lines with additional information like number and time.')
 	parser.add_argument('-f', '--format', default='[%(number)6d   %(time)s] %(line)s',
 		help='Sets the format string for the augmented line with the following subsitutions: %%(number)s, %%(time)s, %%(line)s.')

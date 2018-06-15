@@ -37,6 +37,12 @@ except ImportError:
     izip = zip
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	parser = argparse.ArgumentParser(description='JSON Config Generator')
 	parser.add_argument('--fraction', type=float, default=1.0, help='Fraction of configs to sample, in the interval (0.0 to 1.0] (default=1.0).')
 	parser.add_argument('--seed', default=None, help='Seed for the random number generator if sampling.')

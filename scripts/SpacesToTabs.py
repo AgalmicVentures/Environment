@@ -48,6 +48,12 @@ def spacesToTabs(filename, spacesPerTab):
 			outFile.write(newLine)
 
 def main(argv=None):
+	"""
+	The main function of this script.
+
+	:param argv: List[str] Arguments to parse (default sys.argv)
+	:return: int
+	"""
 	#Parse arguments
 	parser = argparse.ArgumentParser(description='Spaces To Tabs Converter')
 	parser.add_argument('-n', '--spaces', type=int, default=4, help='Spaces per tab (default=4).')
