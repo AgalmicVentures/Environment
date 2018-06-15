@@ -82,6 +82,7 @@ def main(argv=None):
 	"""
 	The main function of this script. Converts JSON to XML based on the arguments provided.
 
+	:param argv: List[str] Arguments to parse (default sys.argv)
 	:return: int
 	"""
 	#Parse arguments
