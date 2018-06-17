@@ -40,6 +40,7 @@ def main(argv=None):
 	parser.add_argument('-x', '--extension', default=[], action='append',
 		help='Add extension to look for (default all files).')
 	parser.add_argument('-v', '--verbose', action='store_true', help='Output more information.')
+	parser.add_argument('-D', '--dry-run', action='store_true', help='Do a dry run, only showing the renames.')
 
 	if argv is None:
 		argv = sys.argv
@@ -85,7 +86,8 @@ def main(argv=None):
 		if arguments.verbose:
 			print('%s --> %s' % (fileName, newFileName))
 
-		os.rename(oldFilePath, newFilePath)
+		if not arguments.dry_run:
+			os.rename(oldFilePath, newFilePath)
 
 	return 0
 
