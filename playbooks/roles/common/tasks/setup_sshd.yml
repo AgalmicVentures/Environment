@@ -65,11 +65,11 @@
     - security
     - ssh
 
-- name: Configuring sshd (enabling password authentication)
+- name: Configuring sshd (disabling password authentication)
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^PasswordAuthentication"
-    line: "PasswordAuthentication yes"
+    line: "PasswordAuthentication no"
     state: present
   notify: restart sshd
   tags:
