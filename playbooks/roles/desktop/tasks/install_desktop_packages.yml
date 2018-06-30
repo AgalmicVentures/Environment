@@ -27,6 +27,7 @@
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
     - desktop
+    - packages
 
 - name: Installing desktop packages
   apt:
@@ -34,3 +35,4 @@
     state: latest
   tags:
     - desktop
+    - packages

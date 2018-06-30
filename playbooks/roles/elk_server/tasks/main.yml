@@ -59,6 +59,7 @@
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
     - elk
+    - packages
 
 - name: Installing supporting packages
   apt:
@@ -66,6 +67,7 @@
     state: latest
   tags:
     - elk
+    - packages
 
 - name: Install Elasticsearch
   apt:
@@ -73,6 +75,7 @@
     state: latest
   tags:
     - elk
+    - packages
 
 - name: Install Kibana
   apt:

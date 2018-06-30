@@ -26,6 +26,7 @@
     update_cache: yes
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
+    - packages
     - sdr
 
 - name: Installing SDR packages
@@ -33,6 +34,7 @@
     name: [git, gqrx-sdr, libck-dev, libjansson-dev, librtlsdr-dev, rtl-sdr]
     state: latest
   tags:
+    - packages
     - sdr
 
 - name: Creating account

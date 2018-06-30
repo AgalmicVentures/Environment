@@ -45,6 +45,7 @@
   when: is_digital_ocean and (apt_key_result.changed or apt_repo_result.changed)
   tags:
     - digital_ocean
+    - packages
 
 - name: Updating apt cache
   apt:
@@ -52,6 +53,7 @@
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
     - digital_ocean
+    - packages
 
 - name: Installing supporting packages
   apt:
@@ -60,6 +62,7 @@
   when: is_digital_ocean
   tags:
     - digital_ocean
+    - packages
 
 - name: Installing Digital Ocean Agent
   apt:
@@ -68,6 +71,7 @@
   when: is_digital_ocean
   tags:
     - digital_ocean
+    - packages
 
 - name: Starting service
   systemd:

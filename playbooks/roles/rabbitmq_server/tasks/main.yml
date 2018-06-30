@@ -26,6 +26,7 @@
     update_cache: yes
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
+    - packages
     - rabbitmq
 
 - name: Installing RabbitMQ packages
@@ -33,6 +34,7 @@
     name: [rabbitmq-server, ufw]
     state: latest
   tags:
+    - packages
     - rabbitmq
 
 #TODO: change the default password to something that won't be hit automatically

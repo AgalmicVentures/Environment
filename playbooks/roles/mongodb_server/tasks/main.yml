@@ -28,6 +28,7 @@
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
     - mongodb
+    - packages
 
 - name: Installing supporting packages
   apt:
@@ -35,6 +36,7 @@
     state: latest
   tags:
     - mongodb
+    - packages
 
 - name: Install MongoDB
   apt:
@@ -42,6 +44,7 @@
     state: latest
   tags:
     - mongodb
+    - packages
 
 - name: Configuring MongoDB (enabling HTTP interface)
   lineinfile:

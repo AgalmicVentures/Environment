@@ -27,6 +27,7 @@
     cache_valid_time: "{{ apt_cache_valid_time }}"
   when: is_physical_machine
   tags:
+    - packages
     - sensors
 
 - name: Installing sensors packages
@@ -36,6 +37,7 @@
   when: is_physical_machine
   register: install_packages
   tags:
+    - packages
     - sensors
 
 - name: Detecting sensors

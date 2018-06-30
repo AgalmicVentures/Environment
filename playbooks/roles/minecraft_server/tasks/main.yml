@@ -27,6 +27,7 @@
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
     - minecraft
+    - packages
 
 - name: Installing Minecraft supporting packages
   apt:
@@ -34,6 +35,7 @@
     state: latest
   tags:
     - minecraft
+    - packages
 
 - name: Allowing Minecraft connections through the firewall (ufw, port 25565)
   ufw:

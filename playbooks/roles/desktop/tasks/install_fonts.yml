@@ -27,6 +27,7 @@
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
     - desktop
+    - packages
 
 - name: Installing font tools
   apt:
@@ -34,6 +35,7 @@
     state: latest
   tags:
     - desktop
+    - packages
 
 - name: Installing fonts
   apt:
@@ -42,6 +44,7 @@
   register: apt_result
   tags:
     - desktop
+    - packages
 
 - name: Installing Consolas
   get_url:

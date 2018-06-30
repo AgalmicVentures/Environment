@@ -27,6 +27,7 @@
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
     - developer
+    - packages
 
 - name: Installing developer packages
   apt:
@@ -34,3 +35,4 @@
     state: latest
   tags:
     - developer
+    - packages

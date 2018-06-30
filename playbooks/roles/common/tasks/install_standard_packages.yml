@@ -25,8 +25,12 @@
   apt:
     update_cache: yes
     cache_valid_time: "{{ apt_cache_valid_time }}"
+  tags:
+    - packages
 
 - name: Installing standard packages
   apt:
     name: [binutils, curl, htop, jq, python3-pip, python3-venv, screen, vim, wget]
     state: latest
+  tags:
+    - packages

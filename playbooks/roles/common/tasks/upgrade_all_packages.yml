@@ -27,6 +27,7 @@
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
     - housekeeping
+    - packages
     - security
 
 - name: Upgrading all packages
@@ -36,6 +37,7 @@
     force_apt_get: yes #Fresh Debian 9.3 breaks without this
   tags:
     - housekeeping
+    - packages
     - security
 
 - name: Removing useless packages from the cache
@@ -43,9 +45,11 @@
     autoclean: yes
   tags:
     - housekeeping
+    - packages
 
 - name: Removing unused packages
   apt:
     autoremove: yes
   tags:
     - housekeeping
+    - packages

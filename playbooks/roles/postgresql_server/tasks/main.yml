@@ -26,6 +26,7 @@
     update_cache: yes
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
+    - packages
     - postgresql
 
 - name: Installing Postgres packages
@@ -33,6 +34,7 @@
     name: [postgresql-9.6, ufw]
     state: latest
   tags:
+    - packages
     - postgresql
 
 #TODO: change the default password to something that won't be hit automatically
