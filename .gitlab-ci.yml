@@ -54,6 +54,7 @@ help_test_job:
     - scripts/GenerateConfigs.py -h
     - scripts/IPythonCleanup.py -h
     - scripts/IPythonExtractCode.py -h
+    - scripts/JsonToPythonClass.py -h
     - scripts/JsonToXml.py -h
     - scripts/MulticastPeek.py -h
     - scripts/MulticastPoke.py -h
