@@ -41,6 +41,9 @@ suitable (see http://nbconvert.readthedocs.io/en/latest/external_exporters.html)
 #### `JsonToXml.py`
 Converts JSON documents to XML with a variety of transformation options.
 
+#### `JsonToXml.py`
+Converts JSON documents to equivalent Python classes.
+
 #### `MulticastPeek.py`
 Listens to a multicast group and dumps the packets it receives in a
 human-readable format.
