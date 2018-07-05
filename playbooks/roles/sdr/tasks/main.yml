@@ -31,7 +31,7 @@
 
 - name: Installing SDR packages
   apt:
-    name: [git, gqrx-sdr, libck-dev, libjansson-dev, librtlsdr-dev, rtl-sdr]
+    name: [build-essential, git, gqrx-sdr, libck-dev, libjansson-dev, librtlsdr-dev, nasm, pkg-config, rtl-sdr]
     state: latest
   tags:
     - packages
@@ -44,6 +44,35 @@
     shell: /bin/bash
     generate_ssh_key: yes
     ssh_key_type: ed25519
+  tags:
+    - sdr
+
+- name: Cloning TSL repository
+  git:
+    repo: https://github.com/pvachon/tsl.git
+    dest: /home/sdr/tsl/
+  become: yes
+  become_user: sdr
+  tags:
+    - sdr
+
+- name: Building TSL
+  command: ./waf configure build
+  args:
+    chdir: /home/sdr/tsl/
+  register: tsl_build_result
+  changed_when: "'Compiling' in tsl_build_result.stdout or 'Linking' in tsl_build_result.stdout"
+  become: yes
+  become_user: sdr
+  tags:
+    - sdr
+
+#This is intentionally run as root
+- name: Installing TSL
+  command: ./waf install
+  args:
+    chdir: /home/sdr/tsl/
+  changed_when: False #There's probably a better way to suppress this...
   tags:
     - sdr
 
@@ -60,8 +89,8 @@
   command: ./waf configure build
   args:
     chdir: /home/sdr/tsl-sdr/
-  register: build_result
-  changed_when: "'Compiling' in build_result.stdout or 'Linking' in build_result.stdout"
+  register: tslsdr_build_result
+  changed_when: "'Compiling' in tslsdr_build_result.stdout or 'Linking' in tslsdr_build_result.stdout"
   become: yes
   become_user: sdr
   tags:
