@@ -53,7 +53,27 @@ SET_METHOD_TEMPLATE = '''
 		"""
 		self._%(name)s = %(name)s'''
 
-def jsonToPythonClass(name, data, indent='\t', ignores=set(), mutable=False):
+REPR_METHOD_TEMPLATE = '''
+	def __repr__(self):
+		"""
+		Returns an interprettable representation of this object.
+
+		:return: str
+		"""
+		return \'%(className)s(%(constructorArguments)s)\' %% (%(constructorValues)s)'''
+
+TO_JSON_METHOD_TEMPLATE = '''
+	def toJson(self):
+		"""
+		Returns this object as JSON.
+
+		:return: dict
+		"""
+		return {
+			%(values)s
+		}'''
+
+def jsonToPythonClass(name, data, indent='\t', ignores=set(), mutable=False, generateRepr=False, generateJson=False):
 	"""
 	Converts a JSON dictionary to an XML string by recursively calling itself.
 
@@ -91,17 +111,31 @@ def jsonToPythonClass(name, data, indent='\t', ignores=set(), mutable=False):
 		} for field in fields]
 		parts += setMethodStrs
 
+	if generateRepr:
+		reprStr = REPR_METHOD_TEMPLATE % {
+			'className': name,
+			'constructorArguments': ', '.join('%s=%%s' % field for field in fields),
+			'constructorValues': ', '.join('self._%s' % field for field in fields),
+		}
+		parts.append(reprStr)
+
+	if generateJson:
+		jsonStr = TO_JSON_METHOD_TEMPLATE % {
+			'values': '\n\t\t\t'.join('\'%s\': self._%s,' % (field, field) for field in fields),
+		}
+		parts.append(jsonStr)
+
 	return '\n'.join(parts)
 
 def main(argv=None):
 	"""
-	The main function of this script. Converts JSON to XML based on the arguments provided.
+	The main function of this script. Converts JSON to Python code based on the arguments provided.
 
 	:param argv: List[str] Arguments to parse (default sys.argv)
 	:return: int
 	"""
 	#Parse arguments
-	parser = argparse.ArgumentParser(description='Converts JSON to XML.')
+	parser = argparse.ArgumentParser(description='Converts JSON to Python Classes.')
 	parser.add_argument('name',
 		help='The name of the class.')
 
@@ -113,6 +147,12 @@ def main(argv=None):
 
 	parser.add_argument('-m', '--mutable', action='store_true',
 		help='Generate setters.')
+	parser.add_argument('-r', '--repr', action='store_true',
+		help='Generate __repr__.')
+	parser.add_argument('-j', '--json', action='store_true',
+		help='Generate toJson and __str__.')
+	#TODO: __str__
+	#TODO: caching __hash__ (and __eq__?) -- immutable only for the hash?
 
 	if argv is None:
 		argv = sys.argv
@@ -127,13 +167,16 @@ def main(argv=None):
 		return 1
 
 	#Convert
-	outputXml = jsonToPythonClass(arguments.name, inputJson,
+	output = jsonToPythonClass(arguments.name, inputJson,
 		indent=arguments.indent,
 		ignores=set(arguments.ignore),
-		mutable=arguments.mutable)
+		mutable=arguments.mutable,
+		generateRepr=arguments.repr,
+		generateJson=arguments.json,
+	)
 
 	#Output
-	print(outputXml)
+	print(output)
 	return 0
 
 if __name__ == '__main__':
