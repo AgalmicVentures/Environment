@@ -27,7 +27,8 @@ except ImportError:
 	import json
 import sys
 
-CLASS_TEMPLATE = '''class %(name)s(object):
+CLASS_TEMPLATE = '''
+class %(name)s(object):
 	"""
 	Represents TODO.
 	"""
@@ -73,7 +74,17 @@ TO_JSON_METHOD_TEMPLATE = '''
 			%(values)s
 		}'''
 
-def jsonToPythonClass(name, data, indent='\t', ignores=set(), mutable=False, generateRepr=False, generateJson=False):
+STR_METHOD_TEMPLATE = '''
+	def __str__(self):
+		"""
+		Returns this object as a JSON string.
+
+		:return: str
+		"""
+		return json.dumps(self.toJson())'''
+
+def jsonToPythonClass(name, data, indent='\t', ignores=set(), mutable=False,
+		generateRepr=False, generateJson=False, generateStr=False):
 	"""
 	Converts a JSON dictionary to an XML string by recursively calling itself.
 
@@ -119,11 +130,15 @@ def jsonToPythonClass(name, data, indent='\t', ignores=set(), mutable=False, gen
 		}
 		parts.append(reprStr)
 
-	if generateJson:
+	if generateJson or generateStr:
 		jsonStr = TO_JSON_METHOD_TEMPLATE % {
 			'values': '\n\t\t\t'.join('\'%s\': self._%s,' % (field, field) for field in fields),
 		}
 		parts.append(jsonStr)
+
+	if generateStr:
+		parts = ['import json'] + parts
+		parts.append(STR_METHOD_TEMPLATE)
 
 	return '\n'.join(parts)
 
@@ -150,8 +165,9 @@ def main(argv=None):
 	parser.add_argument('-r', '--repr', action='store_true',
 		help='Generate __repr__.')
 	parser.add_argument('-j', '--json', action='store_true',
-		help='Generate toJson and __str__.')
-	#TODO: __str__
+		help='Generate toJson.')
+	parser.add_argument('-s', '--str', action='store_true',
+		help='Generate __str__ (and toJson).')
 	#TODO: caching __hash__ (and __eq__?) -- immutable only for the hash?
 
 	if argv is None:
@@ -173,6 +189,7 @@ def main(argv=None):
 		mutable=arguments.mutable,
 		generateRepr=arguments.repr,
 		generateJson=arguments.json,
+		generateStr=arguments.str,
 	)
 
 	#Output
