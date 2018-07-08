@@ -83,7 +83,7 @@ STR_METHOD_TEMPLATE = '''
 		"""
 		return json.dumps(self.toJson())'''
 
-def jsonToPythonClass(name, data, indent='\t', ignores=set(), mutable=False,
+def jsonToPythonClass(name, data, ignores=set(), mutable=False,
 		generateRepr=False, generateJson=False, generateStr=False):
 	"""
 	Converts a JSON dictionary to an XML string by recursively calling itself.
@@ -154,8 +154,8 @@ def main(argv=None):
 	parser.add_argument('name',
 		help='The name of the class.')
 
-	parser.add_argument('-t', '--indent', default='\t',
-		help='Sets the string used for a single level of indentation.')
+	parser.add_argument('-t', '--tab-width', type=int,
+		help='The width of a tab in spaces (default actual tabs).')
 
 	parser.add_argument('-i', '--ignore', default=[], action='append',
 		help='Adds a key to ignore.')
@@ -184,13 +184,16 @@ def main(argv=None):
 
 	#Convert
 	output = jsonToPythonClass(arguments.name, inputJson,
-		indent=arguments.indent,
 		ignores=set(arguments.ignore),
 		mutable=arguments.mutable,
 		generateRepr=arguments.repr,
 		generateJson=arguments.json,
 		generateStr=arguments.str,
 	)
+
+	#Indent
+	if arguments.tab_width is not None:
+		output = output.replace('\t', arguments.tab_width * ' ')
 
 	#Output
 	print(output)
