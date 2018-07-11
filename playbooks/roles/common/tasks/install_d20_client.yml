@@ -35,7 +35,7 @@
 - name: Creating cron job to seed entropy pool from D20 once per hour
   cron:
     name: Seed entropy pool from D20
-    job: "/root/Code/OpenSource/D20/D20/Client.py > /dev/null"
+    job: "/root/Code/OpenSource/D20/D20/Client.py {{ d20_server_pool | default('') }} > /dev/null"
     minute: "*"
     state: present
   register: cron_result
