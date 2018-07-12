@@ -31,7 +31,9 @@ CREATE SEQUENCE RunIdSequence;
 CREATE TABLE Run(
 	id INT PRIMARY KEY DEFAULT nextval('RunIdSequence'),
 
+	command TEXT,
 	gitVersion TEXT NOT NULL,
+	workingDirectory TEXT,
 	processId INT NOT NULL,
 	uid INT NOT NULL,
 	username TEXT,
