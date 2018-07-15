@@ -21,8 +21,8 @@
 
 ------------------------------ Drop Schema ------------------------------
 
-DROP TABLE Exception;
-DROP TABLE Run;
+DROP TABLE IF EXISTS Exception;
+DROP TABLE IF EXISTS Run;
 
-DROP SEQUENCE ExceptionIdSequence;
-DROP SEQUENCE RunIdSequence;
+DROP SEQUENCE IF EXISTS ExceptionIdSequence;
+DROP SEQUENCE IF EXISTS RunIdSequence;

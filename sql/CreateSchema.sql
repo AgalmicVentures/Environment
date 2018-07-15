@@ -25,10 +25,10 @@
 
 -------------------- Tables --------------------
 
-CREATE SEQUENCE ExceptionIdSequence;
-CREATE SEQUENCE RunIdSequence;
+CREATE SEQUENCE IF NOT EXISTS ExceptionIdSequence;
+CREATE SEQUENCE IF NOT EXISTS RunIdSequence;
 
-CREATE TABLE Run(
+CREATE TABLE IF NOT EXISTS Run(
 	id INT PRIMARY KEY DEFAULT nextval('RunIdSequence'),
 
 	command TEXT,
@@ -41,7 +41,7 @@ CREATE TABLE Run(
 	startTime TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE Exception(
+CREATE TABLE IF NOT EXISTS Exception(
 	id INT PRIMARY KEY DEFAULT nextval('ExceptionIdSequence'),
 	runId INT NOT NULL REFERENCES Run,
 	threadId BIGINT NOT NULL,
