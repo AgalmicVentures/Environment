@@ -38,7 +38,11 @@ SLOTS_TEMPLATE = '''
 
 CLASS_INIT_TEMPLATE = '''
 	def __init__(%(constructorArguments)s):
-		%(constructorAssignments)s'''
+		%(constructorParts)s'''
+
+TYPE_CHECK_TEMPLATE = '''if not isinstance(%(field)s, %(type)s):
+			raise ValueError('%(field)s must be type %(type)s')
+'''
 
 GET_METHOD_TEMPLATE = '''
 	def %(name)s(self):
@@ -88,7 +92,7 @@ STR_METHOD_TEMPLATE = '''
 		return json.dumps(self.toJson())'''
 
 def jsonToPythonClass(name, data, ignores=set(), defaults=False, mutable=False,
-		generateSlots=False, generateRepr=False, generateJson=False, generateStr=False):
+		generateSlots=False, generateTypeChecks=False, generateRepr=False, generateJson=False, generateStr=False):
 	"""
 	Converts a JSON dictionary to an XML string by recursively calling itself.
 
@@ -120,10 +124,15 @@ def jsonToPythonClass(name, data, ignores=set(), defaults=False, mutable=False,
 		for name in sorted(data.keys())
 		if name not in ignores
 	]
+	constructorParts = []
+	if generateTypeChecks:
+		constructorParts.append('\t\t'.join(TYPE_CHECK_TEMPLATE % {'field': field, 'type': type(data[field]).__name__} for field in fields))
+	constructorParts.extend('self._%s = %s' % (field, field) for field in fields)
+
 	classInitStr = CLASS_INIT_TEMPLATE % {
 		'name': name,
 		'constructorArguments': ', '.join(['self'] + constructorArguments),
-		'constructorAssignments': '\n\t\t'.join('self._%s = %s' % (field, field) for field in fields),
+		'constructorParts': '\n\t\t'.join(constructorParts),
 	}
 	parts.append(classInitStr)
 
@@ -181,6 +190,8 @@ def main(argv=None):
 
 	parser.add_argument('-d', '--defaults', action='store_true',
 		help='Generate defaults for constructor arguments.')
+	parser.add_argument('-T', '--type-checks', action='store_true',
+		help='Generate type checks.')
 	parser.add_argument('-m', '--mutable', action='store_true',
 		help='Generate setters.')
 	parser.add_argument('-r', '--repr', action='store_true',
@@ -211,6 +222,7 @@ def main(argv=None):
 		defaults=arguments.defaults,
 		mutable=arguments.mutable,
 		generateSlots=arguments.slots,
+		generateTypeChecks=arguments.type_checks,
 		generateRepr=arguments.repr,
 		generateJson=arguments.json,
 		generateStr=arguments.str,
