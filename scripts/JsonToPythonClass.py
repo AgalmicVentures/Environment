@@ -87,7 +87,7 @@ STR_METHOD_TEMPLATE = '''
 		"""
 		return json.dumps(self.toJson())'''
 
-def jsonToPythonClass(name, data, ignores=set(), mutable=False,
+def jsonToPythonClass(name, data, ignores=set(), defaults=False, mutable=False,
 		generateSlots=False, generateRepr=False, generateJson=False, generateStr=False):
 	"""
 	Converts a JSON dictionary to an XML string by recursively calling itself.
@@ -115,9 +115,14 @@ def jsonToPythonClass(name, data, ignores=set(), mutable=False,
 		}
 		parts.append(slotsStr)
 
+	constructorArguments = fields if not defaults else [
+		'%s=%s' % (name, repr(data[name]))
+		for name in sorted(data.keys())
+		if name not in ignores
+	]
 	classInitStr = CLASS_INIT_TEMPLATE % {
 		'name': name,
-		'constructorArguments': ', '.join(['self'] + fields),
+		'constructorArguments': ', '.join(['self'] + constructorArguments),
 		'constructorAssignments': '\n\t\t'.join('self._%s = %s' % (field, field) for field in fields),
 	}
 	parts.append(classInitStr)
@@ -174,6 +179,8 @@ def main(argv=None):
 	parser.add_argument('-i', '--ignore', default=[], action='append',
 		help='Adds a key to ignore.')
 
+	parser.add_argument('-d', '--defaults', action='store_true',
+		help='Generate defaults for constructor arguments.')
 	parser.add_argument('-m', '--mutable', action='store_true',
 		help='Generate setters.')
 	parser.add_argument('-r', '--repr', action='store_true',
@@ -201,6 +208,7 @@ def main(argv=None):
 	#Convert
 	output = jsonToPythonClass(arguments.name, inputJson,
 		ignores=set(arguments.ignore),
+		defaults=arguments.defaults,
 		mutable=arguments.mutable,
 		generateSlots=arguments.slots,
 		generateRepr=arguments.repr,
