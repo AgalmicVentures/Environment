@@ -27,12 +27,16 @@ except ImportError:
 	import json
 import sys
 
-CLASS_TEMPLATE = '''
+CLASS_TOP_TEMPLATE = '''
 class %(name)s(object):
 	"""
 	Represents TODO.
-	"""
+	"""'''
 
+SLOTS_TEMPLATE = '''
+	__slots__ = [%(slots)s]'''
+
+CLASS_INIT_TEMPLATE = '''
 	def __init__(%(constructorArguments)s):
 		%(constructorAssignments)s'''
 
@@ -84,7 +88,7 @@ STR_METHOD_TEMPLATE = '''
 		return json.dumps(self.toJson())'''
 
 def jsonToPythonClass(name, data, ignores=set(), mutable=False,
-		generateRepr=False, generateJson=False, generateStr=False):
+		generateSlots=False, generateRepr=False, generateJson=False, generateStr=False):
 	"""
 	Converts a JSON dictionary to an XML string by recursively calling itself.
 
@@ -100,19 +104,29 @@ def jsonToPythonClass(name, data, ignores=set(), mutable=False,
 
 	fields = [name for name in sorted(data.keys()) if name not in ignores]
 
-	classStr = CLASS_TEMPLATE % {
+	classStr = CLASS_TOP_TEMPLATE % {
+		'name': name,
+	}
+	parts = [classStr]
+
+	if generateSlots:
+		slotsStr = SLOTS_TEMPLATE % {
+			'slots': ', '.join("'%s'" % field for field in fields),
+		}
+		parts.append(slotsStr)
+
+	classInitStr = CLASS_INIT_TEMPLATE % {
 		'name': name,
 		'constructorArguments': ', '.join(['self'] + fields),
 		'constructorAssignments': '\n\t\t'.join('self._%s = %s' % (field, field) for field in fields),
 	}
+	parts.append(classInitStr)
+
 	getMethodStrs = [GET_METHOD_TEMPLATE % {
 		'name': field,
 		'typeName': type(data[field]).__name__
 	} for field in fields]
-
-	parts = [
-		classStr,
-	] + getMethodStrs
+	parts.extend(getMethodStrs)
 
 	if mutable:
 		setMethodStrs = [SET_METHOD_TEMPLATE % {
@@ -120,7 +134,7 @@ def jsonToPythonClass(name, data, ignores=set(), mutable=False,
 			'capitalizedName': '' if len(field) == 0 else field[0].upper() + field[1:],
 			'typeName': type(data[field]).__name__,
 		} for field in fields]
-		parts += setMethodStrs
+		parts.extend(setMethodStrs)
 
 	if generateRepr:
 		reprStr = REPR_METHOD_TEMPLATE % {
@@ -168,6 +182,8 @@ def main(argv=None):
 		help='Generate toJson.')
 	parser.add_argument('-s', '--str', action='store_true',
 		help='Generate __str__ (and toJson).')
+	parser.add_argument('-S', '--slots', action='store_true',
+		help='Generate __slots__ .')
 	#TODO: caching __hash__ (and __eq__?) -- immutable only for the hash?
 
 	if argv is None:
@@ -186,6 +202,7 @@ def main(argv=None):
 	output = jsonToPythonClass(arguments.name, inputJson,
 		ignores=set(arguments.ignore),
 		mutable=arguments.mutable,
+		generateSlots=arguments.slots,
 		generateRepr=arguments.repr,
 		generateJson=arguments.json,
 		generateStr=arguments.str,
