@@ -29,6 +29,7 @@
   when: is_digital_ocean
   tags:
     - digital_ocean
+    - packages
 
 - name: Adding Digital Ocean Agent repository to apt
   apt_repository:
@@ -38,6 +39,7 @@
   when: is_digital_ocean
   tags:
     - digital_ocean
+    - packages
 
 - name: Updating apt cache for change new repositories
   apt:
