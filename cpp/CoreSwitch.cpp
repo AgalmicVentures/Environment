@@ -1,3 +1,4 @@
+//usr/bin/g++ "$0" -o /tmp/CoreSwitch && exec /tmp/CoreSwitch "$@"
 
 /*
  * Copyright (c) 2015-2018 Agalmic Ventures LLC (www.agalmicventures.com)
