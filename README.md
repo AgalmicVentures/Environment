@@ -9,6 +9,10 @@ and operations scripts are included.
 Standard configuration files for `bash`, `vim`, etc. which are installed as a
 part of the standard environment.
 
+### C++ (`cpp/`)
+Snippets of generally useful C++. Some are standalone programs which maybe be
+executed directly (see `cpp/README.md` for details).
+
 ### Licenses (`licenses/`)
 Copies of the MIT license in a variety of language formats are included for use
 with the `Prepend.py` script (see below).
