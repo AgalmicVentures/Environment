@@ -42,6 +42,14 @@ smoke_test_playbooks_job:
   only:
     - master
 
+test_cpp_scripts_job:
+  stage: test
+  script:
+    - cpp/CoreSwitch.cpp
+    - cpp/Rdtsc.cpp
+  only:
+    - master
+
 help_test_job:
   stage: test
   script:
