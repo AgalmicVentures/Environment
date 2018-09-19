@@ -13,11 +13,22 @@ Bookmarks, kept here rather than in a browser, for portability and the retention
   * https://oeis.org/ - On-line Encyclopedia of Integer Sequences
 
 ## **Tools**
-* https://www.epochconverter.com/ - Epoch time converter
-* https://godbolt.org/ - Compiler explorer with assembly output
-* http://icanhazip.com/ - Returns the requesting IP as text (suitable for e.g. `curl`)
-* http://m.wolframalpha.com/ - Wolfram Alpha
-* http://sqlfiddle.com/ - SQL fiddle
+* Calculators
+	* https://www.epochconverter.com/ - Epoch time converter
+	* http://m.wolframalpha.com/ - Wolfram Alpha
+* Cryptocurrency
+	* Blockchain
+		* BTC - https://blockexplorer.com/
+		* ETH - https://etherscan.io/
+	* Exchanges
+		* https://www.bitmex.com/app/trade
+		* https://pro.coinbase.com/trade
+* Fiddles
+	* https://godbolt.org/ - Compiler explorer with assembly output
+	* https://jsfiddle.net/ - HTML/CSS/JS fiddle
+	* http://sqlfiddle.com/ - SQL fiddle
+* Network
+	* http://icanhazip.com/ - Returns the requesting IP as text (suitable for e.g. `curl`)
 
 ## **Vendors**
 * Electronics
@@ -25,4 +36,5 @@ Bookmarks, kept here rather than in a browser, for portability and the retention
   * https://www.digikey.com/
   * https://www.sparkfun.com/
   * https://www.yepkit.com/home - USB relays, switchable hubs, etc.
-
+* Security
+  * https://www.yubico.com/ - Yubikey
