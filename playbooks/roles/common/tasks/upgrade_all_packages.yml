@@ -21,6 +21,26 @@
 
 #Upgrades all packages to their latest versions
 
+- name: Check for check-new-release
+  stat:
+    path: /etc/update-manager/release-upgrades
+  register: release_upgrades_stat_result
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - housekeeping
+    - packages
+
+- name: Disabling prompts in check-new-release
+  lineinfile:
+    dest: /etc/update-manager/release-upgrades
+    regexp: "^Prompt=.*"
+    line: "Prompt=never"
+    state: present
+  when: ansible_distribution == "Ubuntu" and release_upgrades_stat_result.stat.exists
+  tags:
+    - housekeeping
+    - packages
+
 - name: Updating apt cache
   apt:
     update_cache: yes
@@ -50,26 +70,6 @@
 - name: Removing unused packages
   apt:
     autoremove: yes
-  tags:
-    - housekeeping
-    - packages
-
-- name: Check for check-new-release
-  stat:
-    path: /etc/update-manager/release-upgrades
-  register: release_upgrades_stat_result
-  when: ansible_distribution == "Ubuntu"
-  tags:
-    - housekeeping
-    - packages
-
-- name: Disabling prompts in check-new-release
-  lineinfile:
-    dest: /etc/update-manager/release-upgrades
-    regexp: "^Prompt=.*"
-    line: "Prompt=never"
-    state: present
-  when: ansible_distribution == "Ubuntu" and release_upgrades_stat_result.stat.exists
   tags:
     - housekeeping
     - packages
