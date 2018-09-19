@@ -21,3 +21,6 @@ Reference sheet of diagnostic queries, e.g. for checking on locks.
 
 ### `DropSchema.sql`
 Drops everything created by `CreateSchema.sql` in the correct order.
+
+### `Migrate.sql`
+Example snippets to help build migration scripts.
