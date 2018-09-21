@@ -19,6 +19,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+#Global settings
+export ANSIBLE_NOCOWS=1
+
 #Load colors
 readonly NC='\033[00m'
 readonly RED='\033[1;31m'
