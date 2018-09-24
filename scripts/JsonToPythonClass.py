@@ -130,7 +130,6 @@ def jsonToPythonClass(name, data, ignores=set(), defaults=False, mutable=False,
 	constructorParts.extend('self._%s = %s' % (field, field) for field in fields)
 
 	classInitStr = CLASS_INIT_TEMPLATE % {
-		'name': name,
 		'constructorArguments': ', '.join(['self'] + constructorArguments),
 		'constructorParts': '\n\t\t'.join(constructorParts),
 	}
