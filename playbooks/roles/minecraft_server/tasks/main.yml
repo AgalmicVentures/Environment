@@ -68,8 +68,8 @@
 
 - name: Downloading latest Minecraft
   get_url:
-    url: https://s3.amazonaws.com/Minecraft.Download/versions/1.12.2/minecraft_server.1.12.2.jar
-    dest: /home/minecraft/minecraft/minecraft_server.1.12.2.jar
+    url: https://s3.amazonaws.com/Minecraft.Download/versions/1.13.1/minecraft_server.1.13.1.jar
+    dest: /home/minecraft/minecraft/minecraft_server.1.13.1.jar
   become: yes
   become_user: minecraft
   register: download_result
