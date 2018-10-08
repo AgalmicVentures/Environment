@@ -4,13 +4,15 @@ Bookmarks, kept here rather than in a browser, for portability and the retention
 
 ## **References**
 * Computer Science
-  * https://www.2uo.de/myths-about-urandom - Myths about /dev/urandom
   * https://xlinux.nist.gov/dads/ - Dictionary of Algorithms and Data Structures
 * Engineering
   * http://lcamtuf.coredump.cx/gcnc/ - Guerrilla guide to CNC machining, mold making, and resin casting
 * Math
   * http://mathworld.wolfram.com/ - MathWorld
   * https://oeis.org/ - On-line Encyclopedia of Integer Sequences
+* Security
+  * https://www.2uo.de/myths-about-urandom - Myths about /dev/urandom
+  * https://developers.yubico.com/U2F/Protocol_details/Overview.html - U2F Protocol Details
 
 ## **Tools**
 * Calculators
