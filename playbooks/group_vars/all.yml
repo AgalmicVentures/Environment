@@ -24,5 +24,5 @@ apt_cache_valid_time: 7200
 is_digital_ocean: "{{ ansible_system_vendor == 'DigitalOcean' }}"
 #NOTE: This check is to work around issues where ansible_virtualization_role is
 #incorrectly identified
-is_virtual_machine: "{{ ansible_virtualization_role == 'guest' or is_digital_ocean }}"
+is_virtual_machine: "{{ (ansible_virtualization_role is defined and ansible_virtualization_role == 'guest') or is_digital_ocean }}"
 is_physical_machine: "{{ not is_virtual_machine }}"
