@@ -85,11 +85,19 @@
   tags:
     - security
 
+- name: Checking for watchdog support (/proc/sys/kernel/watchdog)
+  stat:
+    path: /proc/sys/kernel/watchdog
+  register: watchdog_stat_result
+  tags:
+    - sysctl
+
 - name: Enabling watchdog timers
   sysctl:
     name: kernel.watchdog
     value: 1
     sysctl_set: yes
+  when: watchdog_stat_result is defined and watchdog_stat_result.stat.exists
   tags:
     - sysctl
 
@@ -98,6 +106,7 @@
     name: kernel.watchdog_thresh
     value: 10
     sysctl_set: yes
+  when: watchdog_stat_result is defined and watchdog_stat_result.stat.exists
   tags:
     - sysctl
 
