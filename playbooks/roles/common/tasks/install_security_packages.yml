@@ -27,6 +27,7 @@
     cache_valid_time: "{{ apt_cache_valid_time }}"
   tags:
     - firewall
+    - packages
     - security
 
 - name: Installing security packages
@@ -35,6 +36,7 @@
     state: latest
   tags:
     - firewall
+    - packages
     - security
     - ssh
 
@@ -91,4 +93,5 @@
     name: ['inetd', 'prelink', 'rsh-server', 'telnet-server', 'xinetd', 'ypserv']
     state: absent
   tags:
+    - packages
     - security
