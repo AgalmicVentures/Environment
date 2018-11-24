@@ -48,6 +48,7 @@
 	pul = pull
 
 	psh = push
+	psuh = push
 	puhs = push
 	pus = push
 
