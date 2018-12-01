@@ -26,10 +26,11 @@
     path: /mnt/scratch
     src: tmpfs
     fstype: tmpfs
-    opts: size=1G
+    opts: "size={{ansible_memtotal_mb // 32}}M"
     state: mounted
   tags:
     - filesystem
+    - ramdisk
 
 - name: Symlinking scratch RAM disk to /tmp/scratch
   file:
@@ -39,3 +40,4 @@
     force: yes
   tags:
     - filesystem
+    - ramdisk
