@@ -27,6 +27,7 @@
 #Setup the system
 - import_tasks: upgrade_all_packages.yml
 - import_tasks: setup_time.yml
+- import_tasks: setup_locale.yml
 - import_tasks: install_security_packages.yml
 - import_tasks: install_standard_packages.yml
 

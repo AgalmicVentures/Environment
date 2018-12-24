@@ -1,0 +1,16 @@
+
+- name: Ensuring en_US.UTF-8 local exists
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+  tags:
+    - locale
+
+- name: Set default locale to en_US.UTF-8
+  debconf:
+    name: locales
+    question: locales/default_environment_locale
+    value: en_US.UTF-8
+    vtype: select
+  tags:
+    - locale
