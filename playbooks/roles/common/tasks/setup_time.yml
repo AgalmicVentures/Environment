@@ -26,6 +26,7 @@
 - name: Setting time zone
   timezone:
     name: Etc/UTC
+  notify: restart crond
   tags:
     - time
     - timezone
