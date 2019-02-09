@@ -1,9 +1,8 @@
-ansible==2.7.5
+ansible==2.7.7
 asn1crypto==0.24.0
-bcrypt==3.1.5
+bcrypt==3.1.6
 cffi==1.11.5
-cryptography==2.4.2
-idna==2.8
+cryptography==2.5
 Jinja2==2.10
 MarkupSafe==1.1.0
 paramiko==2.4.2
