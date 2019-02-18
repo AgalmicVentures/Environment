@@ -32,6 +32,7 @@ readonly BLUE='\033[0;34m'
 
 #Load Mercurial completions
 if [ -e /etc/bash_completion.d/mercurial ] ; then
+	# shellcheck disable=SC1091
 	source /etc/bash_completion.d/mercurial
 fi
 
@@ -96,7 +97,7 @@ up() {
 
 #Extraction
 extract() {
-	if [ -f $1 ] ; then
+	if [ -f "$1" ] ; then
 		case $1 in
 			*.tar.bz2)   tar xvjf "$1"   ;;
 			*.tar.gz)    tar xvzf "$1"   ;;
