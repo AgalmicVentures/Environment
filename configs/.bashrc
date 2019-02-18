@@ -116,3 +116,32 @@ extract() {
 		echo "'$1' is not a valid file!"
 	fi
 }
+
+#Multiple repositories at a time
+gitall() {
+	local OLD_PWD=$(pwd)
+
+	for DIR in $(find . -maxdepth 3 -name .git -type d) ; do
+		BASE=$(dirname "$DIR")
+		echo -e "${BLUE}****************************** ${BASE} ******************************${NC}"
+		echo
+		cd "$BASE" || exit 1
+		git "$@"
+		cd "$OLD_PWD" || exit 1
+		echo
+	done
+}
+
+hgall() {
+	local OLD_PWD=$(pwd)
+
+	for DIR in $(find . -maxdepth 3 -name .hg -type d) ; do
+		BASE=$(dirname "$DIR")
+		echo -e "${BLUE}****************************** ${BASE} ******************************${NC}"
+		echo
+		cd "$BASE" || exit 1
+		hg "$@"
+		cd "$OLD_PWD" || exit 1
+		echo
+	done
+}
