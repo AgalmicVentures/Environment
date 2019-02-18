@@ -29,6 +29,8 @@ shellcheck_lint_job:
   stage: lint
   script:
     - shellcheck scripts/*.sh
+    #This is a shell script too!
+    - shellcheck configs/.bashrc
   only:
     - master
 
