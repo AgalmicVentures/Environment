@@ -80,6 +80,7 @@ alias egrep="egrep --color=auto"
 
 #Handle typos
 alias gti=git
+alias igt=git
 
 #Moving up directories
 up() {
@@ -119,9 +120,10 @@ extract() {
 
 #Multiple repositories at a time
 gitall() {
-	local OLD_PWD=$(pwd)
+	local OLD_PWD
+	OLD_PWD=$(pwd)
 
-	for DIR in $(find . -maxdepth 3 -name .git -type d) ; do
+	while IFS= read -r -d '' DIR ; do
 		BASE=$(dirname "$DIR")
 		echo -e "${BLUE}****************************** ${BASE} ******************************${NC}"
 		echo
@@ -129,13 +131,14 @@ gitall() {
 		git "$@"
 		cd "$OLD_PWD" || exit 1
 		echo
-	done
+	done < <(find . -maxdepth 3 -name .git -type d -print0 | sort -t '\0' -z)
 }
 
 hgall() {
-	local OLD_PWD=$(pwd)
+	local OLD_PWD
+	OLD_PWD=$(pwd)
 
-	for DIR in $(find . -maxdepth 3 -name .hg -type d) ; do
+	while IFS= read -r -d '' DIR ; do
 		BASE=$(dirname "$DIR")
 		echo -e "${BLUE}****************************** ${BASE} ******************************${NC}"
 		echo
@@ -143,5 +146,5 @@ hgall() {
 		hg "$@"
 		cd "$OLD_PWD" || exit 1
 		echo
-	done
+	done < <(find . -maxdepth 3 -name .hg -type d -print0 | sort -t '\0' -z)
 }
