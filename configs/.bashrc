@@ -74,6 +74,8 @@ fi
 
 alias ll="ls -lAh"
 
+alias activate="source env/bin/activate"
+
 #Enable coloring
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
