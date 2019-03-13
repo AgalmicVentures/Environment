@@ -74,13 +74,16 @@ fi
 
 alias ll="ls -lAh"
 
-alias activate="source env/bin/activate"
 
 #Enable coloring
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
 
-#Handle typos
+#Abbreviations
+alias st="git st"
+alias ci="git commit"
+
+#Typos
 alias gti=git
 alias igt=git
 
