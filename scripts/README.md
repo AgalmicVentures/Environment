@@ -17,6 +17,9 @@ milliseconds, microseconds, and nanoseconds).
 #### `CsvToJson.py`
 Converts CSV documents to JSON with a variety of transformation options.
 
+#### `CursesExample.py`
+Skeleton code for using the `curses` library.
+
 #### `ExamineBinary.py`
 Examines a binary file of unknown format to determine as much as possible
 about it e.g. by finding the most common substrings.
