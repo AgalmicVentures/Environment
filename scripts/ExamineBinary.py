@@ -25,12 +25,14 @@ import collections
 import math
 import sys
 
-def examineSubstrings(data, length):
+def examineSubstrings(data, length, z=3.0, dividerMultiple=20.0):
 	"""
 	Examines substrings of the data of a given length, looking for patterns.
 
 	:param data: bytes
-	:param length: int
+	:param length: int Substring length to examine
+	:param z: float
+	:param dividerMultiple: float
 	:return: collections.Counter
 	"""
 	#Count values in a sliding window over the data
@@ -53,11 +55,12 @@ def examineSubstrings(data, length):
 		#
 		#To compute that, remember the formula for the confidence interval:
 		#	p_hat +/- z * sqrt(p_hat * (1 - p_hat) / n)
-		z = 3.0 #99.7% confidence, TODO: make this an option
 		fraction = float(commonCount) / total
-		conservativeFraction = fraction - math.sqrt(fraction * (1.0 - fraction) / total)
+		conservativeFraction = fraction - z * math.sqrt(fraction * (1.0 - fraction) / total)
 		expectedFraction = 1.0 / (256 ** length)
-		if conservativeFraction < 24.0 * expectedFraction:
+
+		#Skip anything that doesn't happen at least the token multiple more often than expected
+		if conservativeFraction < dividerMultiple * expectedFraction:
 			break
 
 		#Look for common tokens, skipping if there are none
@@ -85,6 +88,10 @@ def main(argv=None):
 	:return: int
 	"""
 	parser = argparse.ArgumentParser(description='Binary Examiner')
+	parser.add_argument('-d', '--divider-multiple', type=float, default=20.0,
+		help='Required frequency multiple for a token to be a potential divider (default=20.0).')
+	parser.add_argument('-z', '--z', type=float, default=3.0,
+		help='Z-score threshold for statistical tests (default=3.0).')
 	parser.add_argument('file', help='File to check.')
 
 	if argv is None:
@@ -100,7 +107,7 @@ def main(argv=None):
 
 	#Look at substrings at common lengths of plain old data types
 	for length in [1, 2, 4, 8]:
-		examineSubstrings(data, length)
+		examineSubstrings(data, length, z=arguments.z, dividerMultiple=arguments.divider_multiple)
 
 	return 0
 
