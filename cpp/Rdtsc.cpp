@@ -23,8 +23,7 @@
  */
 
 #include <cstdint>
-#include <cstdio>
-#include <cstdlib>
+#include <iostream>
 
 static inline uint64_t rdtsc()
 {
@@ -39,5 +38,5 @@ static inline uint64_t rdtsc()
 int main()
 {
 	uint64_t time = rdtsc();
-	std::printf("%llu\n", time);
+	std::cout << time << std::endl;
 }

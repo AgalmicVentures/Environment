@@ -23,8 +23,7 @@
  */
 
 #include <cstdint>
-#include <cstdio>
-#include <cstdlib>
+#include <iostream>
 
 static inline uint64_t rdtscp(uint32_t &aux)
 {
@@ -45,9 +44,9 @@ int main()
 	while (true) {
 		uint64_t time = rdtscp(core);
 		if (core != lastCore) {
-			std::printf("%u -> %u (TSC = %llu = %llu + %llu)\n",
-				lastCore, core,
-				time, lastTime, time - lastTime);
+			std::cout << lastCore << " -> " << core
+				<< " (TSC = " << time
+				<< " = " << lastTime << " + " << (time - lastTime) << ")" << std::endl;
 			lastCore = core;
 			lastTime = time;
 		}
