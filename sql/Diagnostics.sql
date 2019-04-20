@@ -62,3 +62,28 @@ WHERE
 	NOT blocked_lock.granted
 	AND blocking_activity.datname = current_database()
 ORDER BY wait_duration DESC;
+
+-------------------- Space --------------------
+
+SELECT *,
+	pg_size_pretty(totalBytes) AS totalSize,
+    pg_size_pretty(indexBytes) AS indexSize,
+    pg_size_pretty(toastBytes) AS toastSize,
+    pg_size_pretty(tableBytes) AS tableSize
+FROM (
+	SELECT *,
+		totalBytes - indexBytes - COALESCE(toastBytes, 0) AS tableBytes
+	FROM (
+		SELECT c.oid,
+			nspname AS tableSchema,
+			relname AS tableName,
+			c.reltuples AS rowEstimate,
+			pg_total_relation_size(c.oid) AS totalBytes,
+			pg_indexes_size(c.oid) AS indexBytes,
+			pg_total_relation_size(reltoastrelid) AS toastBytes
+		FROM pg_class c
+		LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
+		WHERE relkind = 'r'
+	) x
+	ORDER BY totalBytes DESC
+) y;
