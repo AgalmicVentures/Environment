@@ -41,35 +41,35 @@ WHERE NOT GRANTED;
 
 -- Convenience query for seeing what queries are blocking what other queries and how
 SELECT
-	COALESCE(blocking_lock.relation::regclass::text, blocking_lock.locktype) as locked_item,
-	NOW() - blocked_activity.query_start AS wait_duration,
-	blocked_activity.pid AS blocked_pid,
-	blocked_activity.query as blocked_query,
-	blocked_lock.mode as blocked_mode,
-	blocking_activity.pid AS blocking_pid,
-	blocking_activity.query as blocking_query,
-	blocking_lock.mode as blocking_mode
-FROM pg_catalog.pg_locks blocked_lock
-JOIN pg_stat_activity blocked_activity ON blocked_lock.pid = blocked_activity.pid
-JOIN pg_catalog.pg_locks blocking_lock ON
-	(blocking_lock.transactionid = blocked_lock.transactionid OR
-		(blocking_lock.locktype = blocked_lock.locktype AND blocking_lock.relation = blocked_lock.relation)
-	) AND blocked_lock.pid != blocking_lock.pid
-JOIN pg_stat_activity blocking_activity ON
-	blocking_lock.pid = blocking_activity.pid
-	AND blocking_activity.datid = blocked_activity.datid
+	COALESCE(blockingLock.relation::regclass::text, blockingLock.locktype) AS lockedItem,
+	NOW() - blockedActivity.query_start AS waitDuration,
+	blockedActivity.pid AS blockedPid,
+	blockedActivity.query AS blockedQuery,
+	blockedLock.mode AS blockedMode,
+	blockingActivity.pid AS blockingPid,
+	blockingActivity.query AS blockingQuery,
+	blockingLock.mode AS blockingMode
+FROM pg_catalog.pg_locks blockedLock
+JOIN pg_stat_activity blockedActivity ON blockedLock.pid = blockedActivity.pid
+JOIN pg_catalog.pg_locks blockingLock ON
+	(blockingLock.transactionid = blockedLock.transactionid OR
+		(blockingLock.locktype = blockedLock.locktype AND blockingLock.relation = blockedLock.relation)
+	) AND blockedLock.pid != blockingLock.pid
+JOIN pg_stat_activity blockingActivity ON
+	blockingLock.pid = blockingActivity.pid
+	AND blockingActivity.datid = blockedActivity.datid
 WHERE
-	NOT blocked_lock.granted
-	AND blocking_activity.datname = current_database()
-ORDER BY wait_duration DESC;
+	NOT blockedLock.granted
+	AND blockingActivity.datname = current_database()
+ORDER BY waitDuration DESC;
 
 -------------------- Space --------------------
 
 SELECT *,
 	pg_size_pretty(totalBytes) AS totalSize,
-    pg_size_pretty(indexBytes) AS indexSize,
-    pg_size_pretty(toastBytes) AS toastSize,
-    pg_size_pretty(tableBytes) AS tableSize
+	pg_size_pretty(indexBytes) AS indexSize,
+	pg_size_pretty(toastBytes) AS toastSize,
+	pg_size_pretty(tableBytes) AS tableSize
 FROM (
 	SELECT *,
 		totalBytes - indexBytes - COALESCE(toastBytes, 0) AS tableBytes
