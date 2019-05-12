@@ -82,6 +82,7 @@ alias egrep="egrep --color=auto"
 #Abbreviations
 alias st="git st"
 alias ci="git commit"
+alias pytest="python -m unittest discover"
 alias py3test="python3 -m unittest discover"
 
 #Typos
