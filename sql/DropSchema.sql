@@ -21,8 +21,38 @@
 
 ------------------------------ Drop Schema ------------------------------
 
+-------------------- Procedures --------------------
+
+DO
+$$
+DECLARE
+	dropSql TEXT;
+BEGIN
+	SELECT string_agg(format(
+			'DROP %s %s;',
+			CASE
+				WHEN proisagg THEN 'AGGREGATE'
+				ELSE 'FUNCTION'
+			END,
+			oid::regprocedure),
+		E'\n')
+	FROM pg_proc
+	WHERE pronamespace = 'public'::regnamespace
+		AND prolang IN (SELECT oid FROM pg_language WHERE lanname IN ('sql', 'plpgsql'))
+	INTO dropSql;
+
+	IF dropSql IS NOT NULL THEN
+		EXECUTE dropSql;
+	END IF;
+END
+$$ LANGUAGE plpgsql;
+
+-------------------- Tables --------------------
+
 DROP TABLE IF EXISTS Exception;
 DROP TABLE IF EXISTS Run;
+
+-------------------- Sequences --------------------
 
 DROP SEQUENCE IF EXISTS ExceptionIdSequence;
 DROP SEQUENCE IF EXISTS RunIdSequence;

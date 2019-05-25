@@ -23,10 +23,12 @@
 
 -- This script is responsible for setting up the schema of the TODO database.
 
--------------------- Tables --------------------
+-------------------- Sequences --------------------
 
 CREATE SEQUENCE IF NOT EXISTS ExceptionIdSequence;
 CREATE SEQUENCE IF NOT EXISTS RunIdSequence;
+
+-------------------- Tables --------------------
 
 CREATE TABLE IF NOT EXISTS Run(
 	id INT PRIMARY KEY DEFAULT nextval('RunIdSequence'),
@@ -38,7 +40,9 @@ CREATE TABLE IF NOT EXISTS Run(
 	uid INT NOT NULL,
 	username TEXT,
 	language TEXT,
-	startTime TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+	startTime TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+
+	endTime TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS Exception(
@@ -51,6 +55,44 @@ CREATE TABLE IF NOT EXISTS Exception(
 	backtrace TEXT NOT NULL,
 	time TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
+
+-------------------- Procedures --------------------
+
+CREATE OR REPLACE FUNCTION StartRun(
+	_command TEXT,
+	_arguments TEXT[],
+	_gitVersion TEXT,
+	_workingDirectory TEXT,
+	_processId INT,
+	_username TEXT,
+	_language TEXT)
+RETURNS INT AS
+$$
+	INSERT INTO Run (command, arguments, gitVersion, workingDirectory, processId, username, language)
+	VALUES (_command, _arguments, _gitVersion, _workingDirectory, _processId, _username, _language)
+	RETURNING id;
+$$ LANGUAGE SQL;
+
+CREATE OR REPLACE FUNCTION EndRun(_runId INT)
+RETURNS VOID AS
+$$
+	UPDATE Run
+	SET endTime = NOW()
+	WHERE id = _runId;
+$$ LANGUAGE SQL;
+
+CREATE OR REPLACE FUNCTION InsertException(
+	_runId INT,
+	_threadId INT,
+	_exceptionType TEXT,
+	_message TEXT,
+	_backtrace TEXT)
+RETURNS INT AS
+$$
+	INSERT INTO Exception (runId, threadId, exceptionType, message, backtrace)
+	VALUES (_runId, _threadId, _exceptionType, _message, _backtrace)
+	RETURNING id;
+$$ LANGUAGE SQL;
 
 -------------------- Privileges --------------------
 

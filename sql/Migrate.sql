@@ -24,7 +24,7 @@
 -- Helpful snippets for writing migration scripts.
 
 DO
-$do$
+$$
 BEGIN
 
 -- Checks a columns existence before editing it to avoid errors
@@ -36,4 +36,4 @@ THEN
 END IF;
 
 END
-$do$;
+$$;
