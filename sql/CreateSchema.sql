@@ -111,7 +111,7 @@ CREATE OR REPLACE FUNCTION InsertLogMessage(
 	_level TEXT,
 	_message TEXT,
 	_data JSONB DEFAULT NULL)
-RETURNS INT AS
+RETURNS BIGINT AS
 $$
 	INSERT INTO LogMessage (runId, level, message, data)
 	VALUES (_runId, _level, _message, _data)
