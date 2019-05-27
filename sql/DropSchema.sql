@@ -49,10 +49,12 @@ $$ LANGUAGE plpgsql;
 
 -------------------- Tables --------------------
 
+DROP TABLE IF EXISTS LogMessage;
 DROP TABLE IF EXISTS Exception;
 DROP TABLE IF EXISTS Run;
 
 -------------------- Sequences --------------------
 
+DROP SEQUENCE IF EXISTS LogMessageIdSequence;
 DROP SEQUENCE IF EXISTS ExceptionIdSequence;
 DROP SEQUENCE IF EXISTS RunIdSequence;

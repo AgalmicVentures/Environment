@@ -27,6 +27,7 @@
 
 CREATE SEQUENCE IF NOT EXISTS ExceptionIdSequence;
 CREATE SEQUENCE IF NOT EXISTS RunIdSequence;
+CREATE SEQUENCE IF NOT EXISTS LogMessageIdSequence;
 
 -------------------- Tables --------------------
 
@@ -34,6 +35,7 @@ CREATE TABLE IF NOT EXISTS Run(
 	id INT PRIMARY KEY DEFAULT nextval('RunIdSequence'),
 
 	command TEXT,
+	arguments TEXT[],
 	gitVersion TEXT NOT NULL,
 	workingDirectory TEXT,
 	processId INT NOT NULL,
@@ -50,10 +52,20 @@ CREATE TABLE IF NOT EXISTS Exception(
 	runId INT NOT NULL REFERENCES Run,
 	threadId BIGINT NOT NULL,
 
+	time TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
 	exceptionType TEXT NOT NULL,
 	message TEXT NOT NULL,
-	backtrace TEXT NOT NULL,
-	time TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+	backtrace TEXT NOT NULL
+);
+
+CREATE TABLE LogMessage(
+	id BIGINT PRIMARY KEY DEFAULT nextval('LogMessageIdSequence'),
+	runId INT NOT NULL REFERENCES Run,
+
+	time TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+	level TEXT NOT NULL,
+	message TEXT NOT NULL,
+	data JSONB
 );
 
 -------------------- Procedures --------------------
@@ -94,6 +106,18 @@ $$
 	RETURNING id;
 $$ LANGUAGE SQL;
 
+CREATE OR REPLACE FUNCTION InsertLogMessage(
+	_runId INT,
+	_level TEXT,
+	_message TEXT,
+	_data JSONB DEFAULT NULL)
+RETURNS INT AS
+$$
+	INSERT INTO LogMessage (runId, level, message, data)
+	VALUES (_runId, _level, _message, _data)
+	RETURNING id;
+$$ LANGUAGE SQL;
+
 -------------------- Privileges --------------------
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public
@@ -107,4 +131,3 @@ GRANT SELECT ON ALL SEQUENCES IN SCHEMA public
 
 GRANT SELECT, UPDATE, USAGE ON ALL SEQUENCES IN SCHEMA public
     TO TODO_db_writer;
-
