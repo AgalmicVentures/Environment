@@ -25,6 +25,7 @@ set backspace=indent,eol,start
 set backup
 set backupdir=~/.vim/backups
 set noerrorbells
+set nomodeline "Horrible security flaws lie here
 set whichwrap=b,s,<,>,[,]
 set wildmenu
 set wildignore=*.pyc,*.o,*.obj,*.exe,*.dll,*.jpg,*.png
