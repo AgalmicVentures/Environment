@@ -74,6 +74,9 @@ fi
 
 alias ll="ls -lAh"
 
+#Aliases based on historical command use
+alias countHistory="history | cut -c 8- | sort | uniq -c | sort -n"
+alias st="git st"
 
 #Enable coloring
 alias grep="grep --color=auto"
