@@ -92,8 +92,9 @@ alias py3test="python3 -m unittest discover"
 #Typos
 alias gti=git
 alias igt=git
-alias gitadd=git add
-alias gitst=git st
+alias gitadd="git add"
+alias gitst="git st"
+alias sl=ls
 
 #Moving up directories
 up() {
