@@ -25,8 +25,8 @@
 
 -------------------- Sequences --------------------
 
-CREATE SEQUENCE IF NOT EXISTS ExceptionIdSequence;
 CREATE SEQUENCE IF NOT EXISTS RunIdSequence;
+CREATE SEQUENCE IF NOT EXISTS ExceptionIdSequence;
 CREATE SEQUENCE IF NOT EXISTS LogMessageIdSequence;
 
 -------------------- Tables --------------------
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS Exception(
 	backtrace TEXT NOT NULL
 );
 
-CREATE TABLE LogMessage(
+CREATE TABLE IF NOT EXISTS LogMessage(
 	id BIGINT PRIMARY KEY DEFAULT nextval('LogMessageIdSequence'),
 	runId INT NOT NULL REFERENCES Run,
 
