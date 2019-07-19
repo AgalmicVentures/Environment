@@ -31,6 +31,8 @@ Bookmarks, kept here rather than in a browser, for portability and the retention
 	* http://sqlfiddle.com/ - SQL fiddle
 * Network
 	* http://icanhazip.com/ - Returns the requesting IP as text (suitable for e.g. `curl`)
+	* https://www.cloudflare.com/ssl/encrypted-sni/ - Checks browser support for various DNS security features
+	* https://mitm.watch/ - Man in the middle watcher
 
 ## **Vendors**
 * Electronics
