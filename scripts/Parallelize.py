@@ -23,6 +23,7 @@
 import argparse
 import datetime
 import multiprocessing
+import os
 import subprocess
 import sys
 import time
@@ -40,12 +41,21 @@ def main(argv=None):
 	parser.add_argument('configs', nargs='*', help='A set of configurations to run.')
 	parser.add_argument('-p', '--processes', type=int, default=multiprocessing.cpu_count(),
 		help='Time to sleep between checking process completions.')
+	parser.add_argument('-m', '--max-load', type=float,
+		help='Maximum value of 1-minute load average; above this do not spawn additional processes.')
 	parser.add_argument('-s', '--sleep', type=float, default=5.0,
 		help='Time to sleep between checking process completions.')
 
 	if argv is None:
 		argv = sys.argv
 	arguments = parser.parse_args(argv[1:])
+
+	try:
+		getLoadAvg = os.getloadavg
+	except AttributeError:
+		getLoadAvg = lambda: (0, 0, 0)
+		if arguments.max_load is not None:
+			print('WARNING: Load averages not available on this platform; cannot limit.')
 
 	startTime = datetime.datetime.now()
 	print('[%s] Starting %d processes for %d configs' % (startTime, arguments.processes, len(arguments.configs)))
@@ -54,7 +64,8 @@ def main(argv=None):
 	processes = {}
 	for i, config in enumerate(arguments.configs):
 		#Wait for a CPU to become available
-		while len(processes) >= arguments.processes:
+		while len(processes) >= arguments.processes or (
+				arguments.max_load is not None and getLoadAvg()[0] > arguments.max_load):
 			time.sleep(arguments.sleep)
 
 			#Check for finished processes
@@ -78,6 +89,7 @@ def main(argv=None):
 
 		process = subprocess.Popen([arguments.run_script, arguments.run_id, config], shell=False)
 		processes[config] = process
+		time.sleep(arguments.sleep)
 
 	#Wait for processes to finish
 	for process in processes.values():
