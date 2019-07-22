@@ -89,7 +89,10 @@ def main(argv=None):
 
 		process = subprocess.Popen([arguments.run_script, arguments.run_id, config], shell=False)
 		processes[config] = process
-		time.sleep(arguments.sleep)
+
+		#Throttle process creation if targeting a max load
+		if arguments.max_load is not None:
+			time.sleep(arguments.sleep)
 
 	#Wait for processes to finish
 	for process in processes.values():
