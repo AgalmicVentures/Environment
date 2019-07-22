@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import argparse
+import ast
 try:
 	import ujson as json
 except ImportError:
@@ -171,13 +172,14 @@ def jsonToPythonClass(name, data, ignores=set(), defaults=False, mutable=False,
 
 def main(argv=None):
 	"""
-	The main function of this script. Converts JSON to Python code based on the arguments provided.
+	The main function of this script. Converts JSON or a Python dict literal to a
+	Python class based on the arguments provided.
 
 	:param argv: List[str] Arguments to parse (default sys.argv)
 	:return: int
 	"""
 	#Parse arguments
-	parser = argparse.ArgumentParser(description='Converts JSON to Python Classes.')
+	parser = argparse.ArgumentParser(description='Converts JSON/Dicts to Python Classes.')
 	parser.add_argument('name',
 		help='The name of the class.')
 
@@ -210,13 +212,21 @@ def main(argv=None):
 	#Read input
 	inputString = sys.stdin.read()
 	try:
-		inputJson = json.loads(inputString)
-	except ValueError as e:
-		print('Error parsing JSON: %s' % e)
+		inputData = json.loads(inputString)
+	except ValueError as je:
+		try:
+			inputData = ast.literal_eval(inputString)
+		except SyntaxError as le:
+			print('ERROR: Could not parse data as JSON or literal: %s' % je)
+			return 1
+
+	#Check for a dictionary
+	if not isinstance(inputData, dict):
+		print('ERROR: Input data must be a dictionary')
 		return 1
 
 	#Convert
-	output = jsonToPythonClass(arguments.name, inputJson,
+	output = jsonToPythonClass(arguments.name, inputData,
 		ignores=set(arguments.ignore),
 		defaults=arguments.defaults,
 		mutable=arguments.mutable,

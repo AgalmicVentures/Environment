@@ -20,6 +20,9 @@ Converts CSV documents to JSON with a variety of transformation options.
 #### `CursesExample.py`
 Skeleton code for using the `curses` library.
 
+#### `DataToPythonClass.py`
+Converts a JSON document or Python `dict` to an equivalent Python class.
+
 #### `ExamineBinary.py`
 Examines a binary file of unknown format to determine as much as possible
 about it e.g. by finding the most common substrings.
@@ -43,9 +46,6 @@ suitable (see http://nbconvert.readthedocs.io/en/latest/external_exporters.html)
 
 #### `JsonToXml.py`
 Converts JSON documents to XML with a variety of transformation options.
-
-#### `JsonToXml.py`
-Converts JSON documents to equivalent Python classes.
 
 #### `MulticastPeek.py`
 Listens to a multicast group and dumps the packets it receives in a
