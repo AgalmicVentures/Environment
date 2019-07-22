@@ -34,10 +34,10 @@ def main(argv=None):
 	:param argv: List[str] Arguments to parse (default sys.argv)
 	:return: int
 	"""
-	parser = argparse.ArgumentParser(description='IPython Cleanup Tool')
+	parser = argparse.ArgumentParser(description='IPython Code Extraction Tool')
 	parser.add_argument('-s', '--separator', default=None,
 		help='Separator to add between cells')
-	parser.add_argument('file', help='IPython note book file to clean.')
+	parser.add_argument('file', help='IPython note book file to extract.')
 
 	if argv is None:
 		argv = sys.argv
