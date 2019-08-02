@@ -25,11 +25,19 @@
 
 -------------------- Sequences --------------------
 
+CREATE SEQUENCE IF NOT EXISTS SchemaMigrationIdSequence;
 CREATE SEQUENCE IF NOT EXISTS RunIdSequence;
 CREATE SEQUENCE IF NOT EXISTS ExceptionIdSequence;
 CREATE SEQUENCE IF NOT EXISTS LogMessageIdSequence;
 
 -------------------- Tables --------------------
+
+CREATE TABLE IF NOT EXISTS SchemaMigration(
+	id INT PRIMARY KEY DEFAULT nextval('SchemaMigrationIdSequence'),
+
+	version TEXT UNIQUE NOT NULL,
+	appliedTime TIMESTAMP DEFAULT NOW()
+);
 
 CREATE TABLE IF NOT EXISTS Run(
 	id INT PRIMARY KEY DEFAULT nextval('RunIdSequence'),
@@ -69,6 +77,22 @@ CREATE TABLE IF NOT EXISTS LogMessage(
 );
 
 -------------------- Procedures --------------------
+
+CREATE OR REPLACE FUNCTION ApplySchemaMigration(
+	_version TEXT)
+RETURNS BOOL AS
+$$
+BEGIN
+	-- Already applied?
+	IF EXISTS (SELECT * FROM SchemaMigration WHERE version=_version) THEN
+		RETURN FALSE;
+	END IF;
+
+	-- Not already applied
+	INSERT INTO SchemaMigration(version) VALUES (_version);
+	RETURN TRUE;
+END
+$$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION StartRun(
 	_command TEXT,

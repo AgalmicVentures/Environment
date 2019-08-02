@@ -52,9 +52,11 @@ $$ LANGUAGE plpgsql;
 DROP TABLE IF EXISTS LogMessage;
 DROP TABLE IF EXISTS Exception;
 DROP TABLE IF EXISTS Run;
+DROP TABLE IF EXISTS SchemaMigration;
 
 -------------------- Sequences --------------------
 
 DROP SEQUENCE IF EXISTS LogMessageIdSequence;
 DROP SEQUENCE IF EXISTS ExceptionIdSequence;
 DROP SEQUENCE IF EXISTS RunIdSequence;
+DROP SEQUENCE IF EXISTS SchemaMigrationIdSequence;
