@@ -27,11 +27,8 @@ DO
 $$
 BEGIN
 
--- Checks a columns existence before editing it to avoid errors
-IF (SELECT COUNT(*)
-		FROM information_schema.columns
-		WHERE table_name = 'sometable' AND column_name = 'somecolumn') > 0
-THEN
+-- Checks for the existence of a migration and applies it if it hasn't been
+IF ApplySchemaMigration('000000 Some Name Here') THEN
 	ALTER TABLE sometable ALTER COLUMN somecolumn DROP NOT NULL;
 END IF;
 
