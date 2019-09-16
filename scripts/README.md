@@ -23,6 +23,10 @@ Skeleton code for using the `curses` library.
 #### `DataToPythonClass.py`
 Converts a JSON document or Python `dict` to an equivalent Python class.
 
+#### `Encode.py`
+Swiss army knife for encoding and hashing files for use in impoverished
+environments.
+
 #### `ExamineBinary.py`
 Examines a binary file of unknown format to determine as much as possible
 about it e.g. by finding the most common substrings.
