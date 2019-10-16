@@ -34,7 +34,7 @@
 - name: Adding Digital Ocean Agent repository to apt
   apt_repository:
     repo: deb https://repos.sonar.digitalocean.com/apt main main
-    state: present
+    state: absent
   register: apt_repo_result
   when: is_digital_ocean
   tags:
@@ -69,16 +69,8 @@
 - name: Installing Digital Ocean Agent
   apt:
     name: [do-agent]
-    state: latest
+    state: absent
   when: is_digital_ocean
   tags:
     - digital_ocean
     - packages
-
-- name: Starting service
-  systemd:
-    name: do-agent
-    state: started
-  when: is_digital_ocean
-  tags:
-    - digital_ocean
