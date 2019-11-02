@@ -63,7 +63,7 @@
 
 - name: Configuring firewall (ufw)
   ufw:
-    logging: on
+    logging: "on"
     policy: deny
   tags:
     - firewall
@@ -73,7 +73,7 @@
 - name: Allowing SSH connections
   ufw:
     rule: allow
-    port: 22
+    port: "22"
   tags:
     - firewall
     - network

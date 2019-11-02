@@ -26,7 +26,7 @@
     url: https://repos.sonar.digitalocean.com/sonar-agent.asc
     state: present
   register: apt_key_result
-  when: is_digital_ocean
+  when: is_digital_ocean|bool
   tags:
     - digital_ocean
     - packages
@@ -36,7 +36,7 @@
     repo: deb https://repos.sonar.digitalocean.com/apt main main
     state: absent
   register: apt_repo_result
-  when: is_digital_ocean
+  when: is_digital_ocean|bool
   tags:
     - digital_ocean
     - packages
@@ -61,7 +61,7 @@
   apt:
     name: [apt-transport-https]
     state: latest
-  when: is_digital_ocean
+  when: is_digital_ocean|bool
   tags:
     - digital_ocean
     - packages
@@ -70,7 +70,7 @@
   apt:
     name: [do-agent]
     state: absent
-  when: is_digital_ocean
+  when: is_digital_ocean|bool
   tags:
     - digital_ocean
     - packages

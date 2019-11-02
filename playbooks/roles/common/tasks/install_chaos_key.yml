@@ -24,7 +24,7 @@
 - name: Checking for ChaosKey 0
   stat:
     path: /dev/chaoskey0
-  when: is_physical_machine
+  when: is_physical_machine|bool
   register: stat_result
   tags:
     - entropy
