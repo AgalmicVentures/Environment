@@ -25,7 +25,7 @@
   apt:
     update_cache: yes
     cache_valid_time: "{{ apt_cache_valid_time }}"
-  when: is_physical_machine
+  when: is_physical_machine|bool
   tags:
     - packages
     - sensors
@@ -34,7 +34,7 @@
   apt:
     name: [lm-sensors]
     state: latest
-  when: is_physical_machine
+  when: is_physical_machine|bool
   register: install_packages
   tags:
     - packages
@@ -51,7 +51,7 @@
     name: kmod
     state: started
     enabled: yes
-  when: is_physical_machine
+  when: is_physical_machine|bool
   tags:
     - sensors
 
