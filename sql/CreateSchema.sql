@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS Exception(
 CREATE TABLE IF NOT EXISTS LogMessage(
 	id BIGINT PRIMARY KEY DEFAULT nextval('LogMessageIdSequence'),
 	runId INT NOT NULL REFERENCES Run,
+	threadId BIGINT,
 
 	time TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
 	level TEXT NOT NULL,
@@ -119,7 +120,7 @@ $$ LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION InsertException(
 	_runId INT,
-	_threadId INT,
+	_threadId BIGINT,
 	_exceptionType TEXT,
 	_message TEXT,
 	_backtrace TEXT)
@@ -132,13 +133,14 @@ $$ LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION InsertLogMessage(
 	_runId INT,
+	_threadId BIGINT,
 	_level TEXT,
 	_message TEXT,
 	_data JSONB DEFAULT NULL)
 RETURNS BIGINT AS
 $$
-	INSERT INTO LogMessage (runId, level, message, data)
-	VALUES (_runId, _level, _message, _data)
+	INSERT INTO LogMessage (runId, threadId, level, message, data)
+	VALUES (_runId, _threadId, _level, _message, _data)
 	RETURNING id;
 $$ LANGUAGE SQL;
 
