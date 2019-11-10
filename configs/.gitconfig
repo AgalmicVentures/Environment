@@ -51,6 +51,10 @@
 	puhs = push
 	pus = push
 
+	rese = reset
+	reste = reset
+	rset = reset
+
 	ts = st
 
 	#More advanced shortcuts
