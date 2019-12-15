@@ -19,58 +19,52 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-- hosts: all
-  roles:
-    - common
-
-- hosts: desktops
-  roles:
-    - desktop
-
-- hosts: developers
-  roles:
-    - developer
-
-- hosts: dockers
-  roles:
+- name: Updating apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_time }}"
+  tags:
     - docker
+    - packages
 
-- hosts: elk_servers
-  roles:
-    - elk_server
+- name: Installing Docker dependencies
+  apt:
+    name: [apt-transport-https, ca-certificates, gnupg2, software-properties-common]
+    state: latest
+  tags:
+    - docker
+    - packages
 
-- hosts: hft_servers
-  roles:
-    - hft_server
+- name: Adding apt key for Docker packages
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+  register: docker_apt_key_result
+  tags:
+    - docker
+    - packages
 
-- hosts: gitlab_ci_servers
-  roles:
-    - gitlab_ci_server
+- name: Adding Docker repository to apt
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
+    state: present
+  register: docker_apt_repo_result
+  tags:
+    - docker
+    - packages
 
-- hosts: gitlab_servers
-  roles:
-    - gitlab_server
+- name: Updating apt cache for change new repositories
+  apt:
+    update_cache: yes
+  when: docker_apt_key_result.changed or docker_apt_repo_result.changed
+  tags:
+    - docker
+    - packages
 
-- hosts: minecraft_servers
-  roles:
-    - minecraft_server
-
-- hosts: mongodb_servers
-  roles:
-    - mongodb_server
-
-- hosts: postgresql_servers
-  roles:
-    - postgresql_server
-
-- hosts: rabbitmq_servers
-  roles:
-    - rabbitmq_server
-
-- hosts: rpis
-  roles:
-    - rpi
-
-- hosts: sdrs
-  roles:
-    - sdr
+- name: Installing Docker CE
+  apt:
+    name: [docker-ce]
+    state: latest
+  tags:
+    - docker
+    - packages
