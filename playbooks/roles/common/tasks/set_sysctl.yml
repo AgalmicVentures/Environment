@@ -55,7 +55,7 @@
 - name: Enabling PIDs on core files
   sysctl:
     name: kernel.core_uses_pid
-    value: 1
+    value: "1"
     sysctl_set: yes
   tags:
     - sysctl
@@ -71,7 +71,7 @@
 - name: Enabling panic on oops
   sysctl:
     name: kernel.panic_on_oops
-    value: 1
+    value: "1"
     sysctl_set: yes
   tags:
     - sysctl
@@ -154,7 +154,7 @@
 - name: Disabling IP forwarding (IPv4)
   sysctl:
     name: net.ipv4.ip_forward
-    value: 0
+    value: "0"
     sysctl_set: yes
   tags:
     - network
@@ -194,7 +194,7 @@
 - name: Disabling ICMP redirect messages (IPv6)
   sysctl:
     name: net.ipv6.conf.all.accept_redirects
-    value: 0
+    value: "0"
     sysctl_set: yes
   tags:
     - network

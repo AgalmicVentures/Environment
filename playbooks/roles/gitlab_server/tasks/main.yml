@@ -38,7 +38,7 @@
 - name: Allowing HTTP (80) connections
   ufw:
     rule: allow
-    port: 80
+    port: "80"
   tags:
     - security
     - gitlab
@@ -46,7 +46,7 @@
 - name: Allowing HTTPS (443) connections
   ufw:
     rule: allow
-    port: 443
+    port: "443"
   tags:
     - security
     - gitlab
