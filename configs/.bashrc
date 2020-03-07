@@ -50,11 +50,11 @@ fi
 prompt() {
 	RETURN=$?
 
-	PS1="\n[\[$YELLOW\]\D{%Y-%m-%d %H:%M:%S}\[$NC\]]\n\[$GREEN\]\u@\h\[$NC\]:\[$LIGHT_GREEN\]\w\[$NC\] \[$RED\]=>\[$NC\] "
+	PS1="\\n[\\[$YELLOW\\]\\D{%Y-%m-%d %H:%M:%S}\\[$NC\\]]\\n\\[$GREEN\\]\\u@\\h\\[$NC\\]:\\[$LIGHT_GREEN\\]\\w\\[$NC\\] \\[$RED\\]=>\\[$NC\\] "
 
 	if [[ $RETURN -ne 0 ]]
 	then
-		PS1="\n${RED}Non-zero exit code: ${RETURN}${NC}\n${PS1}"
+		PS1="\\n${RED}Non-zero exit code: ${RETURN}${NC}\\n${PS1}"
 	fi
 
 	export PS1=$PS1
