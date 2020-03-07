@@ -80,7 +80,7 @@
 - name: Disabling tracing for unpriveleged users
   sysctl:
     name: kernel.perf_event_paranoid
-    value: 1
+    value: "1"
     sysctl_set: yes
   tags:
     - security
