@@ -1,7 +1,9 @@
 # Environment
 This repository contains the Agalmic Ventures standard development environment.
-Everything from install scripts and configuration files to basic development
-and operations scripts are included.
+This includes everything from needed for developing systems from scratch and
+operationalizing them, including standard configuration files, code templates
+and examples, scripts and tools to support development, and Ansible playbooks
+for instantiating standard infrastructure.
 
 ## What's Included
 
@@ -11,7 +13,7 @@ part of the standard environment.
 
 ### C++ (`cpp/`)
 Snippets of generally useful C++. Some are standalone programs which maybe be
-executed directly (see `cpp/README.md` for details).
+executed directly, as if they were scripts (see `cpp/README.md` for details).
 
 ### Licenses (`licenses/`)
 Copies of the MIT license in a variety of language formats are included for use
@@ -22,7 +24,7 @@ Ansible playbooks for configuring development and production environments,
 including security hardening and standard installations of common services.
 
 ### Scripts (`scripts/`)
-Python and shell scripts for automating common development and operations
+Python and shell scripts for automating common development and operational
 tasks.
 
 For example, there is a pipeline for running parallel simulations by
@@ -37,10 +39,9 @@ Stubs of SQL scripts for setting up a database environment in PostgreSQL.
 System files, usually for Linux, such as `udev` rules.
 
 ## Getting Started
-The best way to install this environment is to run the
-`playbooks/create_user.yml` Ansible playbook on the desired user@host.  It
-will copy all files to where they need to be and install necessary symlinks so
-configurations will just work.
+The simplest way to get started is to clone this repository.
 
-To bootstrap the first copy, clone this repository to
-`~/Code/OpenSource/Environment` and run the playbook on the local user.
+To install this environment (symlinks, etc.) for a user, run the
+`playbooks/create_user.yml` Ansible playbook on the desired user@host. It
+will clone the repository to `~/Code/OpenSource/Environment` and set
+everything up so configurations will Just Work.
