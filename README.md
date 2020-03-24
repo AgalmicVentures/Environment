@@ -1,11 +1,14 @@
 # Environment
 This repository contains the Agalmic Ventures standard development environment.
-This includes everything from needed for developing systems from scratch and
-operationalizing them, including standard configuration files, code templates
+This includes everything from needed to develop systems from scratch and
+operationalize them, including standard configuration files, code templates
 and examples, scripts and tools to support development, and Ansible playbooks
 for instantiating standard infrastructure.
 
 ## What's Included
+
+### Bookmarks (`Bookmarks.md`)
+Links to reference information on a variety of topics.
 
 ### Configs (`configs/`)
 Standard configuration files for `bash`, `vim`, etc. which are installed as a

@@ -4,6 +4,7 @@ Bookmarks, kept here rather than in a browser, for portability and the retention
 
 ## **References**
 * Computer Science
+  * https://yarchive.net/comp/index.html - Usenet archives
   * https://xlinux.nist.gov/dads/ - Dictionary of Algorithms and Data Structures
 * Engineering
   * http://lcamtuf.coredump.cx/gcnc/ - Guerrilla guide to CNC machining, mold making, and resin casting
