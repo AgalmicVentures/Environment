@@ -92,7 +92,9 @@ alias py3test="python3 -m unittest discover"
 #Typos
 alias gti=git
 alias igt=git
+alias giot=git
 alias gitadd="git add"
+alias gitpull="git pull"
 alias gitst="git st"
 alias sl=ls
 
