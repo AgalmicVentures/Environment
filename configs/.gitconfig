@@ -50,6 +50,7 @@
 	psuh = push
 	puhs = push
 	pus = push
+	ush = push
 
 	rese = reset
 	reste = reset
