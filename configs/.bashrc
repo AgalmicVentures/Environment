@@ -73,8 +73,6 @@ else
 	alias ls="ls --color=auto"
 fi
 
-alias ll="ls -lAh"
-
 #Aliases based on historical command use
 alias countHistory="history | cut -c 8- | sort | uniq -c | sort -n"
 alias st="git st"
@@ -84,6 +82,7 @@ alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
 
 #Abbreviations
+alias ll="ls -lAh"
 alias st="git st"
 alias ci="git commit"
 alias pytest="python -m unittest discover"
@@ -96,6 +95,7 @@ alias giot=git
 alias gitadd="git add"
 alias gitpull="git pull"
 alias gitst="git st"
+alias lls=ll
 alias sl=ls
 
 #Moving up directories
