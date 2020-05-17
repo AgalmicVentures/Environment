@@ -28,7 +28,7 @@ set noerrorbells
 set nomodeline "Horrible security flaws lie here
 set whichwrap=b,s,<,>,[,]
 set wildmenu
-set wildignore=*.pyc,*.o,*.obj,*.exe,*.dll,*.jpg,*.png
+set wildignore=*.pyc,*.o,*.obj,*.so,*.dylib,*.exe,*.dll,*.jpg,*.png,*.gif
 set wildmode=list:longest
 
 "UI Settings

@@ -48,6 +48,7 @@
 
 	psh = push
 	psuh = push
+	puh = push
 	puhs = push
 	pus = push
 	ush = push
@@ -55,6 +56,7 @@
 	rese = reset
 	reste = reset
 	rset = reset
+	rst = reset
 
 	ts = st
 
