@@ -38,6 +38,7 @@
 	comit = commit
 	commi = commit
 	commt = commit
+	ocmmit = commit
 
 	dff = diff
 	doff = diff
