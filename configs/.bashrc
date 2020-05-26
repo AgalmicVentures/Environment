@@ -74,7 +74,7 @@ else
 fi
 
 #Aliases based on historical command use
-alias countHistory="history | cut -c 8- | sort | uniq -c | sort -n"
+alias count-history="history | cut -c 8- | sort | uniq -c | sort -n"
 alias st="git st"
 
 #Enable coloring
@@ -87,6 +87,9 @@ alias st="git st"
 alias ci="git commit"
 alias pytest="python -m unittest discover"
 alias py3test="python3 -m unittest discover"
+
+#Things I would never otherwise remember
+alias osx-unquarantine="xattr -dr com.apple.quarantine"
 
 #Typos
 alias gti=git
