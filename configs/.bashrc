@@ -93,6 +93,7 @@ alias osx-unquarantine="xattr -dr com.apple.quarantine"
 
 #Typos
 alias gti=git
+alias guit=git
 alias igt=git
 alias giot=git
 alias gitadd="git add"
