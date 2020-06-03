@@ -137,6 +137,17 @@ working directory.
 Applies the same operation to all of the Mercurial repositories in the current
 working directory. Especially useful when you have a large number of projects.
 
+#### `show_asn1.sh`
+Shows an ASN.1 encoded file parsed as ASCII text (requires OpenSSL).
+
+#### `show_csr.sh`
+Shows a certificate request parsed as ASCII text and verifies it (requires
+OpenSSL). Supports both DER and PEM files.
+
+#### `show_certificate.sh`
+Shows an X.509 certificate parsed as ASCII text (requires OpenSSL). Supports
+both DER and PEM files.
+
 #### `ssh_tunnel.sh`
 Helper script for setting up SSH tunnels: it passes its arguments to `ssh`
 along with options to fork it to run in the background, and heartbeat once per
