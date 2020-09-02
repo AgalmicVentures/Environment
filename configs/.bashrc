@@ -96,9 +96,13 @@ alias gti=git
 alias guit=git
 alias igt=git
 alias giot=git
+alias gitp=git
+alias tgit=git
+
 alias gitadd="git add"
 alias gitpull="git pull"
 alias gitst="git st"
+
 alias lls=ll
 alias sl=ls
 
