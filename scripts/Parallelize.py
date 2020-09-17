@@ -40,7 +40,7 @@ def main(argv=None):
 	parser.add_argument('run_id', help='A unique identifier for the run.')
 	parser.add_argument('configs', nargs='*', help='A set of configurations to run.')
 	parser.add_argument('-p', '--processes', type=int, default=multiprocessing.cpu_count(),
-		help='Time to sleep between checking process completions.')
+		help='Number of processes to run.')
 	parser.add_argument('-m', '--max-load', type=float,
 		help='Maximum value of 1-minute load average; above this do not spawn additional processes.')
 	parser.add_argument('-s', '--sleep', type=float, default=5.0,
