@@ -26,6 +26,6 @@
 
 \x auto
 \timing
-\set VERBOSITY webose
+\set VERBOSITY verbose
 \set COMP_KEYWORD_CASE upper
 \set ON_ERROR_ROLLBACK interactive
