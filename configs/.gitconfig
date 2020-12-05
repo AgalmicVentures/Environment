@@ -31,6 +31,9 @@
 	stat = status
 
 	#Misspellings
+	ad = add
+	dd = add
+
 	brach = branch
 	brnch = branch
 
