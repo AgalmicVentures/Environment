@@ -18,6 +18,9 @@ part of the standard environment.
 Snippets of generally useful C++. Some are standalone programs which maybe be
 executed directly, as if they were scripts (see `cpp/README.md` for details).
 
+### Data (`data/`)
+Test data for testing scripts or other software.
+
 ### Licenses (`licenses/`)
 Copies of the MIT license in a variety of language formats are included for use
 with the `Prepend.py` script (see below).

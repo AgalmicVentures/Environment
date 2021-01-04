@@ -51,6 +51,9 @@ suitable (see http://nbconvert.readthedocs.io/en/latest/external_exporters.html)
 #### `JsonToXml.py`
 Converts JSON documents to XML with a variety of transformation options.
 
+### `MergeCsvs.py`
+Merges CSV files into one large, sorted-order file.
+
 #### `MulticastPeek.py`
 Listens to a multicast group and dumps the packets it receives in a
 human-readable format.
