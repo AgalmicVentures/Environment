@@ -32,6 +32,8 @@ def main(argv=None):
 	:return: int
 	"""
 	parser = argparse.ArgumentParser(description='Merge CSV Files')
+	parser.add_argument('-n', '--no-headers', action='store_true',
+		help='Do not write headers to the output.')
 	parser.add_argument('-s', '--sort', type=int, default=0,
 		help='Column to sort on (0-indexed, default to 0).')
 	parser.add_argument('output', help='Output file')
@@ -65,6 +67,8 @@ def main(argv=None):
 	#Write to another file
 	with open(arguments.output, 'w') as outputFile:
 		csvWriter = csv.writer(outputFile)
+		if headers is not None and not arguments.no_headers:
+			csvWriter.writerow(headers)
 		csvWriter.writerows(data)
 
 	return 0
