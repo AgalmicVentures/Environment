@@ -67,6 +67,7 @@ help_test_job:
     - scripts/IPythonCleanup.py -h
     - scripts/IPythonExtractCode.py -h
     - scripts/JsonToXml.py -h
+    - scripts/MergeCsvs.py -h
     - scripts/MulticastPeek.py -h
     - scripts/MulticastPoke.py -h
     - scripts/OrganizeTimestampedFiles.py -h
@@ -125,6 +126,13 @@ functional_test_examine_binary:
     - scripts/ExamineBinary.py scripts/ExamineBinary.py
     #English
     - scripts/ExamineBinary.py scripts/README.md
+  only:
+    - master
+
+functional_test_merge_csvs_job:
+  stage: test
+  script:
+    - scripts/MergeCsvs.py output.csv data/a.csv data/b.csv -s 2
   only:
     - master
 
