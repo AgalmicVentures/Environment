@@ -42,6 +42,7 @@ set showmatch
 "set nowrap
 
 "Smart Indenting
+set noexpandtab
 "set autoindent
 "set smartindent
 
