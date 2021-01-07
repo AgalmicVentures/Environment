@@ -23,7 +23,6 @@
 import argparse
 import datetime
 import socket
-import struct
 import sys
 
 def main(argv=None):
@@ -37,6 +36,9 @@ def main(argv=None):
 	parser.add_argument('group', help='Multicast group to listen to (e.g. 224.1.1.1).')
 	parser.add_argument('port', type=int, help='Multicast port to listen to (e.g. 5007).')
 
+	parser.add_argument('-i', '--interface', default='0',
+		help='Interface to listen on (default INADDR_ANY).')
+
 	parser.add_argument('-c', '--count', action='store', type=int,
 		help='Number of packets to receive.')
 
@@ -47,9 +49,9 @@ def main(argv=None):
 	#Setup the listening socket
 	listeningSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 	listeningSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-	listeningSocket.bind( (arguments.group, arguments.port) )
-	multicastMembership = struct.pack("4sl", socket.inet_aton(arguments.group), socket.INADDR_ANY)
+	multicastMembership = socket.inet_aton(arguments.group) + socket.inet_aton(arguments.interface)
 	listeningSocket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, multicastMembership)
+	listeningSocket.bind( (arguments.group, arguments.port) )
 
 	#Listen for packets
 	count = 0
