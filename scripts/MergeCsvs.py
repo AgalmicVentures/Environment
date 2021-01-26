@@ -34,8 +34,8 @@ def main(argv=None):
 	parser = argparse.ArgumentParser(description='Merge CSV Files')
 	parser.add_argument('-n', '--no-headers', action='store_true',
 		help='Do not write headers to the output.')
-	parser.add_argument('-s', '--sort', type=int, default=0,
-		help='Column to sort on (0-indexed, default to 0).')
+	parser.add_argument('-s', '--sort', type=int,
+		help='Column to sort on (0-indexed, default no sorting).')
 	parser.add_argument('output', help='Output file')
 	parser.add_argument('files', nargs='+', help='Input files.')
 
@@ -62,7 +62,8 @@ def main(argv=None):
 				data.append(row)
 
 	#Sort all the rows by key
-	data.sort(key=lambda row: int(row[arguments.sort]))
+	if arguments.sort is not None:
+		data.sort(key=lambda row: int(row[arguments.sort]))
 
 	#Write to another file
 	with open(arguments.output, 'w') as outputFile:
