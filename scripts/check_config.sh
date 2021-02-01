@@ -56,7 +56,7 @@ readonly OPEN_FILES_LIMIT=$(ulimit -n)
 if [[ $OPEN_FILES_LIMIT == "unlimited" || $OPEN_FILES_LIMIT -gt 65535 ]] ; then
 	echo -e "${GREEN}Max open files ${OPEN_FILES_LIMIT}${NC}"
 elif [[ $OPEN_FILES_LIMIT -gt 1023 ]] ; then
-	echo -e "${YELLOW}Max open files ${OPEN_FILES_LIMIT} is lowK${NC}"
+	echo -e "${YELLOW}Max open files ${OPEN_FILES_LIMIT} is low${NC}"
 else
 	echo -e "${RED}Max open files ${OPEN_FILES_LIMIT} is VERY low${NC}"
 fi
