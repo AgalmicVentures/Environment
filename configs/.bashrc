@@ -103,6 +103,7 @@ alias gitadd="git add"
 alias gitpull="git pull"
 alias gitst="git st"
 
+alias cd..="cd .."
 alias lls=ll
 alias sl=ls
 
