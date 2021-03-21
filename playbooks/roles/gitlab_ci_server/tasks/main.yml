@@ -41,7 +41,7 @@
 
 - name: Installing supporting packages
   apt:
-    name: [libboost-dev, make, pyflakes3, pylint, shellcheck, valgrind]
+    name: [libboost-dev, libssl-dev, make, pyflakes3, pylint, shellcheck, valgrind]
     state: latest
   tags:
     - gitlab_ci
