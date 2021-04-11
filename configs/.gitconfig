@@ -32,6 +32,7 @@
 
 	#Misspellings
 	ad = add
+	addd = add
 	dd = add
 
 	brach = branch
@@ -50,12 +51,14 @@
 
 	pll = pull
 	pul = pull
+	pullg = pull
 
 	psh = push
 	psuh = push
 	puh = push
 	puhs = push
 	pus = push
+	pushg = push
 	ush = push
 
 	rese = reset
@@ -64,10 +67,12 @@
 	rst = reset
 
 	sash = stash
+	satsh = stash
 	stsh = stash
 	stashg = stash
 
 	ts = st
+	stg = st
 
 	#More advanced shortcuts
 	ls = log --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(bold cyan)[%aD]%C(reset) %C(white)%s%C(reset) %C(dim white)- %ae%C(reset) %C(bold yellow)%d%C(reset)'
