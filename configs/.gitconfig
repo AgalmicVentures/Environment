@@ -53,6 +53,10 @@
 	doff = diff
 	idff = diff
 
+	lg = log
+	lo = log
+	og = log
+
 	pll = pull
 	pul = pull
 	pullg = pull
