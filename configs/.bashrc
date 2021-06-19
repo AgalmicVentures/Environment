@@ -101,7 +101,9 @@ alias tgit=git
 
 alias gitadd="git add"
 alias gitpull="git pull"
+alias gitpush="git push"
 alias gitst="git st"
+alias qgit=git
 
 alias cd..="cd .."
 alias lls=ll
