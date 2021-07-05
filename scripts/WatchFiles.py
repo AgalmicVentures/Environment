@@ -51,11 +51,20 @@ def main(argv=None):
 	stats = {}
 
 	try:
-		while True:
+		remainingFiles = set(arguments.files)
+		while len(remainingFiles) > 0:
 			#Check the last updated time on all the files
 			changedFiles = []
-			for fileName in arguments.files:
-				newStat = os.stat(fileName)
+			deletedFiles = set()
+			for fileName in remainingFiles:
+				try:
+					newStat = os.stat(fileName)
+				except FileNotFoundError:
+					if arguments.verbose:
+						print('Deleted: %s' % fileName)
+					deletedFiles.add(fileName)
+					continue
+
 				oldStat = stats.get(fileName)
 				if oldStat is None:
 					stats[fileName] = newStat
@@ -63,10 +72,12 @@ def main(argv=None):
 					changedFiles.append(fileName)
 					stats[fileName] = newStat
 
+			remainingFiles -= deletedFiles
+
 			#Run the command?
 			if len(changedFiles) > 0:
 				if arguments.verbose:
-					print('Changed %s:' % ', '.join(changedFiles))
+					print('Changed: %s' % ', '.join(changedFiles))
 
 				command = '%s %s' % (arguments.command, ' '.join(changedFiles)) if arguments.pass_files else arguments.command
 				exitCode = os.system(command)
