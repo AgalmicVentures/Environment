@@ -24,6 +24,7 @@
 
 import argparse
 import os
+import stat
 import sys
 import time
 
@@ -37,6 +38,7 @@ def main(argv=None):
 	parser = argparse.ArgumentParser(description='Watches files and runs a command when they change.')
 	parser.add_argument('-i', '--interval', action='store', type=float, default=0.1, help='Polling interval in seconds when not using inotify (default=0.1).')
 	parser.add_argument('-p', '--pass-files', action='store_true', help='Flag indicating whether to pass changed files to the command.')
+	parser.add_argument('-r', '--recurse', action='store_true', help='Recursively enumerate directories')
 	parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output.')
 	parser.add_argument('command', help='Command to run when one or more files change.')
 	parser.add_argument('files', metavar='FILE', nargs='+', help='Files to watch')
@@ -55,6 +57,7 @@ def main(argv=None):
 		while len(remainingFiles) > 0:
 			#Check the last updated time on all the files
 			changedFiles = []
+			addedFiles = set()
 			deletedFiles = set()
 			for fileName in remainingFiles:
 				try:
@@ -66,13 +69,30 @@ def main(argv=None):
 					continue
 
 				oldStat = stats.get(fileName)
+				changed = False
 				if oldStat is None:
 					stats[fileName] = newStat
+					changed = True
 				elif oldStat.st_mtime != newStat.st_mtime:
 					changedFiles.append(fileName)
 					stats[fileName] = newStat
+					changed = True
+
+				if arguments.recurse and changed and stat.S_ISDIR(newStat.st_mode):
+					if arguments.verbose:
+						print('Recursing: %s' % fileName)
+					for (dirPath, dirNames, dirFileNames) in os.walk(fileName):
+						for dirName in dirNames:
+							fullPath = os.path.join(dirPath, dirName)
+							addedFiles.add(fullPath)
+							deletedFiles.discard(fullPath)
+						for dirFileName in dirFileNames:
+							fullPath = os.path.join(dirPath, dirFileName)
+							addedFiles.add(fullPath)
+							deletedFiles.discard(fullPath)
 
 			remainingFiles -= deletedFiles
+			remainingFiles.update(addedFiles)
 
 			#Run the command?
 			if len(changedFiles) > 0:
