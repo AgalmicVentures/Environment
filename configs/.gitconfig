@@ -78,6 +78,7 @@
 	satsh = stash
 	stsh = stash
 	stashg = stash
+	stath = stash
 
 	ts = st
 	stg = st
@@ -90,7 +91,7 @@
 	ll = !"git ls --stat=80" # summary of file changes
 	lla = !"git ll --all"    # summary of file changes (all branches)
 	today = !"git lla --since='12 hours ago'"
-	recent = !"git lla --since='36 hours ago'"
+	recent = !"git lla --since='3 days ago'"
 
 	ssave = "!f() { git stash save $1; }; f"
 	sshow = "!f() { git stash show stash^{/$*} -p; }; f"

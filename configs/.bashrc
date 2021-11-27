@@ -97,6 +97,7 @@ alias guit=git
 alias igt=git
 alias giot=git
 alias gitp=git
+alias qgit=git
 alias tgit=git
 
 alias gitadd="git add"
