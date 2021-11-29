@@ -59,6 +59,7 @@
 
 	pll = pull
 	pul = pull
+	pulkl = pull
 	pullg = pull
 
 	psh = push
@@ -126,6 +127,11 @@
 	#Only activate paging if output doesn't fit on one screen
 	pager = "less -F"
 
+	#Uncomment on windows:
+	#autocrlf = input
+	#fscache = true
+	#preloadindex = true
+
 [grep]
 	extendRegexp = true
 
@@ -136,6 +142,7 @@
 	default = simple
 
 [status]
+	#NOTE: If status is running very slowly, comment the next line out! It can be the culprit on Windows
 	submoduleSummary = true
 	showUntrackedFiles = all
 
