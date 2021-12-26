@@ -54,9 +54,12 @@
 	idff = diff
 
 	lg = log
+	lgo = log
 	lo = log
+	logg = log
 	og = log
 
+	pl = pull
 	pll = pull
 	pul = pull
 	pulkl = pull
