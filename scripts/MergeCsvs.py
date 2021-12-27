@@ -36,6 +36,12 @@ def main(argv=None):
 		help='Do not write headers to the output.')
 	parser.add_argument('-s', '--sort', type=int,
 		help='Column to sort on (0-indexed, default no sorting).')
+
+	parser.add_argument('-N', '--newline-only', action='store_true',
+		help='Use newlines as line endings, no carriage returns.')
+	parser.add_argument('-q', '--quoting', type=int, default=csv.QUOTE_MINIMAL,
+		help='Select quoting - 0=MINIMAL (default), 1=ALL, 2=NONNUMERIC, 3=NONE')
+
 	parser.add_argument('output', help='Output file')
 	parser.add_argument('files', nargs='+', help='Input files.')
 
@@ -66,8 +72,10 @@ def main(argv=None):
 		data.sort(key=lambda row: int(row[arguments.sort]))
 
 	#Write to another file
-	with open(arguments.output, 'w') as outputFile:
-		csvWriter = csv.writer(outputFile)
+	with open(arguments.output, 'w', newline='') as outputFile:
+		csvWriter = csv.writer(outputFile,
+			lineterminator='\n' if arguments.newline_only else '\r\n',
+			quoting=arguments.quoting)
 		if headers is not None and not arguments.no_headers:
 			csvWriter.writerow(headers)
 		csvWriter.writerows(data)
