@@ -39,6 +39,7 @@
 	brnch = branch
 
 	ceckout = checkout
+	cehckout = checkout
 	chckout = checkout
 
 	cmmit = commit
