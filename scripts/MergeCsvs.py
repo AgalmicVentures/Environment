@@ -22,6 +22,7 @@
 
 import argparse
 import csv
+import itertools
 import sys
 
 def main(argv=None):
@@ -34,6 +35,9 @@ def main(argv=None):
 	parser = argparse.ArgumentParser(description='Merge CSV Files')
 	parser.add_argument('-n', '--no-headers', action='store_true',
 		help='Do not write headers to the output.')
+
+	parser.add_argument('-d', '--deduplicate', action='store_true',
+		help='De-duplicate identical rows.')
 	parser.add_argument('-s', '--sort', type=int,
 		help='Column to sort on (0-indexed, default no sorting).')
 
@@ -70,6 +74,10 @@ def main(argv=None):
 	#Sort all the rows by key
 	if arguments.sort is not None:
 		data.sort(key=lambda row: int(row[arguments.sort]))
+
+	#De-duplicate
+	if arguments.deduplicate:
+		data = [row for row, _ in itertools.groupby(data)]
 
 	#Write to another file
 	with open(arguments.output, 'w', newline='') as outputFile:
