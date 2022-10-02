@@ -51,8 +51,10 @@
 	ocmmit = commit
 
 	dff = diff
+	dif = diff
 	doff = diff
 	idff = diff
+	iff = diff
 
 	lg = log
 	lgo = log
