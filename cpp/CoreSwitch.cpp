@@ -1,7 +1,7 @@
 //usr/bin/g++ "$0" -o /tmp/CoreSwitch && exec /tmp/CoreSwitch "$@"
 
 /*
- * Copyright (c) 2015-2022 Agalmic Ventures LLC (www.agalmicventures.com)
+ * Copyright (c) 2015-2023 Agalmic Ventures LLC (www.agalmicventures.com)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
