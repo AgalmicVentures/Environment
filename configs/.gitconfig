@@ -52,6 +52,7 @@
 
 	dff = diff
 	dif = diff
+	diffg = diff
 	doff = diff
 	idff = diff
 	iff = diff
@@ -69,6 +70,7 @@
 	pullg = pull
 	pulll = pull
 	ull = pull
+	upll = pull
 
 	psh = push
 	psuh = push
@@ -77,6 +79,7 @@
 	pus = push
 	pushg = push
 	ush = push
+	upsh = push
 
 	rese = reset
 	reste = reset
